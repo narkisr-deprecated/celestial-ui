@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="celestial" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="Celestial"></title>
+
+    <!-- font awesome from BootstrapCDN -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <h3 class="muted">ng-boilerplate <small><a
+              href="http://github.com/joshdmiller/ng-boilerplate/blob/master/CHANGELOG.md">v<%= version %></a></small></h3>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li ui-route="/systems" ng-class="{active:$uiRoute}">
+                  <a href="#/systems">
+                    <i class="icon-home"></i>
+                    systems
+			</a>
+                </li>
+                <li ui-route="/about" ng-class="{active:$uiRoute}">
+                  <a href="#/about">
+                    <i class="icon-info-sign"></i>
+                    What is it?
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/joshdmiller/ng-boilerplate#readme">
+                    <i class="icon-book"></i>
+                    Read the Docs
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/joshdmiller/ng-boilerplate">
+                    <i class="icon-github-alt"></i>
+                    Github
+                  </a>
+                </li>
+                <li>
+                  <a href="https://github.com/joshdmiller/ng-boilerplate/issues">
+                    <i class="icon-comments"></i>
+                    Support
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" ui-view="main"></div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <p>
+            (c) 2013 celestial-ops.com
+          </p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
