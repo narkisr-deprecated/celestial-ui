@@ -1,14 +1,33 @@
 <div  class="well well-small">
-  <li class="dropdown" >
-  <a class="dropdown-toggle">
-    Click me for a dropdown, yo!
-  </a>
-  <ul class="dropdown-menu">
-    <li ng-repeat="choice in items">
-      <a>{{choice}}</a>
-    </li>
-  </ul>
-</li>
-  <pagination boundary-links="true" total-items="totalItems" page="currentPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  <table class="table table-striped">
+    <thead>
+	<tr>
+	  <th>#</th>
+	  <th>Hostname</th>
+	  <th>Type</th>
+	  <th>Hypervisor</th>
+	  <th>Description</th>
+	  <th>Actions</th>
+	</tr>
+    </thead>
+    <tbody>
+	<tr ng-repeat="system in systems">
+	  <td><a href="/view/system?id={{system.id}}">{{system.id}}</a></td>
+	  <td>{{system.machine.hostname}}</td>
+	  <td>{{system.type}}</td>
+	  <td>{{system.hypervisor}}</td>
+	  <td>{{system.description}}</td>
+	  <td>
+	    <i class="icon-play"></i> 
+	    <i class="icon-off" ></i>   
+	    <i class="icon-remove-circle"> </i>   
+	    <span rel="popover" title="provision" data-placement="left">
+		<i class="icon-gears" style="margin-right:25px;font-size:1em"> </i>   
+	    </span>
+	  </td>
+	</tr>
+    </tbody>
+  </table>
+  <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 </div>
 
