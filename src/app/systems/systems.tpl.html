@@ -12,7 +12,7 @@
     </thead>
     <tbody>
 	<tr ng-repeat="system in systems">
-	  <td><a href="/view/system?id={{system.id}}">{{system.id}}</a></td>
+	  <td><a href="#/system/{{system.id}}">{{system.id}}</a></td>
 	  <td>{{system.machine.hostname}}</td>
 	  <td>{{system.type}}</td>
 	  <td>{{system.hypervisor}}</td>
@@ -22,7 +22,7 @@
 	    <i class="icon-off" ></i>   
 	    <i class="icon-remove-circle"> </i>   
 	    <span rel="popover" title="provision" data-placement="left">
-		<i class="icon-gears" style="margin-right:25px;font-size:1em"> </i>   
+		<i class="icon-gears"/>   
 	    </span>
 	  </td>
 	</tr>

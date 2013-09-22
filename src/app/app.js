@@ -2,7 +2,7 @@ angular.module( 'celestial', [
   'templates-app',
   'templates-common',
   'celestial.systems',
-  'celestial.about',
+  'celestial.types',
   'ui.state',
   'ui.route'
 ])
@@ -20,7 +20,6 @@ angular.module( 'celestial', [
       $scope.pageTitle = toState.data.pageTitle + ' | celestial' ;
     }
   });
-})
+});
 
-;
 
