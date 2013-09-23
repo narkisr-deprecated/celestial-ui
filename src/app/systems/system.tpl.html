@@ -1,14 +1,5 @@
 <div> 
   <p> 
-   <tabset>
-    <tab heading="Machine">
-     {{system.machine}}
-    </tab>
-    </hr>
-    <tab heading="{{hypervisor | capitalize}}">
-      {{hypervisorData}}
-    </tab>
-  </tabset>
-
+     <div ng-include src="headerTemplate"></div>
   </p>
 </div>

@@ -1,6 +1,24 @@
 angular.module( 'celestial.system', [
   'ui.state', 'ui.bootstrap', 'ngResource'
 ])
+.directive('proxmox', function() {
+      return {
+        restrict: 'ECMA',
+        templateUrl: 'systems/proxmox.tpl.html'
+      };
+})
+.directive('vcenter', function() {
+      return {
+        restrict: 'ECMA',
+        templateUrl: 'systems/vcenter.tpl.html'
+      };
+})
+.directive('aws', function() {
+      return {
+        restrict: 'ECMA',
+        templateUrl: 'systems/aws.tpl.html'
+      };
+})
 .config(function config($stateProvider) {
   $stateProvider.state( 'system', {
     url: '/system/:id',
@@ -27,15 +45,15 @@ angular.module( 'celestial.system', [
   var System = $resource('/systems/:id', {id:'@id'});
 
   $scope.id = $location.path().replace("/system/", "");
-
   $scope.loadSystem = function(){
     $scope.system = System.get({id:$scope.id},function(sys,resp){
       $scope.hypervisor = _.filter(['aws','proxmox','vsphere'],
                               function(a){return sys[a]!=null; })[0];
       $scope.hypervisorData = sys[$scope.hypervisor];
+      $scope.headerTemplate = 'systems/'+$scope.hypervisor+'.tpl.html';
     });
   };
 
-  $scope.loadSystem();
+$scope.loadSystem();
 });
 
