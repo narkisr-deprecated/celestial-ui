@@ -1,0 +1,51 @@
+<fieldset>
+  <!-- Form Name -->
+  <legend>Proxmox</legend>
+
+  <!-- Text input-->
+  <div class="control-group">
+    <label class="control-label" for="nameserver">Nameserver</label>
+    <div class="controls">
+	<input id="nameserver" name="nameserver" placeholder="8.8.8.8" class="input-medium" required="" type="text">
+	<p class="help-block">DNS nameserver</p>
+    </div>
+  </div>
+
+  <!-- Password input-->
+  <div class="control-group">
+    <label class="control-label" for="password">Password</label>
+    <div class="controls">
+	<input id="password" name="password" placeholder="" class="input-large" required="" type="password">
+	<p class="help-block">Container password</p>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="control-group">
+    <label class="control-label" for="node">Node</label>
+    <div class="controls">
+	<input id="node" name="node" placeholder="" class="input-large" required="" type="text">
+	<p class="help-block">Proxmox node</p>
+    </div>
+  </div>
+
+  <!-- Select Basic -->
+  <div class="control-group">
+    <label class="control-label" for="type">Type</label>
+    <div class="controls">
+	<select id="type" name="type" class="input-large">
+	  <option>ct</option>
+	</select>
+    </div>
+  </div>
+
+  <!-- Text input-->
+  <div class="control-group">
+    <label class="control-label" for="features">Features</label>
+    <div class="controls">
+	<input id="features" name="features" placeholder="" class="input-large" type="text">
+	<p class="help-block">Enabled features</p>
+    </div>
+  </div>
+
+</fieldset>

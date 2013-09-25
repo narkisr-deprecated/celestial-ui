@@ -1,54 +1,30 @@
 <div>
   <div>
-    <div ng-switch="getCurrentStep()" ng-animate="'wave'" class="slide-frame">
-	<div ng-switch-when="two">
-	  <div ng-include src="systems/add_machine.tpl.html"></div>
-	</div>
-	<div ng-switch-when="one">
-	  <form>
-	  <fieldset>  
-          <legend>Type</legend>
+    <form>
+	<fieldset>  
+	  <legend>Type</legend>
+	  <div class="control-group">  
+	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
+	    <div class="controls">  
+		<select id="hypervisor"  ng-model="system.hypervisor">  
+		  <option>Proxmox</option>  
+		  <option>Aws</option>  
+		  <option>vCenter</option>  
+		</select>  
+	    </div>  
 	    <div class="control-group">  
-		<label class="control-label" for="hypervisor">Hypervisor type</label>  
-		<div class="controls">  
-		  <select id="hypervisor" selected={{hypervisor}} ng-model="wizard.hypervisor">  
-		    <option>Proxmox</option>  
-		    <option>Aws</option>  
-		    <option>vCenter</option>  
-		  </select>  
-		</div>  
-	     <div class="control-group">  
 		<label class="control-label" for="env">Environment</label>  
 		<div class="controls">  
-		  <select id="multiSelect" ng-model="wizard.env">  
-		    <option>prod</option>  
-		    <option>qa</option>  
-		    <option>dev</option>  
+		  <select id="multiSelect" ng-model="system.env">  
+		    <option>Production</option>  
+		    <option>Qa</option>  
+		    <option>Development</option>  
 		  </select>  
 		</div>  
-	    </div>  </div>  
-	  </fieldset>  
-        </form>
-	</div>
-	<div ng-switch-when="three">
-	  <fieldset>  
-	    <div class="control-group">  
-		<h4>Thanks {{wizard.firstName}} {{wizard.lastName}}!</h4>
-		<div class="row">
-		  <div class="span4">
-			<p><strong>Coming:</strong> {{wizard.coming}}</p>
-			<p><strong>Tacos:</strong> {{wizard.tacos}}</p>
-			<p><strong>Toppings:</strong></p>
-		    <div class="badge badge-success pull-left" ng-repeat="topping in wizard.toppings">{{topping}}</div>
-		    </div>
-		</div>
-	    </div>  
-	  </fieldset>  
+	    </fieldset>  
+
+	    <div ng-include src="hypervisorTemplate"></div>
+
+	  </form>
 	</div>
     </div>	
-  </div>
-</div>	
-<div class="modal-footer">
-  <a class="btn" ng-click="handlePrevious()" ng-show="!isFirstStep()">Back</a>
-  <a class="btn btn-primary" ng-click="handleNext(dismiss)">{{getNextLabel()}}</a>
-</div>	

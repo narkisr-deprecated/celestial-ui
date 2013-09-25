@@ -36,6 +36,6 @@ angular.module( 'celestial.system', [
     });
   };
 
-$scope.loadSystem();
+   $scope.loadSystem();
 });
 
