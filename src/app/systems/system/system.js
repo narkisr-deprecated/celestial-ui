@@ -7,7 +7,7 @@ angular.module( 'celestial.system', [
     views: {
 	"main": {
         controller: 'SystemCtrl',
-        templateUrl: 'systems/system.tpl.html'
+        templateUrl: 'systems/system/system.tpl.html'
 	}
     },
     data:{ pageTitle: 'System'}

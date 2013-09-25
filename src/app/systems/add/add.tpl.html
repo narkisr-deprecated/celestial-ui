@@ -11,7 +11,7 @@
 	    <div class="control-group">  
 		<label class="control-label" for="hypervisor">Hypervisor type</label>  
 		<div class="controls">  
-		  <select id="hypervisor" ng-model="wizard.hypervisor">  
+		  <select id="hypervisor" selected={{hypervisor}} ng-model="wizard.hypervisor">  
 		    <option>Proxmox</option>  
 		    <option>Aws</option>  
 		    <option>vCenter</option>  
