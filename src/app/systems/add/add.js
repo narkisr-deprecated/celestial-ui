@@ -1,5 +1,5 @@
 angular.module( 'celestial.systemAdd', [
-  'ui.state', 'ui.bootstrap', 'ngResource'
+  'ui.state',  'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systemAdd', {
@@ -13,25 +13,39 @@ angular.module( 'celestial.systemAdd', [
     data:{ pageTitle: 'New System' }
   });
 })
-.controller( 'SystemAddCtrl', function SystemAddController($scope,$http,$resource,$location) {
+.controller( 'SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location) {
 
   var Systems = $resource('/systems/');
+  var Environments = $resource('/environments/');
   
   $scope.system = {proxmox:{type:'ct'}};
 
   $scope.system.hypervisor = 'proxmox';
 
-  $scope.loadForm = function () {
+  $scope.loadTypes = function () {
     $http({method: 'GET', url: '/types'}).
       success(function(data, status, headers, config) {
         $scope.types = [];
         angular.forEach(data.types,function(type){
-           $scope.types.push(type);
+           $scope.types.push(type.type);
         });
         $scope.system.type = $scope.types[0];
       }).error(function(data, status, headers, config) {
-        console.log('failed to featc types');
+        console.log('failed to fetch types');
       });
+     };
+
+  $scope.loadEnvs = function() {
+    Environments.get({},function(data){
+      $scope.envs = [];
+      angular.forEach(data.environments,function(v,k){
+        $scope.envs.push(k);
+        console.log(k);
+      });
+     $scope.system.env = $scope.envs[0];
+    },function(error){
+       console.log('failed to fetch environments');
+    });
   };
 
   $scope.hypervisorSelect = function() {
@@ -44,9 +58,12 @@ angular.module( 'celestial.systemAdd', [
     Systems.save($scope.system,
       function(resp) {
         $location.path( '/system/'+resp.id);
-	},function(errors){console.log(errors);}
+	},function(errors){
+        console.log(errors);
+      }
      );
   };
   
-  $scope.loadForm();
+  $scope.loadTypes();
+  $scope.loadEnvs();
 });
