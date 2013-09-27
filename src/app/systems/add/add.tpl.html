@@ -1,30 +1,46 @@
 <div>
   <div>
-    <form>
+    <form class="form-horizontal" ng-submit="submit()">
 	<fieldset>  
 	  <legend>Type</legend>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="type">System type</label>  
+	    <div class="controls">  
+		<select id="type"  ng-model="system.type" ng-repeat="type in types" >  
+		  <option>{{type}}</option>  
+		</select>  
+	    </div>  
+	  </div>
+
 	  <div class="control-group">  
 	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
 	    <div class="controls">  
 		<select id="hypervisor"  ng-model="system.hypervisor">  
-		  <option>Proxmox</option>  
-		  <option>Aws</option>  
-		  <option>vCenter</option>  
+		  <option>proxmox</option>  
+		  <option>aws</option>  
+		  <option>vcenter</option>  
 		</select>  
 	    </div>  
-	    <div class="control-group">  
-		<label class="control-label" for="env">Environment</label>  
-		<div class="controls">  
-		  <select id="multiSelect" ng-model="system.env">  
-		    <option>Production</option>  
-		    <option>Qa</option>  
-		    <option>Development</option>  
-		  </select>  
-		</div>  
-	    </fieldset>  
+	  </div>
 
-	    <div ng-include src="hypervisorTemplate"></div>
+	  <div class="control-group">  
+	    <label class="control-label" for="env">Environment</label>  
+	    <div class="controls">  
+		<select id="multiSelect" ng-model="system.env">  
+		  <option>Production</option>  
+		  <option>Qa</option>  
+		  <option>Development</option>  
+		</select>  
+	    </div>  
+	  </div>
+	</fieldset>  
 
-	  </form>
+	<div ng-include src="hypervisorTemplate"></div>
+
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save system</button>
 	</div>
-    </div>	
+    </form>
+  </div>
+</div>	
