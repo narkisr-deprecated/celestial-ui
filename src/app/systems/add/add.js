@@ -13,9 +13,11 @@ angular.module( 'celestial.systemAdd', [
     data:{ pageTitle: 'New System' }
   });
 })
-.controller( 'SystemAddCtrl', function SystemAddController($scope,$http) {
+.controller( 'SystemAddCtrl', function SystemAddController($scope,$http,$resource,$location) {
 
-  $scope.system = {};
+  var Systems = $resource('/systems/');
+  
+  $scope.system = {proxmox:{type:'ct'}};
 
   $scope.system.hypervisor = 'proxmox';
 
@@ -39,7 +41,11 @@ angular.module( 'celestial.systemAdd', [
   $scope.$watch( 'system.hypervisor', $scope.hypervisorSelect );
 
   $scope.submit = function(){
-    console.log($scope.system);
+    Systems.save($scope.system,
+      function(resp) {
+        $location.path( '/system/'+resp.id);
+	},function(errors){console.log(errors);}
+     );
   };
   
   $scope.loadForm();

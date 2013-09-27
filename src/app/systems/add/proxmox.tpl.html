@@ -6,7 +6,7 @@
   <div class="control-group">
     <label class="control-label" for="nameserver">Nameserver</label>
     <div class="controls">
-	<input id="nameserver" name="nameserver" placeholder="8.8.8.8" class="input-medium" required="" type="text">
+	<input id="nameserver" name="nameserver" placeholder="8.8.8.8" class="input-medium" required="" type="text" ng-model="system.proxmox.nameserver">
 	<p class="help-block">DNS nameserver</p>
     </div>
   </div>
@@ -15,7 +15,7 @@
   <div class="control-group">
     <label class="control-label" for="password">Password</label>
     <div class="controls">
-	<input id="password" name="password" placeholder="" class="input-large" required="" type="password">
+	<input id="password" name="password" placeholder="" class="input-large" required="" type="password" ng-model="system.proxmox.password">
 	<p class="help-block">Container password</p>
     </div>
   </div>
@@ -24,7 +24,7 @@
   <div class="control-group">
     <label class="control-label" for="node">Node</label>
     <div class="controls">
-	<input id="node" name="node" placeholder="" class="input-large" required="" type="text">
+	<input id="node" name="node" placeholder="" class="input-large" required="" type="text"  ng-model="system.proxmox.node">
 	<p class="help-block">Proxmox node</p>
     </div>
   </div>
@@ -33,7 +33,7 @@
   <div class="control-group">
     <label class="control-label" for="type">Type</label>
     <div class="controls">
-	<select id="type" name="type" class="input-large">
+	<select id="type" name="type" class="input-large"  ng-model="system.proxmox.type">
 	  <option>ct</option>
 	</select>
     </div>
@@ -43,7 +43,7 @@
   <div class="control-group">
     <label class="control-label" for="features">Features</label>
     <div class="controls">
-	<input id="features" name="features" placeholder="" class="input-large" type="text">
+	<input id="features" name="features" placeholder="" class="input-large" type="text" ng-model="system.proxmox.features">
 	<p class="help-block">Enabled features</p>
     </div>
   </div>
@@ -59,7 +59,7 @@
   <div class="control-group">
     <label class="control-label" for="user">User</label>
     <div class="controls">
-	<input id="user" name="user" type="text" placeholder="" class="input-large" required="">
+	<input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="system.machine.user">
 	<p class="help-block">Machine user</p>
     </div>
   </div>
@@ -68,7 +68,7 @@
   <div class="control-group">
     <label class="control-label" for="os">OS</label>
     <div class="controls">
-	<input id="os" name="os" type="text" placeholder="" class="input-large" required="">
+	<input id="os" name="os" type="text" placeholder="" class="input-large" required="" ng-model="system.machine.os">
 	<p class="help-block">Operating system</p>
     </div>
   </div>
@@ -77,25 +77,23 @@
   <div class="control-group">
     <label class="control-label" for="cpus">CPUs</label>
     <div class="controls">
-	<input id="cpus" name="cpus" type="text" placeholder="" class="input-large" required="">
+	<input id="cpus" name="cpus" type="number" min="1" placeholder="" class="input-large" required="" ng-model="system.machine.cpus">
 	<p class="help-block">Number of CPUs</p>
     </div>
   </div>
 
-  <!-- Text input-->
   <div class="control-group">
     <label class="control-label" for="memory">Memory</label>
     <div class="controls">
-	<input id="memory" name="memory" type="text" placeholder="" class="input-large" required="">
+	<input id="memory" name="memory" min="1" type="number" placeholder="" class="input-large" required="" ng-model="system.machine.memory" >
 	<p class="help-block">Memory in GB</p>
     </div>
   </div>
 
-  <!-- Text input-->
   <div class="control-group">
     <label class="control-label" for="disk">Disk</label>
     <div class="controls">
-	<input id="disk" name="disk" type="text" placeholder="" class="input-large" required="">
+	<input id="disk" name="disk" type="number" min="1" placeholder="" class="input-large" required="" ng-model="system.machine.disk">
 	<p class="help-block">Disk size in GB</p>
     </div>
   </div>
@@ -104,7 +102,7 @@
   <div class="control-group">
     <label class="control-label" for="ip">IP</label>
     <div class="controls">
-	<input id="ip" name="ip" type="text" placeholder="" class="input-large">
+	<input id="ip" name="ip" type="text" placeholder="" class="input-large" ng-model="system.machine.ip">
 	<p class="help-block">IP address</p>
     </div>
   </div>
@@ -113,7 +111,7 @@
   <div class="control-group">
     <label class="control-label" for="hostname">Hostname</label>
     <div class="controls">
-	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="">
+	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="system.machine.hostname">
 	<p class="help-block">Machine hostname</p>
     </div>
   </div>
@@ -122,7 +120,7 @@
   <div class="control-group">
     <label class="control-label" for="domain">Domain</label>
     <div class="controls">
-	<input id="domain" name="domain" type="text" placeholder="local" class="input-large" required="">
+	<input id="domain" name="domain" type="text" placeholder="local" class="input-large" required="" ng-model="system.machine.domain">
 	<p class="help-block">Machine domain</p>
     </div>
   </div>
