@@ -1,45 +1,41 @@
-<div class="well well-small">
-  <div class='row'> 
-   <div class="span4">
-	<a href="#/type/add/"> <i class="icon-plus"></i>Add a Type</a> 
-    </div>
-	<div class="span4 offset4 input-append">
-	  <input class="span2" id="appendedDropdownButton" type="text" style='height:25px'>
-	  <div class="btn-group">
-	    <button class="btn dropdown-toggle" data-toggle="dropdown">
-		Filter By
-		<span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu">
-		<li> Name </li>
-	    </ul>
-	  </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading"> 
+    <h3 class="panel-title"> Types </h3>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-	<tr>
-	  <th>Name</th>
-	  <th>Provisoner</th>
-	  <th>Description</th>
-	  <th>Actions</th>
-	</tr>
-    </thead>
-    <tbody>
-	<tr ng-repeat="type in types">
-	  <td><a href="#/type/{{type.type}}">{{type.type}}</a></td>
-	  <td>{{type.provisioner}}</td>
-	  <td>{{type.description}}</td>
-	  <td>
-	    <i class="icon-play" tooltip-placement="bottom" tooltip="Start"></i> 
-	    <i class="icon-off" tooltip-placement="bottom" tooltip="Stop"></i>   
-	    <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy"> </i>   
-	    <i class="icon-gears" tooltip-placement="bottom" tooltip="Provision"></i>
-	  </td>
-	</tr>
-    </tbody>
-  </table>
-  <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  <div class='panel-body'> 
+
+    <table class="table table-striped">
+	<thead>
+	  <tr>
+	    <th>Name</th>
+	    <th>Provisoner</th>
+	    <th>Description</th>
+	    <th>Actions</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="type in types">
+	    <td><a href="#/type/{{type.type}}">{{type.type}}</a></td>
+	    <td>{{type.provisioner}}</td>
+	    <td>{{type.description}}</td>
+	    <td>
+		<i class="icon-play" tooltip-placement="bottom" tooltip="Start"></i> 
+		<i class="icon-off" tooltip-placement="bottom" tooltip="Stop"></i>   
+		<i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy"> </i>   
+		<i class="icon-gears" tooltip-placement="bottom" tooltip="Provision"></i>
+	    </td>
+	  </tr>
+	</tbody>
+    </table>
+
+    <p class="text-right"> 
+	<a href="#/type/add/"> <i class="icon-plus"></i>Add a Type</a> 
+    </p>
+
+    <p class="text-center"> 
+	<pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </p>
+  </div>
 </div>
 

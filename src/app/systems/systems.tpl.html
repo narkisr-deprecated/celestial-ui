@@ -1,52 +1,47 @@
-<div class="well well-small">
-  <div class='row'> 
-   <div class="span4">
-      <a href="#/system/add/"> <i class="icon-plus"></i>Add a System</a> 
-    </div>
-	<div class="span4 offset4 input-append">
-	  <input class="span2" id="appendedDropdownButton" type="text" style='height:25px'>
-	  <div class="btn-group">
-	    <button class="btn dropdown-toggle" data-toggle="dropdown">
-		Filter By
-		<span class="caret"></span>
-	    </button>
-	    <ul class="dropdown-menu">
-		<li> Hostname </li>
-		<li> Type </li>
-		<li> Environemt</li>
-	    </ul>
-	  </div>
-    </div>
+<div class="panel panel-default">
+  <div class="panel-heading"> 
+    <h3 class="panel-title"> Systems </h3>
   </div>
+  <div class='panel-body'> 
 
-  <table class="table table-striped">
-    <thead>
-	<tr>
-	  <th>#</th>
-	  <th>Hostname</th>
-	  <th>Type</th>
-	  <th>Hypervisor</th>
-	  <th>Description</th>
-	  <th>Actions</th>
-	</tr>
-    </thead>
-    <tbody>
-	<tr ng-repeat="system in systems">
-	  <td><a href="#/system/{{system.id}}">{{system.id}}</a></td>
-	  <td>{{system.machine.hostname}}</td>
-	  <td>{{system.type}}</td>
-	  <td>{{system.hypervisor}}</td>
-	  <td>{{system.description}}</td>
-	  <td>
-	    <i class="icon-play" tooltip-placement="bottom" tooltip="Create" ng-click="launchJob(system.id,'create')"></i> 
-	    <!-- <i class="icon&#45;off" tooltip&#45;placement="bottom" tooltip="Stop" ng&#45;click="launchJob(system.id,'stop')"></i>    -->
-	    <i class="icon-gears" tooltip-placement="bottom" tooltip="Provision" ng-click="launchJob(system.id,'provision')"></i>
-	    <i class="icon-refresh" tooltip-placement="bottom" tooltip="Stage" ng-click="launchJob(system.id,'stage')"></i>
-	    <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy" ng-click="launchJob(system.id,'destroy')"> </i>   
-	  </td>
-	</tr>
-    </tbody>
-  </table>
-  <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+
+    <table class="table table-striped">
+	<thead>
+	  <tr>
+	    <th>#</th>
+	    <th>Hostname</th>
+	    <th>Type</th>
+	    <th>Hypervisor</th>
+	    <th>Description</th>
+	    <th>Actions</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="system in systems">
+	    <td><a href="#/system/{{system.id}}">{{system.id}}</a></td>
+	    <td>{{system.machine.hostname}}</td>
+	    <td>{{system.type}}</td>
+	    <td>{{system.hypervisor}}</td>
+	    <td>{{system.description}}</td>
+	    <td>
+		<i class="icon-play" tooltip-placement="bottom" tooltip="Create" ng-click="launchJob(system.id,'create')"></i> 
+		<!-- <i class="icon&#45;off" tooltip&#45;placement="bottom" tooltip="Stop" ng&#45;click="launchJob(system.id,'stop')"></i>    -->
+		<i class="icon-gears" tooltip-placement="bottom" tooltip="Provision" ng-click="launchJob(system.id,'provision')"></i>
+		<i class="icon-refresh" tooltip-placement="bottom" tooltip="Stage" ng-click="launchJob(system.id,'stage')"></i>
+		<i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy" ng-click="launchJob(system.id,'destroy')"> </i>   
+	    </td>
+	  </tr>
+	</tbody>
+    </table>
+
+    <p class="text-right"> 
+	<a href="#/system/add/" ><i class="icon-plus"></i>Add a System</a> 
+    </p>
+
+
+    <p class="text-center"> 
+	<pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </p>
+  </div>
 </div>
 
