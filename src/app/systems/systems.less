@@ -43,7 +43,39 @@ td{
      &:hover{color:lightblue;}
    }
 }
+.growl-item.ng-enter,
+.growl-item.ng-leave {
+    -webkit-transition:1s linear all;
+    -moz-transition:1s linear all;
+    -o-transition:1s linear all;
+    transition:1s linear all;
+}
+
+.growl{
+  position:fixed;
+  top:20%;
+  left:40%;
+  //float:right;width:250px
+}
+.growl-item.ng-enter,
+.growl-item.ng-leave{
+ -webkit-transition:.5s linear all;
+ -moz-transition:.5s linear all;
+ -o-transition:.5s linear all;
+  transition:.5s linear all
+}
+.growl-item.ng-enter,.growl-item.ng-leave.ng-leave-active{
+ opacity:0
+}
+.growl-item.ng-leave,.growl-item.ng-enter.ng-enter-active{opacity:1}
+
 @import '../../vendor/bootstrap/less/pagination.less';
 @import '../../vendor/bootstrap/less/tooltip.less';
 @import '../../vendor/bootstrap/less/tables.less';
 @import '../../vendor/bootstrap/less/forms.less';
+@import '../../vendor/bootstrap/less/alerts.less';
+@import '../../vendor/bootstrap/less/component-animations.less';
+@import '../../vendor/bootstrap/less/close.less';
+@import '../../vendor/bootstrap/less/popovers.less';
+
+
