@@ -1,6 +1,6 @@
 
 angular.module( 'celestial.systems', [
-  'ui.state', 'ui.bootstrap', 'ngResource','celestial.system','celestial.systemAdd'
+  'ui.state', 'ui.bootstrap', 'ngResource','celestial.system','celestial.systemAdd','angular-growl', 'ngAnimate'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {
@@ -14,9 +14,15 @@ angular.module( 'celestial.systems', [
     data:{ pageTitle: 'Systems' }
   });
 })
-.controller( 'SystemsCtrl', function SystemsController($scope,$resource) {
+.controller( 'SystemsCtrl', function SystemsController($scope,$resource,growl) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
+  var Jobs = $resource('/jobs/', {},{
+   create:{method : "POST", params:{id:'@id'},url:'/jobs/create/:id'},
+   provision:{method : "POST", params:{id:'@id'},url:'/jobs/provision/:id'},
+   stage:{method : "POST", params:{id:'@id'},url:'/jobs/stage/:id'},
+   destroy:{method : "POST", params:{id:'@id'},url:'/jobs/destroy/:id'}
+  });
 
   $scope.perPage = 10;
 
@@ -24,7 +30,9 @@ angular.module( 'celestial.systems', [
 
   $scope.loadCount = function(){
      Systems.get({page:1,offset:$scope.perPage},function(data,resp){
+        if(data.meta!=null){
          $scope.count = data.meta.total;
+        }
      });
   };
 
@@ -44,7 +52,13 @@ angular.module( 'celestial.systems', [
     });
   };
   
-  $scope.$watch( 'currentPage', $scope.setPage );
+  $scope.launchJob = function(id,action) {
+   Jobs[action]({id:id},function(data) {
+      growl.addInfoMessage(data.msg);
+   });
+  };
 
+  $scope.$watch( 'currentPage', $scope.setPage );
+   
 });
 

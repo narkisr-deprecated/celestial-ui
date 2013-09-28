@@ -38,10 +38,11 @@
 	  <td>{{system.hypervisor}}</td>
 	  <td>{{system.description}}</td>
 	  <td>
-	    <i class="icon-play" tooltip-placement="bottom" tooltip="Start"></i> 
-	    <i class="icon-off" tooltip-placement="bottom" tooltip="Stop"></i>   
-	    <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy"> </i>   
-	    <i class="icon-gears" tooltip-placement="bottom" tooltip="Provision"></i>
+	    <i class="icon-play" tooltip-placement="bottom" tooltip="Create" ng-click="launchJob(system.id,'create')"></i> 
+	    <!-- <i class="icon&#45;off" tooltip&#45;placement="bottom" tooltip="Stop" ng&#45;click="launchJob(system.id,'stop')"></i>    -->
+	    <i class="icon-gears" tooltip-placement="bottom" tooltip="Provision" ng-click="launchJob(system.id,'provision')"></i>
+	    <i class="icon-refresh" tooltip-placement="bottom" tooltip="Stage" ng-click="launchJob(system.id,'stage')"></i>
+	    <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy" ng-click="launchJob(system.id,'destroy')"> </i>   
 	  </td>
 	</tr>
     </tbody>
