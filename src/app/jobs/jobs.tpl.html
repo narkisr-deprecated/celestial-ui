@@ -1,0 +1,22 @@
+<div class="well well-small">
+  <table class="table table-striped">
+    <thead>
+	<tr>
+	  <th>System id</th>
+        <th>Action</th>
+        <th>Status</th>
+	  <th>Job id</th>
+	  <th>Transaction id</th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr ng-repeat="job in jobs">
+	  <td><a href="#/system/{{job.id}}">{{job.id}}</a></td>
+        <td>{{job.type}}</td>
+        <td>{{job.status}}</td>
+	  <td>{{job.jid}} </td>
+	  <td>{{job.tid}} </td>
+     </tr>
+    </tbody>
+  </table>
+</div>
