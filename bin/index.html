@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="celestial" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="Celestial"></title>
+
+    <!-- compiled CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/ng-boilerplate-0.3.1.css" />
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+    <!-- compiled JavaScript -->
+    <script type="text/javascript" src="assets/ng-boilerplate-0.3.1.js"></script>
+  </head>
+  <body>
+
+    <div growl></div>
+
+    <div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+	  <div class="container-fluid">
+	    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	    </button>
+	    <a class="brand" href="#">Celestial</a>
+	    <div class="nav-collapse collapse">
+		<p class="navbar-text pull-right">
+		  Logged in as <a href="#" class="navbar-link">Username</a>
+		</p>
+	    </div><!--/.nav-collapse -->
+	  </div>
+	</div>
+    </div>
+
+    <div class="container-fluid"> 
+	<div class="row-fluid">
+	  <div class="sidenav span2">
+	    <ul>
+		<li ui-route="/systems" ng-class="{active:$uiRoute}">
+		<a href="#/systems">
+		  <i class="icon-building"></i> 
+		  Systems
+		</a>
+		</li>
+		<li ui-route="/types" ng-class="{active:$uiRoute}">
+		<a href="#/types">
+		  <i class="icon-info-sign"></i>
+		  Types
+		</a>
+		</li>
+		<li ui-route="/jobs" ng-class="{active:$uiRoute}">
+		<a href="#/jobs">
+		  <i class="icon-tasks"></i>
+		  Jobs
+		</a>
+		</li>
+		<li>
+		<a href="https://github.com/celestial-ops">
+		  <i class="icon-github-alt"></i>
+		  Github
+		</a>
+		</li>
+		<li>
+		<a href="http://celestial-ops.com/#contact">
+		  <i class="icon-comments"></i>
+		  Support
+		</a>
+		</li>
+	    </ul>
+	  </div>
+
+	  <div class="main-content span10" >
+	    <div ui-view="main"> </div>
+	    <footer class="footer">
+		<div class="container">
+		  <div class="footer-inner">
+		    <p> (c) 2013 celestial-ops.com </p>
+		  </div>
+		</div>
+	    </footer>
+	  </div>
+	</div>
+    </div>
+  </body>
+</html>
