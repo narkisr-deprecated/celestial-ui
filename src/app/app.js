@@ -10,10 +10,12 @@ angular.module( 'celestial', [
 
 .run( function run () {
 })
-
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+  $scope.loggedUser = function(){
+    
+  };
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-    if ( angular.isDefined( toState.data.pageTitle ) ) {
+    if (angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | celestial' ;
     }
   });
