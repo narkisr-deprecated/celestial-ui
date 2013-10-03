@@ -2,6 +2,7 @@
   "name": "ng-boilerplate",
   "version": "0.3.1",
   "devDependencies": {
+    "jquery":"2.0.3",
     "angular": "~1.2.0-rc.2",
     "angular-resource": "~1.2.0-rc.2",
     "angular-mocks": "~1.0.7",
@@ -12,7 +13,8 @@
     "underscore": "1.5.1",
     "components-font-awesome": "3.2.1", 
     "angular-growl":"0.3.0", 
-    "angular-animate":"~1.2.0-rc.2"
+    "angular-animate":"~1.2.0-rc.2", 
+    "angular-cookies":"~1.2.0-rc.2"
   },
   "dependencies": {},
   "resolutions": {
