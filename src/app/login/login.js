@@ -38,12 +38,9 @@ angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ng
     }); 
   };
   
-  loginService.checkLoginStatus = function() { 
-    cookie = $cookies.celestial;
-    if(cookie==null){
-       $window.location = "/login";
-    }
-  };
+ $http.get('/sessions').success(function(data){
+      loginService.session = data;
+ }); 
 
   return loginService;
 })
