@@ -31,8 +31,7 @@
      $(document).ready(function() {
         if(getURLParameter('login_failed')!=null){
            $('.alert').toggle(true); 
-           $('#username').val(getURLParameter('username'));
-           $('#username').attr('readonly', true);
+           $('#username').val(getURLParameter('user'));
         }else {
            $('.alert').toggle(false); 
         }
