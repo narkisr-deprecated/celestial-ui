@@ -29,7 +29,7 @@ module.exports = {
     atpl: [ 'src/app/**/*.tpl.html','src/app/**/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
-    html: [ 'src/index.html',],
+    html: [ 'src/index.html'],
     less: 'src/less/main.less'
   },
 
@@ -69,7 +69,9 @@ module.exports = {
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js', 
-      'vendor/angular-growl/build/angular-growl.js' 
+      'vendor/angular-growl/build/angular-growl.js',
+      'vendor/angular-cookies/angular-cookies.js' ,
+      'vendor/jquery/jquery.js' 
     ],
     css: [
        
