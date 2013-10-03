@@ -1,5 +1,5 @@
 angular.module( 'celestial', [
-  'templates-app', 'templates-common', 'celestial.systems', 'celestial.types','celestial.jobs',
+  'templates-app', 'templates-common', 'celestial.systems', 'celestial.types','celestial.jobs','celestial.login',
   'ui.state', 'ui.route', 'angular-growl' , 'ngAnimate'
 ])
 
@@ -7,6 +7,7 @@ angular.module( 'celestial', [
   $urlRouterProvider.otherwise( '/systems' );
   growlProvider.globalTimeToLive(2000);
 })
+
 .directive('eatClick', function() {
     return function(scope, element, attrs) {
         $(element).click(function(event) {
@@ -14,6 +15,7 @@ angular.module( 'celestial', [
         });
     };
 })
+
 .controller( 'AppCtrl', function AppCtrl ( $scope, loginService) {
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
@@ -22,17 +24,17 @@ angular.module( 'celestial', [
     }
   });
 
-  $scope.$on('$locationChangeStart', function(next, current) { 
-    loginService.checkLoginStatus();
-  });
+   $scope.$on('$locationChangeStart', function(next, current) { 
+    // loginService.checkLoginStatus();
+   });
    
    $scope.logout = function(){
      loginService.logout();
    };
 
-   $scope.$watch(function () { return loginService.username;},
+   $scope.$watch(function () { return loginService.session;},
      function (value) {
-       $scope.username = value;
+       $scope.username = loginService.session.username;
      }
   );
 
