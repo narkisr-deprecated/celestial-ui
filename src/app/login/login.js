@@ -12,6 +12,22 @@ angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ng
   });
 
 })
+.config(['$httpProvider', function ($httpProvider,$window) {
+    $httpProvider.interceptors.push(function ($q) {
+        return {
+            'response': function (response) {
+                return response;
+            },
+            'responseError': function (rejection) {
+                if(rejection.status === 401) {
+                    // location.reload();
+                   window.location = "/login";
+                }
+                return $q.reject(rejection);
+            }
+        };
+    });
+}])
 .factory('loginService', function($cookieStore ,$cookies, $location, $http,$window) {
   var loginService = {};
 
