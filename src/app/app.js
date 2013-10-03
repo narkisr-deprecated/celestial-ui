@@ -7,18 +7,35 @@ angular.module( 'celestial', [
   $urlRouterProvider.otherwise( '/systems' );
   growlProvider.globalTimeToLive(2000);
 })
-
-.run( function run () {
+.directive('eatClick', function() {
+    return function(scope, element, attrs) {
+        $(element).click(function(event) {
+            event.preventDefault();
+        });
+    };
 })
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-  $scope.loggedUser = function(){
-    
-  };
+.controller( 'AppCtrl', function AppCtrl ( $scope, loginService) {
+
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if (angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | celestial' ;
     }
   });
+
+  $scope.$on('$locationChangeStart', function(next, current) { 
+    loginService.checkLoginStatus();
+  });
+   
+   $scope.logout = function(){
+     loginService.logout();
+   };
+
+   $scope.$watch(function () { return loginService.username;},
+     function (value) {
+       $scope.username = value;
+     }
+  );
+
 });
 
 
