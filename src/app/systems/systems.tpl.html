@@ -13,6 +13,7 @@
 	    <th>Type</th>
 	    <th>Hypervisor</th>
 	    <th>Description</th>
+	    <th>Jobs</th>
 	    <th>Actions</th>
 	  </tr>
 	</thead>
@@ -25,10 +26,20 @@
 	    <td>{{system.description}}</td>
 	    <td>
 		<i class="icon-play" tooltip-placement="bottom" tooltip="Create" ng-click="launchJob(system.id,'create')"></i> 
-		<!-- <i class="icon&#45;off" tooltip&#45;placement="bottom" tooltip="Stop" ng&#45;click="launchJob(system.id,'stop')"></i>    -->
 		<i class="icon-gears" tooltip-placement="bottom" tooltip="Provision" ng-click="launchJob(system.id,'provision')"></i>
 		<i class="icon-refresh" tooltip-placement="bottom" tooltip="Stage" ng-click="launchJob(system.id,'stage')"></i>
 		<i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy" ng-click="launchJob(system.id,'destroy')"> </i>   
+	    </td>
+	    <td> 
+		<ul class="nav">
+		  <li class="dropdown">
+		  <a class="dropdown-toggle disabled action-dropdown" href=""><i class="icon-list"></i></a>
+              <ul class="dropdown-menu" >
+		      <li ng-repeat="action in system.actions"><a href="#" ng-click="launchAction(system.id,action)">{{action}}</a></li>
+		  </ul>
+		  </li>
+		</ul>
+
 	    </td>
 	  </tr>
 	</tbody>
