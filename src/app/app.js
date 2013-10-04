@@ -25,7 +25,6 @@ angular.module( 'celestial', [
   });
 
    $scope.$on('$locationChangeStart', function(next, current) { 
-    // loginService.checkLoginStatus();
    });
    
    $scope.logout = function(){
@@ -34,7 +33,9 @@ angular.module( 'celestial', [
 
    $scope.$watch(function () { return loginService.session;},
      function (value) {
-       $scope.username = loginService.session.username;
+       if(value!==undefined){
+         $scope.username = loginService.session.username;
+       }
      }
   );
 
