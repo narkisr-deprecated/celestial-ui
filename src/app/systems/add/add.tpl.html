@@ -7,14 +7,14 @@
 	  <div class="control-group">  
 	    <label class="control-label" for="type">System type</label>  
 	    <div class="controls">  
-		<select id="type"  name="type" ng-model="system.type" ng-options="type for type in types" > </select>
-	   </div>  
+		<select id="type"  name="type" ng-model="type" ng-options="type for type in types" > </select>
+	    </div>  
 	  </div>
 
 	  <div class="control-group">  
 	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
 	    <div class="controls">  
-		<select id="hypervisor"  ng-model="system.hypervisor">  
+		<select id="hypervisor"  ng-model="currentHypervisor">  
 		  <option>proxmox</option>  
 		  <option>aws</option>  
 		  <option>vcenter</option>  
@@ -22,14 +22,12 @@
 	    </div>  
 	  </div>
 
-        <div class="control-group">  
+	  <div class="control-group">  
 	    <label class="control-label" for="env">Environment</label>  
 	    <div class="controls">  
-		<select id="type"  name="type" ng-model="system.env" ng-options="env for env in envs"> </select>
+		<select id="type"  name="type" ng-model="env" ng-options="env for env in envs"> </select>
 	    </div>  
 	  </div>
-
-
 	</fieldset>  
 
 	<div ng-include src="hypervisorTemplate"></div>

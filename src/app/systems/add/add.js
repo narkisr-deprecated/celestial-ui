@@ -18,9 +18,11 @@ angular.module( 'celestial.systemAdd', [
   var Systems = $resource('/systems/');
   var Environments = $resource('/environments/');
   
-  $scope.system = {proxmox:{type:'ct'}};
-
-  $scope.system.hypervisor = 'proxmox';
+  $scope.machine = {};
+  $scope.hypervisor = {};
+  $scope.type = '';
+  $scope.env = '';
+  $scope.currentHypervisor = 'proxmox';
 
   $scope.loadTypes = function () {
     $http({method: 'GET', url: '/types'}).
@@ -29,7 +31,7 @@ angular.module( 'celestial.systemAdd', [
         angular.forEach(data.types,function(type){
            $scope.types.push(type.type);
         });
-        $scope.system.type = $scope.types[0];
+        $scope.type = $scope.types[0];
       }).error(function(data, status, headers, config) {
         console.log('failed to fetch types');
       });
@@ -42,20 +44,37 @@ angular.module( 'celestial.systemAdd', [
         $scope.envs.push(k);
         console.log(k);
       });
-     $scope.system.env = $scope.envs[0];
+     $scope.env = $scope.envs[0];
     },function(error){
        console.log('failed to fetch environments');
     });
   };
 
   $scope.hypervisorSelect = function() {
-    $scope.hypervisorTemplate = 'systems/add/'+$scope.system.hypervisor+'.tpl.html';
+    $scope.hypervisorTemplate = 'systems/add/'+$scope.currentHypervisor+'.tpl.html';
+    switch ($scope.currentHypervisor) {
+     case "proxmox": 
+       $scope.hypervisor= {proxmox:{type:'ct'}};
+       $scope.machine={};
+       break;
+     case "aws": 
+       $scope.hypervisor = {aws:{endpoint:"ec2.us-east-1.amazonaws.com",'instance-type':'t1.micro'}};
+       $scope.machine={};
+       break;
+     case "vcenter": 
+       $scope.hypervisor= {vcenter:{}};
+       $scope.machine={};
+       break;
+    }
   };
 
-  $scope.$watch( 'system.hypervisor', $scope.hypervisorSelect );
+  $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect );
 
   $scope.submit = function(){
-    Systems.save($scope.system,
+    console.log($scope.machine);
+    system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
+    system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
+    Systems.save(system,
       function(resp) {
         $location.path( '/system/'+resp.id);
 	},function(errors){
