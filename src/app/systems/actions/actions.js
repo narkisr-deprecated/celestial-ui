@@ -3,7 +3,7 @@ angular.module('celestial.actions', ['ngResource'])
   var actionsService = {};
 
   var Actions =  $resource('/actions/', {},{
-   byType:{method : "GET", params:{type:'@type'},url:'/actions/type/:type'}
+   byType: {method : "GET", params:{type:'@type'},url:'/actions/type/:type'}
   });
 
   actionsService.loadActions = function(type) {
