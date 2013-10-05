@@ -18,14 +18,23 @@ angular.module( 'celestial.types', [
   var typesService = {};
 
   var Types = $resource('/types/',{},{
-
+    getType: {method : "GET", params:{type:'@type'},url:'/types/:type'},
+    update: {method : "PUT",url:'/types/'}
   });
 
+  typesService.get = function(typeId) {
+    return Types.getType({type:typeId});
+  };
+
+  var intoPersisted = function(type) {
+    type['puppet-std']['args'] = type['puppet-std']['args'].split(" ");
+    type['classes'] = JSON.parse(type.classes);
+    return type;
+  };
+
   typesService.save = function(typeName,newType) {
-    console.log(newType);
     newType['type'] = typeName;
-    newType['puppet-std']['args'] =_.words(newType['puppet-std']['args']);
-    newType['classes'] = JSON.parse(newType.classes);
+    newType = intoPersisted(newType);
     Types.save(newType, function(resp) {
         $location.path('/type/'+typeName);
 	},function(errors){
@@ -33,13 +42,23 @@ angular.module( 'celestial.types', [
 	});
   };
 
-  typesService.update= function(type) {
+  typesService.update = function(typeId,type) {
+    type = intoPersisted(type);
+    Types.update(type, function(resp) {
+        $location.path('/type/'+typeId);
+      },function(errors){
+        console.log(errors);
+      });
   };
   
+  typesService.provisionerOf = function(type) {
+    return _.filter(['puppet-std','chef','puppet'], function(a){return type[a]!=null; })[0];
+  };
+
   typesService.getAll = function() {
     return Types.get({}).$promise.then(function(data){
         return  _.map(data.types,function(type){
-           type.provisioner = _.filter(['puppet-std','chef','puppet'], function(a){return type[a]!=null; })[0];
+           type.provisioner = typesService.provisionerOf(type);
            return type; 
         });
     });
