@@ -1,0 +1,30 @@
+<div>
+  <div>
+    <form class="form-horizontal" name="typeForm" ng-submit="submit()">
+	<fieldset>  
+	  <legend>Main</legend>
+	  <div class="control-group">
+	    <label class="control-label" for="type">Type</label>
+	    <div class="controls">
+		<input id="type" name="type" class="input-large" required="" type="text" ng-model="type">
+	    </div>
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="provisioner">Provisioner type</label>  
+	    <div class="controls">  
+		<select id="provisioner"  ng-model="currentProvisioner">  
+		  <option>puppet-std</option>  
+		</select>  
+	    </div>  
+	  </div>
+	</fieldset>  
+
+	<div ng-include src="provisionerTemplate"></div>
+
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save type</button>
+	</div>
+    </form>
+  </div>
+</div>	
