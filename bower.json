@@ -14,7 +14,8 @@
     "components-font-awesome": "3.2.1", 
     "angular-growl":"0.3.0", 
     "angular-animate":"~1.2.0-rc.2", 
-    "angular-cookies":"~1.2.0-rc.2"
+    "angular-cookies":"~1.2.0-rc.2", 
+    "underscore.string":"2.3.3"
   },
   "dependencies": {},
   "resolutions": {

@@ -66,6 +66,7 @@ module.exports = {
       'vendor/angular-animate/angular-animate.js',
       'vendor/underscore/underscore-min.js',
       'vendor/underscore/underscore-min.map',
+      'vendor/underscore.string/dist/underscore.string.min.js',
       'vendor/angular-resource/angular-resource.min.js',
       'vendor/angular-resource/angular-resource.min.js.map',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
