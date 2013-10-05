@@ -63,6 +63,7 @@ angular.module( 'celestial.systems', [
     actionsService.launchAction(id,action);
   };
 
+  $scope.loadCount();
   $scope.$watch( 'currentPage', $scope.setPage );
    
 });
