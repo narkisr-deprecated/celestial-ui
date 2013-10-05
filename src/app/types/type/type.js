@@ -1,5 +1,5 @@
 angular.module( 'celestial.type', [
-  'ui.state', 'ui.bootstrap', 'ngResource'
+  'ui.state', 'ui.bootstrap', 'ngResource','celestial.typeAdd'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'type', {
