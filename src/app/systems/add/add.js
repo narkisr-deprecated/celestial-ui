@@ -71,7 +71,6 @@ angular.module( 'celestial.systemAdd', [
   $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect );
 
   $scope.submit = function(){
-    console.log($scope.machine);
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
     Systems.save(system,
