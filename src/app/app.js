@@ -1,9 +1,11 @@
 angular.module( 'celestial', [
-  'templates-app', 'templates-common', 'celestial.systems', 'celestial.types','celestial.jobs','celestial.login',
+  'templates-app', 'templates-common', 'celestial.systems',
+  'celestial.types','celestial.jobs','celestial.login',
   'ui.state', 'ui.route', 'angular-growl' , 'ngAnimate'
 ])
 
 .config(function myAppConfig ( $stateProvider, $urlRouterProvider,growlProvider ) {
+_.mixin(_.string.exports());
   $urlRouterProvider.otherwise( '/systems' );
   growlProvider.globalTimeToLive(2000);
 })
