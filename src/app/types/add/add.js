@@ -13,9 +13,8 @@ angular.module( 'celestial.typeAdd', [
     data:{ pageTitle: 'New type' }
   });
 })
-.controller( 'TypeAddCtrl', function typeAddController($scope, $http, $resource, $location) {
+.controller( 'TypeAddCtrl', function typeAddController($scope, $http, $resource ,typesService) {
 
-  var Types = $resource('/types/');
   $scope.type = '';
   $scope.currentProvisioner = 'puppet-std';
   $scope.provisioner= {'puppet-std':{module:{}, args:[]}};
@@ -27,17 +26,7 @@ angular.module( 'celestial.typeAdd', [
   $scope.$watch( 'currentProvisioner', $scope.typeSelect );
 
   $scope.submit = function(){
-    type = $scope.provisioner;
-    type['type'] = $scope.type;
-    type['puppet-std']['args'] =_.words($scope.provisioner['puppet-std']['args']);
-    type['classes'] = JSON.parse($scope.provisioner.classes);
-    Types.save(type,
-	function(resp) {
-        $location.path( '/type/'+$scope.type);
-	},function(errors){
-        console.log(errors);
-	}
-     );
+    typesService.save($scope.type,$scope.provisioner); 
   };
   
 });
