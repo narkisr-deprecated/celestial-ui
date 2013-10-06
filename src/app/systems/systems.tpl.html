@@ -31,7 +31,7 @@
 		<i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Destroy" ng-click="launchJob(system.id,'destroy')"> </i>   
 	    </td>
 	    <td> 
-		<ul class="nav">
+		<ul ng-hide="!system.actions" class="nav">
 		  <li class="dropdown">
 		  <a class="dropdown-toggle disabled action-dropdown" href=""><i class="icon-list"></i><span class="caret"></span></a>
               <ul class="dropdown-menu" >

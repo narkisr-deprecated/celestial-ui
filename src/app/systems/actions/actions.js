@@ -8,7 +8,12 @@ angular.module('celestial.actions', ['ngResource'])
 
   actionsService.loadActions = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
-         return  _.chain(actions).values().pluck('actions').first().keys().value(); 
+         result = _.chain(actions).values().pluck('actions').first().value();
+         if(!_.isEmpty(result)){
+           return  _.keys(result); 
+         } else {
+           return null;
+         }
 	});
   };
  
