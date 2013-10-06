@@ -1,5 +1,23 @@
 angular.module( 'celestial.users', [
+ 'celestial.userAdd', 'celestial.userEdit'
 ])
+.factory('rolesService', function($location, $resource) {
+  var rolesService = {};
+
+  var Roles = $resource('/users/',{},{
+    get: {method: 'GET', url:'/users/roles'}
+  });
+  
+  rolesService.loadRoles = function(scope){
+    Roles.get(function(data){
+       scope.roles = data.roles;
+       scope.roleKeys = _.keys(data.roles);
+    });
+  };
+
+  return rolesService;
+ }
+)
 .config(function config($stateProvider) {
   $stateProvider.state( 'users', {
     url: '/admin/users',
