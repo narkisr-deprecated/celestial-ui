@@ -14,7 +14,7 @@ angular.module( 'celestial.userEdit', [ ])
 .controller( 'UserEditCtrl', function UserEditController($scope, $resource, $location, growl,rolesService) {
 
   var Users = $resource('/users/:name',{name:'@name'},{
-   update: {method : "PUT",url:'/users/'}
+    update: {method : "PUT",url:'/users/'}
   }); 
 
   $scope.username = $location.path().replace("/admin/user/edit/","");
@@ -41,8 +41,8 @@ angular.module( 'celestial.userEdit', [ ])
      );
   };
 
-  $scope.revmoe = function(){
-    Users.remove($scope.username,
+  $scope.remove = function(){
+    Users.remove({name:$scope.username},
       function(resp) {
         growl.addInfoMessage('User deleted');
         $location.path( '/admin/users');
