@@ -9,14 +9,14 @@
     </thead>
     <tbody>
 	<tr ng-repeat="user in data.users">
-	  <td><a href="#/user/{{user.username}}">{{user.username}}</a></td>
+	  <td><a href="#/admin/user/edit/{{user.username}}">{{user.username}}</a></td>
 	  <td>{{user.roles.join(',').replace('celestial.roles/','')}}</td>
 	</tr>
     </tbody>
   </table>
 
   <p class="text-right"> 
-    <a href="#/user/add/"> <i class="icon-plus"></i>Add a User</a> 
+    <a href="#/admin/user/add/"> <i class="icon-plus"></i>Add a User</a> 
   </p>
 
   <p class="text-center"> 
