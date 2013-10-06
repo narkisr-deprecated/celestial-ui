@@ -10,7 +10,7 @@
     <tbody>
 	<tr ng-repeat="user in data.users">
 	  <td><a href="#/user/{{user.username}}">{{user.username}}</a></td>
-	  <td>{{user.roles}}</td>
+	  <td>{{user.roles.join(',').replace('celestial.roles/','')}}</td>
 	</tr>
     </tbody>
   </table>
