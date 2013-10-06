@@ -1,5 +1,5 @@
 angular.module( 'celestial.types', [
-  'ui.state', 'ui.bootstrap','celestial.type'
+  'ui.state', 'ui.bootstrap','celestial.typeAdd','celestial.typeEdit'
 ])
 
 .config(function config( $stateProvider ) {
@@ -14,11 +14,12 @@ angular.module( 'celestial.types', [
     data:{ pageTitle: 'Types' }
   });
 })
-.factory('typesService', function($location, $http, $resource) {
+.factory('typesService', function($location, $http, $resource,growl) {
   var typesService = {};
 
   var Types = $resource('/types/',{},{
     getType: {method : "GET", params:{type:'@type'},url:'/types/:type'},
+    remove: {method : "DELETE", params:{type:'@type'},url:'/types/:type'},
     update: {method : "PUT",url:'/types/'}
   });
 
@@ -27,7 +28,9 @@ angular.module( 'celestial.types', [
   };
 
   var intoPersisted = function(type) {
-    type['puppet-std']['args'] = type['puppet-std']['args'].split(" ");
+    if(type['puppet-std']['args']!==undefined){
+      type['puppet-std']['args'] = type['puppet-std']['args'].split(" ");
+    }
     type['classes'] = JSON.parse(type.classes);
     return type;
   };
@@ -36,7 +39,7 @@ angular.module( 'celestial.types', [
     newType['type'] = typeName;
     newType = intoPersisted(newType);
     Types.save(newType, function(resp) {
-        $location.path('/type/'+typeName);
+        $location.path('/types');
 	},function(errors){
         console.log(errors);
 	});
@@ -45,9 +48,11 @@ angular.module( 'celestial.types', [
   typesService.update = function(typeId,type) {
     type = intoPersisted(type);
     Types.update(type, function(resp) {
-        $location.path('/type/'+typeId);
-      },function(errors){
-        console.log(errors);
+        growl.addInfoMessage(resp.msg);
+        $location.path('/types');
+      },function(resp){
+        growl.addInfoMessage(resp.errors);
+        console.log(resp);
       });
   };
   
@@ -63,6 +68,17 @@ angular.module( 'celestial.types', [
         });
     });
   };
+
+  typesService.remove =  function(typeId){
+    Types.remove({type:typeId},
+      function(resp) {
+        growl.addInfoMessage(resp.msg);
+        $location.path( '/types');
+      },function(errors){
+        growl.addErrorMessage(errors.data);
+      }
+     );
+  }; 
 
   return typesService;
 })
@@ -91,8 +107,4 @@ angular.module( 'celestial.types', [
   
   $scope.$watch( 'currentPage', $scope.setPage );
   $scope.$watch( 'data.types', $scope.setPage );
-
-
-})
-
-;
+});

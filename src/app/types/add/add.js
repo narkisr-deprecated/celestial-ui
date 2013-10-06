@@ -15,9 +15,9 @@ angular.module( 'celestial.typeAdd', [
 })
 .controller( 'TypeAddCtrl', function typeAddController($scope, $http, $resource ,typesService) {
 
-  $scope.type = '';
+  $scope.typeId = '';
   $scope.currentProvisioner = 'puppet-std';
-  $scope.provisioner= {'puppet-std':{module:{}, args:[]}};
+  $scope.type = {'puppet-std':{module:{}}};
 
   $scope.typeSelect = function() {
     $scope.provisionerTemplate = 'types/add/'+$scope.currentProvisioner+'.tpl.html';
@@ -26,7 +26,7 @@ angular.module( 'celestial.typeAdd', [
   $scope.$watch( 'currentProvisioner', $scope.typeSelect );
 
   $scope.submit = function(){
-    typesService.save($scope.type,$scope.provisioner); 
+    typesService.save($scope.typeId,$scope.type); 
   };
   
 });

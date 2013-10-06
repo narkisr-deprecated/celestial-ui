@@ -21,7 +21,9 @@ angular.module( 'celestial.typeEdit', [
     typesService.get($scope.typeId).$promise.then(function(type) {
       $scope.type = type;
       $scope.type.classes = JSON.stringify(type.classes);
-	$scope.type['puppet-std'].args = type['puppet-std'].args.join(" ");
+	if($scope.type['puppet-std'].args !==undefined){
+        $scope.type['puppet-std'].args = type['puppet-std'].args.join(" ");
+      }
       $scope.currentProvisioner = typesService.provisionerOf($scope.type);
       $scope.provisionerTemplate = 'types/edit/'+$scope.currentProvisioner+'.tpl.html';
     });
@@ -31,6 +33,10 @@ angular.module( 'celestial.typeEdit', [
 
   $scope.submit = function(){
     typesService.update($scope.typeId,$scope.type);
+  };
+
+  $scope.remove = function() {
+    typesService.remove($scope.typeId);
   };
   
 });
