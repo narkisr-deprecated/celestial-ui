@@ -28,6 +28,10 @@ angular.module( 'celestial.userAdd', [ ])
   $scope.$watch('roleKeys', $scope.roleDefault);
 
   $scope.submit = function(){
+    user = $scope.user;
+    if(user.envs !== "" && user.envs !== undefined){ 
+	user.envs= user.envs.split(" ");
+    }
     Users.save($scope.user,
       function(resp) {
         $location.path( '/admin/users');

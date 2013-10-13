@@ -18,13 +18,20 @@
 	  </div>
 	</fieldset>  
 
-      <div class="control-group">  
-	    <label class="control-label" for="type">Role</label>  
-	    <div class="controls">  
-		<select id="role"  name="role" ng-model="user.roles" ng-options="role for role in roleKeys" > </select>
-	    </div>  
-	  </div>
+	<div class="control-group">  
+	  <label class="control-label" for="type">Role</label>  
+	  <div class="controls">  
+	    <select id="role"  name="role" ng-model="user.roles" ng-options="role for role in roleKeys" > </select>
+	  </div>  
+	</div>
 
+	<div class="control-group">
+	  <label class="control-label" for="envs">Environments</label>
+	  <div class="controls">
+	    <input id="envs" name="envs" placeholder="" class="input-large" type="text" ng-model="user.envs" required="" >
+	    <p class="help-block">Allowed environments</p>
+	  </div>
+	</div>
 
 	<div class="form-actions">
 	  <button type="submit" class="btn btn-primary">Save User</button>

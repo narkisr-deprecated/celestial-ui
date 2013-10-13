@@ -26,13 +26,20 @@ angular.module( 'celestial.userEdit', [ ])
       data.password = '';
 	data.roles = _.invert($scope.roles)[data.roles];
       $scope.user = data;
+      if($scope.user.envs !== undefined){
+        $scope.user.args = $scope.user.envs.join(" ");
+      }     
     });
   };
 
   $scope.loadUser();
 
   $scope.submit = function(){
-    Users.update($scope.user,
+    user = $scope.user;
+    if(user.envs!== ""){ 
+	user.envs= user.envs.split(" ");
+    }
+    Users.update(user,
       function(resp) {
         $location.path( '/admin/users');
       },function(errors){
