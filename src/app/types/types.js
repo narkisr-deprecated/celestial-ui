@@ -35,19 +35,23 @@ angular.module( 'celestial.types', [
     return type;
   };
 
-  typesService.save = function(typeName,newType) {
+  typesService.save = function(typeName,type) {
+    newType = type;
     newType['type'] = typeName;
     newType = intoPersisted(newType);
     Types.save(newType, function(resp) {
         $location.path('/types');
+         growl.addInfoMessage(resp.msg);
 	},function(errors){
+        growl.addInfoMessage(resp.errors);
         console.log(errors);
 	});
   };
 
   typesService.update = function(typeId,type) {
-    type = intoPersisted(type);
-    Types.update(type, function(resp) {
+    updatedType = type;
+    updatedType = intoPersisted(updatedType);
+    Types.update(updatedType, function(resp) {
         growl.addInfoMessage(resp.msg);
         $location.path('/types');
       },function(resp){

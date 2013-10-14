@@ -13,7 +13,7 @@ angular.module( 'celestial.systemAdd', [
     data:{ pageTitle: 'New System' }
   });
 })
-.controller( 'SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location) {
+.controller( 'SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location,growl) {
 
   var Systems = $resource('/systems/');
   var Environments = $resource('/environments/');
@@ -62,7 +62,7 @@ angular.module( 'celestial.systemAdd', [
        $scope.machine={};
        break;
      case "vcenter": 
-       $scope.hypervisor= {vcenter:{}};
+       $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
        $scope.machine={};
        break;
     }
@@ -70,14 +70,25 @@ angular.module( 'celestial.systemAdd', [
 
   $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect );
 
+  $scope.intoPersisted =function(system){
+    switch ($scope.currentHypervisor) {
+     case "vcenter": 
+      system.machine.names = system.machine.names.split(" ");
+      break;
+    }
+   return system;
+  };
+
   $scope.submit = function(){
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
-    Systems.save(system,
+    Systems.save($scope.intoPersisted(system),
       function(resp) {
+        growl.addInfoMessage(resp.msg);
         $location.path( '/system/'+resp.id);
-	},function(errors){
-        console.log(errors);
+	},function(resp){
+        growl.addInfoMessage(resp.errors);
+        console.log(resp.errors);
       }
      );
   };

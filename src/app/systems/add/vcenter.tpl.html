@@ -1,41 +1,152 @@
 <fieldset>
 
-<legend>vCenter</legend>
+  <legend>vCenter</legend>
 
-<div class="control-group">
-  <label class="control-label" for="pool">Pool</label>
-  <div class="controls">
-    <input id="pool" name="pool" placeholder="" class="input-large" required="" type="text">
-    <p class="help-block">vCenter pool</p>
+  <div class="control-group">
+    <label class="control-label" for="pool">Pool</label>
+    <div class="controls">
+	<input id="pool" name="pool" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.vcenter.pool">
+	<p class="help-block">vCenter pool</p>
+    </div>
   </div>
-</div>
 
-<div class="control-group">
-  <label class="control-label" for="datacenter">Datacenter</label>
-  <div class="controls">
-    <input id="datacenter" name="datacenter" placeholder="" class="input-large" required="" type="text">
-    <p class="help-block">vCenter datacenter</p>
+  <div class="control-group">
+    <label class="control-label" for="datacenter">Datacenter</label>
+    <div class="controls">
+	<input id="datacenter" name="datacenter" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.vcenter.datacenter">
+	<p class="help-block">vCenter datacenter</p>
+    </div>
   </div>
-</div>
 
-<div class="control-group">
-  <label class="control-label" for="hostsystem">Hostsystem</label>
-  <div class="controls">
-    <input id="hostsystem" name="hostsystem" placeholder="" class="input-large" required="" type="text">
-    <p class="help-block">vCenter hostsystem</p>
+  <div class="control-group">
+    <label class="control-label" for="hostsystem">Hostsystem</label>
+    <div class="controls">
+	<input id="hostsystem" name="hostsystem" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.vcenter.hostsystem">
+	<p class="help-block">vCenter hostsystem</p>
+    </div>
   </div>
-</div>
 
-<!-- Select Basic -->
-<div class="control-group">
-  <label class="control-label" for="diskformat">Disk format</label>
-  <div class="controls">
-    <select id="diskformat" name="diskformat" class="input-large">
-      <option>sparse</option>
-      <option>flat</option>
-    </select>
+  <div class="control-group">
+    <label class="control-label" for="diskformat">Disk format</label>
+    <div class="controls">
+	<select id="diskformat" name="diskformat" class="input-large" ng-model="hypervisor.vcenter['disk-format']">
+	  <option>sparse</option>
+	  <option>flat</option>
+	</select>
+    </div>
   </div>
-</div>
+
+  <legend>Machine</legend>
+  <div class="control-group">
+    <label class="control-label" for="os">OS</label>
+    <div class="controls">
+	<input id="os" name="os" type="text" placeholder="" class="input-large" required="" ng-model="machine.os">
+	<p class="help-block">Operating system</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="cpus">CPUs</label>
+    <div class="controls">
+	<input id="cpus" name="cpus" type="number" min="1" placeholder="" class="input-large" required="" ng-model="machine.cpus">
+	<p class="help-block">Number of CPUs</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="memory">Memory</label>
+    <div class="controls">
+	<input id="memory" name="memory" min="16" type="number" placeholder="" class="input-large" required="" ng-model="machine.memory" >
+	<p class="help-block">Memory in MB</p>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <label class="control-label" for="disk">Disk</label>
+    <div class="controls">
+	<input id="disk" name="disk" type="number" min="1" placeholder="" class="input-large" required="" ng-model="machine.disk">
+	<p class="help-block">Disk size in GB</p>
+    </div>
+  </div>
+
+  <legend>Networking</legend>
+
+  <div class="control-group">
+    <label class="control-label" for="hostname">Hostname</label>
+    <div class="controls">
+	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="ip">IP</label>
+    <div class="controls">
+	<input id="ip" name="ip" type="text" placeholder="" class="input-large" ng-model="machine.ip">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="ip">Netmask</label>
+    <div class="controls">
+	<input id="netmask" name="netmask" type="text" placeholder="" class="input-large" ng-model="machine.netmask">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="ip">Gateway</label>
+    <div class="controls">
+	<input id="gateway" name="gateway" type="text" placeholder="" class="input-large" ng-model="machine.gateway">
+    </div>
+  </div>
+
+
+ <legend>DNS</legend>
+  <div class="control-group">
+    <label class="control-label" for="domain">Domain</label>
+    <div class="controls">
+	<input id="domain" name="domain" type="text" placeholder="local" class="input-large" required="" ng-model="machine.domain">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="search">Search</label>
+    <div class="controls">
+	<input id="search" name="search" type="text" placeholder="local" class="input-large" required="" ng-model="machine.search">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="nameservers">Nameservers</label>
+    <div class="controls">
+	<input id="nameservers" name="nameservers" type="text" placeholder="8.8.8.8 8.8.4.4" class="input-large" required="" ng-model="machine.names">
+    </div>
+  </div>
+
+  <legend>User</legend>
+  <div class="control-group">
+    <label class="control-label" for="user">User</label>
+    <div class="controls">
+	<input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="machine.user">
+	<p class="help-block">Template user</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="password">Password</label>
+    <div class="controls">
+	<input id="password" name="password" placeholder="" class="input-large" required="" type="password" ng-model="machine.password">
+	<p class="help-block">Template password</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="sudo">Sudo</label>
+    <div class="controls">
+	<label class="checkbox inline" for="checkboxes-0">
+	  <input type="checkbox" name="sudo" id="sudo">
+	</label>
+    </div>
+  </div>
 
 </fieldset>
 

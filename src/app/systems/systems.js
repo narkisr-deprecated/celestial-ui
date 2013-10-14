@@ -43,7 +43,7 @@ angular.module( 'celestial.systems', [
 	$scope.systems = [];
       angular.forEach(data.systems,function(system){
         system[1]['id'] = system[0];
-        system[1]['hypervisor'] = _.filter(['aws','proxmox','vsphere'],function(a){
+        system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter'],function(a){
            return system[1][a]!=null;
         })[0];
         system[1]['actions'] = actionsService.loadActions(system[1].type);
