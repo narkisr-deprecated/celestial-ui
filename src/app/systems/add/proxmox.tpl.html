@@ -61,16 +61,14 @@
     </div>
   </div>
 
-  <!-- Text input-->
-  <div class="control-group">
-    <label class="control-label" for="os">OS</label>
-    <div class="controls">
-	<input id="os" name="os" type="text" placeholder="" class="input-large" required="" ng-model="machine.os">
-	<p class="help-block">Operating system</p>
-    </div>
+  <div class="control-group">  
+    <label class="control-label" for="env">OS</label>  
+    <div class="controls">  
+	<select id="type"  name="type" ng-model="machine.os" ng-options="os for os in oses"> </select>
+    </div>  
+    <p class="help-block">Operating system</p>
   </div>
 
-  <!-- Text input-->
   <div class="control-group">
     <label class="control-label" for="cpus">CPUs</label>
     <div class="controls">
