@@ -72,6 +72,9 @@ angular.module( 'celestial.systemAdd', [
 
   $scope.intoPersisted =function(system){
     switch ($scope.currentHypervisor) {
+     case "proxmox":
+      system.proxmox.features = system.proxmox.features.split(" ");
+      break;
      case "vcenter": 
       system.machine.names = system.machine.names.split(" ");
       break;
