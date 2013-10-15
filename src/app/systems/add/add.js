@@ -21,8 +21,6 @@ angular.module( 'celestial.systemAdd', [
   $scope.machine = {};
   $scope.hypervisor = {};
   $scope.type = '';
-  $scope.env = '';
-  $scope.currentHypervisor = 'proxmox';
 
   $scope.loadTypes = function () {
     $http({method: 'GET', url: '/types'}).
@@ -35,14 +33,14 @@ angular.module( 'celestial.systemAdd', [
       }).error(function(data, status, headers, config) {
         console.log('failed to fetch types');
       });
-     };
+  };
 
   $scope.loadEnvs = function() {
     Environments.get({},function(data){
+	$scope.rawEnvs = data.environments;
       $scope.envs = [];
       angular.forEach(data.environments,function(v,k){
         $scope.envs.push(k);
-        console.log(k);
       });
      $scope.env = $scope.envs[0];
     },function(error){
@@ -51,22 +49,24 @@ angular.module( 'celestial.systemAdd', [
   };
 
   $scope.hypervisorSelect = function() {
-    $scope.hypervisorTemplate = 'systems/add/'+$scope.currentHypervisor+'.tpl.html';
-    switch ($scope.currentHypervisor) {
-     case "proxmox": 
-       $scope.hypervisor= {proxmox:{type:'ct'}};
-       $scope.machine={};
-       break;
-     case "aws": 
-       $scope.hypervisor = {aws:{endpoint:"ec2.us-east-1.amazonaws.com",'instance-type':'t1.micro'}};
-       $scope.machine={};
-       break;
-     case "vcenter": 
-       $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
-       $scope.machine={};
-       break;
+   if($scope.currentHypervisor !== undefined){
+     $scope.hypervisorTemplate = 'systems/add/'+$scope.currentHypervisor+'.tpl.html';
+     switch ($scope.currentHypervisor) {
+      case "proxmox": 
+        $scope.hypervisor= {proxmox:{type:'ct'}};
+        $scope.machine={};
+        break;
+      case "aws": 
+        $scope.hypervisor = {aws:{endpoint:"ec2.us-east-1.amazonaws.com",'instance-type':'t1.micro'}};
+        $scope.machine={};
+        break;
+      case "vcenter": 
+        $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
+        $scope.machine={};
+        break;
     }
-  };
+   }
+ };
 
   $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect );
 
@@ -79,6 +79,28 @@ angular.module( 'celestial.systemAdd', [
    return system;
   };
 
+
+  $scope.setOses = function() {
+    if($scope.env !== undefined){
+      templates = $scope.rawEnvs[$scope.env][$scope.currentHypervisor].ostemplates;
+      if(templates !== undefined){
+         $scope.oses = _.keys(templates); 
+        $scope.machine.os = $scope.oses[0];
+      }
+    }
+  };
+
+  $scope.$watch( 'currentHypervisor', $scope.setOses);
+
+  $scope.setHypervisors = function() {
+    if($scope.env !== undefined){
+      $scope.hypervisors = _.keys($scope.rawEnvs[$scope.env]); 
+      $scope.currentHypervisor = $scope.hypervisors[0];
+    }
+  };
+
+  $scope.$watch( 'env', $scope.setHypervisors);
+
   $scope.submit = function(){
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
@@ -87,12 +109,13 @@ angular.module( 'celestial.systemAdd', [
         growl.addInfoMessage(resp.msg);
         $location.path( '/system/'+resp.id);
 	},function(resp){
-        growl.addInfoMessage(resp.errors);
+        growl.addWarnMessage(resp.errors);
         console.log(resp.errors);
       }
      );
   };
   
+
   $scope.loadTypes();
   $scope.loadEnvs();
 });

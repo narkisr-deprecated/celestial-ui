@@ -14,11 +14,7 @@
 	  <div class="control-group">  
 	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
 	    <div class="controls">  
-		<select id="hypervisor"  ng-model="currentHypervisor">  
-		  <option>proxmox</option>  
-		  <option>aws</option>  
-		  <option>vcenter</option>  
-		</select>  
+		<select id="hypervisor"  name="hypervisor" ng-model="currentHypervisor" ng-options="hyp for hyp in hypervisors"> </select>
 	    </div>  
 	  </div>
 
