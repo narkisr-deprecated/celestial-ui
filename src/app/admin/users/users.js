@@ -8,10 +8,11 @@ angular.module( 'celestial.users', [
     get: {method: 'GET', url:'/users/roles'}
   });
   
-  rolesService.loadRoles = function(scope){
+  rolesService.loadRoles = function(call){
     Roles.get(function(data){
-       scope.roles = data.roles;
-       scope.roleKeys = _.keys(data.roles);
+       // scope.roles = data.roles;
+       // scope.roleKeys = _.keys(data.roles);
+       call(data.roles);
     });
   };
 

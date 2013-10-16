@@ -19,26 +19,28 @@ angular.module( 'celestial.userEdit', [ ])
 
   $scope.username = $location.path().replace("/admin/user/edit/","");
 
-  rolesService.loadRoles($scope);
 
-  $scope.loadUser =function(){
+  $scope.loadUser = function(roles){
     Users.get({name:$scope.username}, function(data){
       data.password = '';
-	data.roles = _.invert($scope.roles)[data.roles];
+	data.roles = _.invert(roles)[data.roles];
       $scope.user = data;
+      $scope.roleKeys = _.keys(roles);
       if($scope.user.envs !== undefined){
-        $scope.user.args = $scope.user.envs.join(" ");
+        $scope.user.envs = $scope.user.envs.join(",");
       }     
     });
   };
 
-  $scope.loadUser();
+
+  rolesService.loadRoles($scope.loadUser);
 
   $scope.submit = function(){
     user = $scope.user;
     if(user.envs!== ""){ 
-	user.envs= user.envs.split(" ");
+	user.envs= user.envs.split(",");
     }
+    user.roles = [user.roles];
     Users.update(user,
       function(resp) {
         $location.path( '/admin/users');
