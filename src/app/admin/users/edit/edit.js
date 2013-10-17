@@ -27,7 +27,7 @@ angular.module( 'celestial.userEdit', [ ])
       $scope.user = data;
       $scope.roleKeys = _.keys(roles);
       if($scope.user.envs !== undefined){
-        $scope.user.envs = $scope.user.envs.join(",");
+        $scope.user.envs = $scope.user.envs.join(" ");
       }     
     });
   };
@@ -38,7 +38,7 @@ angular.module( 'celestial.userEdit', [ ])
   $scope.submit = function(){
     user = $scope.user;
     if(user.envs!== ""){ 
-	user.envs= user.envs.split(",");
+	user.envs= user.envs.split(" ");
     }
     user.roles = [user.roles];
     Users.update(user,
