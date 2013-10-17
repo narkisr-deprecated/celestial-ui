@@ -1,7 +1,7 @@
 angular.module( 'celestial.systems', [
   'ui.state', 'ui.bootstrap', 'ngResource',
-  'celestial.system', 'celestial.systemAdd', 'celestial.actions',
-  'angular-growl', 'ngAnimate'
+  'celestial.system', 'celestial.systemAdd', 'celestial.actions', 'celestial.confirm',
+  'angular-growl', 'ngAnimate' 
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {
@@ -15,7 +15,7 @@ angular.module( 'celestial.systems', [
     data:{ pageTitle: 'Systems' }
   });
 })
-.controller( 'SystemsCtrl', function SystemsController($scope, $resource, $http, actionsService, growl) {
+.controller( 'SystemsCtrl', function SystemsController($scope, $resource, $http, actionsService, growl,$modal) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
   var Jobs = $resource('/jobs/', {},{
@@ -54,6 +54,11 @@ angular.module( 'celestial.systems', [
   };
   
   $scope.launchJob = function(id,job) {
+    var modalInstance = $modal.open({
+      templateUrl: 'systems/confirm/confirm.tpl.html',
+      controller: 'ConfirmCtrl',
+      resolve: {
+      }}, function(result) { console.log(result); });
     Jobs[job]({id:id},function(data) {
        growl.addInfoMessage(data.msg);
     });
