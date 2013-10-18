@@ -12,6 +12,7 @@
 	    <th>Hostname</th>
 	    <th>Type</th>
 	    <th>Hypervisor</th>
+	    <th>Environment</th>
 	    <th>Description</th>
 	    <th>Jobs</th>
 	    <th>Actions</th>
@@ -23,6 +24,7 @@
 	    <td>{{system.machine.hostname}}</td>
 	    <td>{{system.type}}</td>
 	    <td>{{system.hypervisor}}</td>
+	    <td>{{system.env}}</td>
 	    <td>{{system.description}}</td>
 	    <td>
 		<i class="icon-play" tooltip-placement="bottom" tooltip="Create" ng-click="launchJob(system.id,'create')"></i> 
