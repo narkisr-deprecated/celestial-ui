@@ -15,7 +15,7 @@ angular.module( 'celestial.systems', [
     data:{ pageTitle: 'Systems' }
   });
 })
-.controller( 'SystemsCtrl', function SystemsController($scope, $resource, $http, actionsService, growl,$modal) {
+.controller( 'SystemsCtrl', function SystemsController($scope, $resource, $http, actionsService, growl, $modal, $cookieStore) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
   var Jobs = $resource('/jobs/', {},{
@@ -53,15 +53,38 @@ angular.module( 'celestial.systems', [
     });
   };
   
-  $scope.launchJob = function(id,job) {
+  var safeLaunch = function(id,job,launchFn) {
+    var target = _.find($scope.systems,function(s){return s.id==id;});
+
     var modalInstance = $modal.open({
       templateUrl: 'systems/confirm/confirm.tpl.html',
       controller: 'ConfirmCtrl',
-      resolve: {
-      }}, function(result) { console.log(result); });
-    Jobs[job]({id:id},function(data) {
-       growl.addInfoMessage(data.msg);
+	resolve: {job: function(){return job;}, target: function(){return target;}}
     });
+   
+    modalInstance.result.then(function () {
+       launchFn();
+    }, function () {
+       growl.addErrorMessage('Not launching ' +job);
+    });
+
+  };
+
+  $scope.launchJob = function(id,job) {
+    runJob = function() {
+       Jobs[job]({id:id},function(resp) {
+         growl.addInfoMessage(resp.msg);
+        },function(resp){
+         growl.addWarnMessage(resp.errors);
+         console.log(resp.errors);
+       });
+     };
+
+    if($cookieStore.get('skipSystemConfirm')){
+      runJob();  
+    } else {
+      safeLaunch(id,job,runJob); 
+    }
   };
 
   $scope.launchAction = function(id,action) {

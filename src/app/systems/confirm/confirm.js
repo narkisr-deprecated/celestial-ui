@@ -1,13 +1,22 @@
 angular.module('celestial.confirm', ['ui.bootstrap.modal','ui.state'])
 
+.controller('ConfirmCtrl', function ConfirmController($scope,$modalInstance, $cookieStore, job, target) {
 
-.controller('ConfirmCtrl', function ConfirmController($scope,$modalInstance) {
+  $scope.target = target;
+  $scope.job = job;
+  $scope.state= {}; 
 
   $scope.ok = function () {
-    $modalInstance.close(true);
+    if($scope.state.skip) {
+      $cookieStore.put('skipSystemConfirm', true);
+    }
+    $modalInstance.close();
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss(false);
+    if($scope.state.skip) {
+      $cookieStore.put('skipSystemConfirm', true);
+    }
+    $modalInstance.dismiss();
   };
 });

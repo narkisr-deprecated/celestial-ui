@@ -1,13 +1,18 @@
-<div >
-        <div class="modal-header">
-            <h3>I'm a modal!</h3>
-        </div>
-        <div class="modal-body">
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
+<div>
+  <div class="modal-header">
+    <h2>Please confirm!</h2>
+  </div>
+  <div class="modal-body">
+    <h4> You are about to run {{job}} on {{target.machine.hostname}} </h4>
+    <p> Note that all action are logged for future auditing</p>
+    <div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+    </div>
 
-    <button class="btn" ng-click="open()">Open me!</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+    <label class="checkbox inline" for="skip">
+	<input type="checkbox" name="skip" id="skip" ng-model="state.skip"> skip
+    </label>
+
+  </div>
 </div>

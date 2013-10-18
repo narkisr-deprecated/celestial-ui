@@ -1,5 +1,5 @@
 describe( 'UserEditCtrl', function() {
-  describe( 'loadUser', function() {
+  describe( 'user editing', function() {
     var UserEditCtrl, $scope, $location, $httpBackend;
 
     beforeEach( module( 'celestial' ) );
