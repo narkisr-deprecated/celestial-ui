@@ -5,6 +5,8 @@ Celestial webui, implemented using:
 * [Angularjs](http://angularjs.org/)
 * [Bootstrap](http://getbootstrap.com/2.3.2/)
 
+[![Build Status](https://travis-ci.org/celestial-ops/celestial-ui.png)](https://travis-ci.org/celestial-ops/celestial-ui)
+
 # Build
 
 ```bash
