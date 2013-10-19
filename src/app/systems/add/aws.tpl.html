@@ -1,86 +1,99 @@
-<fieldset>
-  <legend>AWS</legend>
+<legend>AWS</legend>
 
-  <div class="control-group">
-    <label class="control-label" for="instancetype">Instance type</label>
-    <div class="controls">
-	<select id="instancetype" name="instancetype" class="input-large" ng-model="hypervisor.aws['instance-type']">
-        <option>t1.micro</option>
-	  <option>m1.small</option>
-	  <option>m1.medium</option>
-	  <option>m1.large</option>
-        <option>m1.xlarge</option>
-        <option>m3.xlarge</option>
-        <option>m3.2xlarge</option>
-        <option>c1.medium</option>
-        <option>c1.xlarge</option>
-        <option>c1.xlarge</option>
-        <option>cc2.8xlarge</option>
-	  <option>m2.xlarge</option>
-	  <option>m2.2xlarge</option>
-	  <option>m2.4xlarge</option>
-	  <option>cr1.8xlarge</option>
-	  <option>hi1.4xlarge</option>
-        <option>cg1.4xlarge</option>
-	</select>
-	<p class="help-block">AWS instance type</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="instancetype">Instance type</label>
+  <div class="controls">
+    <select id="instancetype" name="instancetype" class="input-large" ng-model="hypervisor.aws['instance-type']">
+	<option>t1.micro</option>
+	<option>m1.small</option>
+	<option>m1.medium</option>
+	<option>m1.large</option>
+	<option>m1.xlarge</option>
+	<option>m3.xlarge</option>
+	<option>m3.2xlarge</option>
+	<option>c1.medium</option>
+	<option>c1.xlarge</option>
+	<option>c1.xlarge</option>
+	<option>cc2.8xlarge</option>
+	<option>m2.xlarge</option>
+	<option>m2.2xlarge</option>
+	<option>m2.4xlarge</option>
+	<option>cr1.8xlarge</option>
+	<option>hi1.4xlarge</option>
+	<option>cg1.4xlarge</option>
+    </select>
+    <p class="help-block">AWS instance type</p>
   </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label" for="imageid">AMI Image</label>
-    <div class="controls">
-	<input id="imageid" name="imageid" placeholder="ami-" class="input-large" required="" type="text" ng-model="hypervisor.aws['image-id']">
-	<p class="help-block">Amazon AMI id</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="imageid">AMI Image</label>
+  <div class="controls">
+    <input id="imageid" name="imageid" placeholder="ami-" class="input-large" required="" type="text" ng-model="hypervisor.aws['image-id']">
+    <p class="help-block">Amazon AMI id</p>
   </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label" for="keyname">Key Pair</label>
-    <div class="controls">
-	<input id="keyname" name="keyname" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.aws['key-name']">
-	<p class="help-block">EC2 keypair</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="keyname">Key Pair</label>
+  <div class="controls">
+    <input id="keyname" name="keyname" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.aws['key-name']">
+    <p class="help-block">EC2 keypair</p>
   </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label" for="endpoint">End point</label>
-    <div class="controls">
-	<select id="endpoint" name="endpoint" class="input-large" ng-model="hypervisor.aws.endpoint">
-	  <option>ec2.us-east-1.amazonaws.com</option>
-	  <option>ec2.us-west-1.amazonaws.com</option>
-	  <option>ec2.us-west-2.amazonaws.com</option>
-	  <option>ec2.eu-west-1.amazonaws.com</option>
-	  <option>ec2.ap-southeast-1.amazonaws.com</option>
-	  <option>ec2.ap-southeast-2.amazonaws.com</option>
-	  <option>ec2.ap-northeast-1.amazonaws.com</option>
-	  <option>ec2.sa-east-1.amazonaws.com</option>
-	</select>
-	<p class="help-block">AWS EC2 endpoint</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="endpoint">End point</label>
+  <div class="controls">
+    <select id="endpoint" name="endpoint" class="input-large" ng-model="hypervisor.aws.endpoint">
+	<option>ec2.us-east-1.amazonaws.com</option>
+	<option>ec2.us-west-1.amazonaws.com</option>
+	<option>ec2.us-west-2.amazonaws.com</option>
+	<option>ec2.eu-west-1.amazonaws.com</option>
+	<option>ec2.ap-southeast-1.amazonaws.com</option>
+	<option>ec2.ap-southeast-2.amazonaws.com</option>
+	<option>ec2.ap-northeast-1.amazonaws.com</option>
+	<option>ec2.sa-east-1.amazonaws.com</option>
+    </select>
+    <p class="help-block">AWS EC2 endpoint</p>
   </div>
-</fieldset>
+</div>
 
-<fieldset>
 
-  <legend>Machine</legend>
+<legend>Machine</legend>
 
-  <!-- Text input-->
-  <div class="control-group">
-    <label class="control-label" for="user">User</label>
-    <div class="controls">
-	<input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="machine.user">
-	<p class="help-block">Machine user</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="user">User</label>
+  <div class="controls">
+    <input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="machine.user">
+    <p class="help-block">Machine user</p>
   </div>
+</div>
 
-  <div class="control-group">
-    <label class="control-label" for="hostname">Hostname</label>
-    <div class="controls">
-	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
-	<p class="help-block">Machine hostname</p>
-    </div>
+<div class="control-group">
+  <label class="control-label" for="hostname">Hostname</label>
+  <div class="controls">
+    <input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
+    <p class="help-block">Machine hostname</p>
   </div>
-</fieldset>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="domain">Domain</label>
+  <div class="controls">
+    <input id="domain" name="domain" type="text" placeholder="" class="input-large" required="" ng-model="machine.domain">
+    <p class="help-block">Machine domain</p>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <label class="control-label" for="ip">IP</label>
+  <div class="controls">
+    <input id="ip" name="ip" type="text" placeholder="" class="input-large" ng-model="machine.ip">
+    <p class="help-block">Elastic IP (dynamic if not set)</p>
+  </div>
+</div>
+
 
 
