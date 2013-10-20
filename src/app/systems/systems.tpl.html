@@ -44,14 +44,16 @@
 		</div>
 	    </td>
 	    <td> 
-		<ul ng-hide="!system.actions" class="nav">
-		  <li class="dropdown">
-		  <a class="dropdown-toggle disabled action-dropdown" href=""><i class="icon-list"></i><span class="caret"></span></a>
-		  <ul class="dropdown-menu" >
+		<div class="btn-group" ng-hide="!system.actions">
+		  <a class="btn" href="" disabled><i class="icon-list-ul"></i></a>
+		  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+		    <span class="icon-caret-down"></span></a>
+		  <ul class="dropdown-menu">
 		    <li ng-repeat="action in system.actions"><a href="#" ng-click="launchAction(system.id,action)">{{action}}</a></li>
 		  </ul>
 		  </li>
 		</ul>
+	    </div>
 	    </td>
 	  </tr>
 	</tbody>
