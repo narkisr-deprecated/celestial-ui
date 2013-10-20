@@ -51,3 +51,23 @@
 </table>
 
 
+<h2>Volumes:</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Size (GB)</th>
+	<th>Clear on destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="vol in system.aws.volumes">
+	<td>{{vol.device}}</td>
+	<td>{{vol.size}}</td>
+	<td>{{vol.clear}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
