@@ -22,7 +22,10 @@ angular.module( 'celestial.systems', [
    create:{method : "POST", params:{id:'@id'},url:'/jobs/create/:id'},
    provision:{method : "POST", params:{id:'@id'},url:'/jobs/provision/:id'},
    stage:{method : "POST", params:{id:'@id'},url:'/jobs/stage/:id'},
-   destroy:{method : "POST", params:{id:'@id'},url:'/jobs/destroy/:id'}
+   start:{method : "POST", params:{id:'@id'},url:'/jobs/start/:id'},
+   stop:{method : "POST", params:{id:'@id'},url:'/jobs/stop/:id'},
+   destroy:{method : "POST", params:{id:'@id'},url:'/jobs/destroy/:id'},
+   reload:{method : "POST", params:{id:'@id'},url:'/jobs/reload/:id'}
   });
 
 
