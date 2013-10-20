@@ -8,6 +8,10 @@
   </thead>
   <tbody>
     <tr>		
+	<td>OS</td>
+	<td>{{system.machine.os}}</td>
+    </tr>
+    <tr>		
 	<td>hostname</td>
 	<td>{{system.machine.hostname}}</td>
     </tr>
@@ -18,6 +22,10 @@
     <tr>		
 	<td>type</td>
 	<td>{{system.type}}</td>
+    </tr>
+    <tr>		
+	<td>IP</td>
+	<td>{{system.machine.ip}}</td>
     </tr>
   </tbody>
 </table>
@@ -31,14 +39,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr>		
-	<td>instance type</td>
-	<td>{{system.aws['instance-type']}}</td>
-    </tr>
-    <tr>		
-	<td>image id</td>
-	<td>{{system.aws['image-id']}}</td>
-    </tr>
     <tr>		
 	<td>key-name</td>
 	<td>{{system.aws['key-name']}}</td>
