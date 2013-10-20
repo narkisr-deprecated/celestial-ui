@@ -119,7 +119,7 @@ angular.module( 'celestial.systemAdd', [
 	growl.addErrorMessage("cant add same device ("+ $scope.volume.device + ") twice.");
     } else {
       $scope.volumes.push($scope.volume);
-      $scope.volume = {};
+      $scope.volume={clear:false};
     } 
   };
 
