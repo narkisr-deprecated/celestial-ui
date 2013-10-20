@@ -26,12 +26,12 @@
   </div>
 </div>
 
-<div class="control-group">
-  <label class="control-label" for="imageid">AMI Image</label>
-  <div class="controls">
-    <input id="imageid" name="imageid" placeholder="ami-" class="input-large" required="" type="text" ng-model="hypervisor.aws['image-id']">
-    <p class="help-block">Amazon AMI id</p>
-  </div>
+<div class="control-group">  
+  <label class="control-label" for="env">OS</label>  
+  <div class="controls">  
+    <select id="type"  name="type" ng-model="machine.os" ng-options="os for os in oses"> </select>
+  </div>  
+  <p class="help-block">Operating system</p>
 </div>
 
 <div class="control-group">
