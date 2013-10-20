@@ -59,6 +59,8 @@ angular.module( 'celestial.systemAdd', [
       case "aws": 
         $scope.hypervisor = {aws:{endpoint:"ec2.us-east-1.amazonaws.com",'instance-type':'t1.micro'}};
         $scope.machine={};
+        $scope.volumes=[];
+        $scope.volume={clear:false};
         break;
       case "vcenter": 
         $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
@@ -79,6 +81,9 @@ angular.module( 'celestial.systemAdd', [
       break;
      case "vcenter": 
       system.machine.names = system.machine.names.split(" ");
+      break;
+     case "aws": 
+	system.aws.volumes = $scope.volumes;
       break;
     }
    return system;
@@ -105,6 +110,24 @@ angular.module( 'celestial.systemAdd', [
   };
 
   $scope.$watch( 'env', $scope.setHypervisors);
+
+  $scope.addVolume = function() {
+    var duplicate = _.find($scope.volumes,function(vol) {
+      return vol.device == $scope.volume.device;
+    });
+    if(duplicate) {
+	growl.addErrorMessage("cant add same device ("+ $scope.volume.device + ") twice.");
+    } else {
+      $scope.volumes.push($scope.volume);
+      $scope.volume = {};
+    } 
+  };
+
+  $scope.removeVolume = function(device) {
+    $scope.volumes = _.filter($scope.volumes,function(vol) {
+      return vol.device != device;
+    });
+  };
 
   $scope.submit = function(){
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};

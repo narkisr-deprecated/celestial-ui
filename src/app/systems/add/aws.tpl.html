@@ -7,8 +7,7 @@
 	<option>t1.micro</option>
 	<option>m1.small</option>
 	<option>m1.medium</option>
-	<option>m1.large</option>
-	<option>m1.xlarge</option>
+	<option>m1.large</option> <option>m1.xlarge</option>
 	<option>m3.xlarge</option>
 	<option>m3.2xlarge</option>
 	<option>c1.medium</option>
@@ -94,6 +93,62 @@
     <p class="help-block">Elastic IP (dynamic if not set)</p>
   </div>
 </div>
+
+
+<legend>EBS</legend>
+
+<div class="control-group">
+  <label class="control-label" for="device">Device</label>
+  <div class="controls">
+    <input id="device" name="device" type="text" placeholder="sdh" class="input-large" ng-model="volume.device">
+    <p class="help-block"></p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="size">Size</label>
+  <div class="controls">
+    <input id="size" name="size" type="number" min="1" placeholder="" class="input-large" ng-model="volume.size">
+    <p class="help-block">Volume size in GB</p>
+  </div>
+</div>
+<div class="control-group">
+  <label class="control-label" for="clear">Clear</label>
+  <div class="controls">
+    <label class="checkbox inline" for="clear">
+	<input type="checkbox" name="clear" id="clear" ng-model="volume.clear" value="false">
+    </label>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <div class="controls">
+    <button type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="addVolume()" >Add</button>
+  </div>
+</div>
+
+<legend>Volumes</legend>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Size (GB)</th>
+	<th>Clear on destroy</th>
+	<th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="vol in volumes">
+	<td>{{vol.device}}</td>
+	<td>{{vol.size}}</td>
+	<td>{{vol.clear}}</td>
+	<td> 
+	  <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Remove" ng-click="removeVolume(vol.device)"></i>
+	</td>
+    </tr>
+  </tbody>
+</table>
 
 
 
