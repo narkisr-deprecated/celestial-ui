@@ -72,7 +72,9 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js', 
       'vendor/angular-growl/build/angular-growl.js',
       'vendor/angular-cookies/angular-cookies.js' ,
-      'vendor/jquery/jquery.js' 
+      'vendor/jquery/jquery.js', 
+      'vendor/momentjs/min/moment.min.js'
+
     ],
     css: [
        

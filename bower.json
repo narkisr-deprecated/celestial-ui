@@ -15,7 +15,8 @@
     "underscore": "1.5.1",
     "components-font-awesome": "3.2.1", 
     "angular-growl":"0.3.0", 
-    "underscore.string":"2.3.3"
+    "underscore.string":"2.3.3", 
+    "momentjs":"2.3.1"
   },
   "dependencies": {},
   "resolutions": {
