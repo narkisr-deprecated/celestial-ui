@@ -25,7 +25,7 @@ angular.module( 'celestial.jobs', [
   (function tick() {
     Jobs.fetch({},function(data,resp){
        $scope.jobs = data.jobs;
-       var byStart = _.sortBy(data.erroneous.concat(data.succesful), function(s) {return s.end;});
+       var byStart = _.sortBy(data.erroneous.concat(data.succesful), function(s) {return s.end;}).reverse();
        $scope.statuses = _.map(byStart, function(s) {
          s.start = moment(s.start).format('MMMM Do YYYY, h:mm:ss a');
          s.end = moment(s.end).format('MMMM Do YYYY, h:mm:ss a');
