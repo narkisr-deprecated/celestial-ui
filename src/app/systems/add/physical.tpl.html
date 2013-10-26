@@ -1,0 +1,64 @@
+<fieldset>
+  <legend>Physical machine</legend>
+  
+  <div class="control-group">
+    <label class="control-label" for="user">User</label>
+    <div class="controls">
+	<input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="machine.user">
+	<p class="help-block">Machine user</p>
+    </div>
+  </div>
+
+  <div class="control-group">  
+    <label class="control-label" for="env">OS</label>  
+    <div class="controls">  
+	<input id="os" name="oss" type="text" placeholder="" class="input-large" required="" ng-model="machine.os">
+	<p class="help-block">Operating system</p>
+    </div>  
+  </div>
+
+  <legend>Networking</legend>
+  <div class="control-group">
+    <label class="control-label" for="ip">IP</label>
+    <div class="controls">
+	<input id="ip" name="ip" type="text" placeholder="" class="input-large" ng-model="machine.ip">
+	<p class="help-block">IP address</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="hostname">Hostname</label>
+    <div class="controls">
+	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
+	<p class="help-block">Machine hostname</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="domain">Domain</label>
+    <div class="controls">
+	<input id="domain" name="domain" type="text" placeholder="local" class="input-large" required="" ng-model="machine.domain">
+	<p class="help-block">Machine domain</p>
+    </div>
+  </div>
+
+  <legend>Interface</legend>
+
+  <div class="control-group">
+    <label class="control-label" for="mac">MAC</label>
+    <div class="controls">
+	<input id="mac" name="mac" type="text" placeholder="local" class="input-large" ng-model="hypervisor.physical.mac">
+	<p class="help-block">Machine MAC</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="broadcast">Broadcast</label>
+    <div class="controls">
+	<input id="broadcast" name="broadcast" type="text" placeholder="local" class="input-large" ng-model="hypervisor.physical.broadcast">
+	<p class="help-block"><a href="https://en.wikipedia.org/wiki/Wake-on-LAN">WOL</a> broadcast address</p>
+    </div>
+  </div>
+</fieldset>
+
+

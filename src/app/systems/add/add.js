@@ -66,6 +66,10 @@ angular.module( 'celestial.systemAdd', [
         $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
         $scope.machine={};
         break;
+      case "physical": 
+        $scope.hypervisor= {physical:{}};
+        $scope.machine={};
+        break;
     }
    }
  };
