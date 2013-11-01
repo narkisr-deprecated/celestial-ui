@@ -5,7 +5,7 @@ angular.module( 'celestial', [
 ])
 
 .config(function myAppConfig ( $stateProvider, $urlRouterProvider,growlProvider ) {
-_.mixin(_.string.exports());
+  _.mixin(_.string.exports());
   $urlRouterProvider.otherwise( '/systems' );
   growlProvider.globalTimeToLive(2000);
 })

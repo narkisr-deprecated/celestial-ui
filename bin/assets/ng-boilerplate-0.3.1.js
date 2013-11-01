@@ -1,5 +1,5 @@
 /**
- * ng-boilerplate - v0.3.1 - 2013-10-26
+ * ng-boilerplate - v0.3.1 - 2013-11-01
  * http://bit.ly/ng-boilerplate
  *
  * Copyright (c) 2013 Josh David Miller
