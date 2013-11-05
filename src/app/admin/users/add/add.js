@@ -39,7 +39,7 @@ angular.module( 'celestial.userAdd', [ ])
       function(resp) {
         $location.path( '/admin/users');
       },function(errors){
-        growl.addErrorMessage(errors.data);
+        growl.addErrorMessage(errors.data,{ttl: 3000});
       }
      );
   };
