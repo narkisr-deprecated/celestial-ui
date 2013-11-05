@@ -37,6 +37,7 @@ angular.module( 'celestial', [
      function (value) {
        if(value!==undefined){
          $scope.username = loginService.session.username;
+         $scope.admin = loginService.isAdmin();
        }
      }
   );
