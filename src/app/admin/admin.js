@@ -13,7 +13,5 @@ angular.module( 'celestial.admin', [
     data:{ pageTitle: 'Admin' }
   });
 })
-.controller( 'AdminCtrl', function AdminController($scope, $resource, $http) {
- 
-});
+.controller( 'AdminCtrl', function AdminController($scope, $resource, $http) { });
 
