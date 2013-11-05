@@ -10,7 +10,6 @@ angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ng
     },
     data:{ pageTitle: 'Login' }
   });
-
 })
 .config(['$httpProvider', function ($httpProvider,$window) {
     $httpProvider.interceptors.push(function ($q) {
@@ -38,9 +37,18 @@ angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ng
     }); 
   };
   
- $http.get('/sessions').success(function(data){
+
+   $http.get('/sessions').success(function(data){
       loginService.session = data;
- }); 
+   }); 
+
+   loginService.isSuper = function(call){
+    return _.contains(loginService.session.roles,'celestial.roles/super-user');
+   };
+
+   loginService.isAdmin = function(call){
+    return _.contains(loginService.session.roles,'celestial.roles/admin');
+   };
 
   return loginService;
 })
