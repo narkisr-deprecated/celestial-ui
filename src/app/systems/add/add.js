@@ -140,9 +140,9 @@ angular.module( 'celestial.systemAdd', [
       function(resp) {
         growl.addInfoMessage(resp.msg);
         $location.path( '/system/'+resp.id);
-	},function(resp){
-        growl.addWarnMessage(resp.errors);
-        console.log(resp.errors);
+	},function(errors){
+        growl.addErrorMessage(errors.data,{ttl: 3000});
+        console.log(errors.data);
       }
      );
   };
