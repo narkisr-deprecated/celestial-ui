@@ -13,7 +13,7 @@ angular.module( 'celestial.systemAdd', [
     data:{ pageTitle: 'New System' }
   });
 })
-.controller( 'SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location,growl) {
+.controller('SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService) {
 
   var Systems = $resource('/systems/');
   var Environments = $resource('/environments/');
@@ -72,9 +72,9 @@ angular.module( 'celestial.systemAdd', [
         break;
     }
    }
- };
+  };
 
-  $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect );
+  $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect);
 
   $scope.intoPersisted =function(system){
     switch ($scope.currentHypervisor) {
@@ -146,7 +146,17 @@ angular.module( 'celestial.systemAdd', [
       }
      );
   };
-  
+ 
+  $scope.isSuper = true;
+
+  loginService.grabSession().then(function(data) {
+    $scope.isSuper = loginService.isSuper(data);
+    if($scope.isSuper) {
+     usersService.grabUsers().then(function(users) {
+	$scope.users = _.map(users,function(user){return user.username;});
+     });
+    }
+  });
 
   $scope.loadTypes();
   $scope.loadEnvs();
