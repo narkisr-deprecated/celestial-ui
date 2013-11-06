@@ -55,7 +55,7 @@
 		  Jobs
 		</a>
 		</li>
-		<li ui-route="/admin" ng-hide="!admin" ng-class="{active:$uiRoute}">
+		<li ui-route="/admin" ng-show="isAdmin" ng-class="{active:$uiRoute}">
 		<a href="#/admin"> <i class="icon-key"></i> Admin</a> </li>
 		<li>
 		<a href="https://github.com/celestial-ops">

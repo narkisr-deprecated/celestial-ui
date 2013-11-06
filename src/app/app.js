@@ -26,21 +26,24 @@ angular.module( 'celestial', [
     }
   });
 
-   $scope.$on('$locationChangeStart', function(next, current) { 
-   });
    
    $scope.logout = function(){
      loginService.logout();
    };
 
-   $scope.$watch(function () { return loginService.session;},
-     function (value) {
-       if(value!==undefined){
-         $scope.username = loginService.session.username;
-         $scope.admin = loginService.isAdmin();
-       }
-     }
-  );
+   $scope.admin = function(){
+    return loginService.isAdmin();
+   };
+
+   // looks like there is a race condition between ng-show and promise return 
+   // this somehow bypasses that
+   $scope.isAdmin = true;
+
+   loginService.grabSession().then(function(data){
+     $scope.username = data.username;
+     $scope.isAdmin = loginService.isAdmin(data);
+   });
+
 
 });
 
