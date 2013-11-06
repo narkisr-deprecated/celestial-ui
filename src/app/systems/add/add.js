@@ -70,8 +70,8 @@ angular.module( 'celestial.systemAdd', [
         $scope.hypervisor= {physical:{}};
         $scope.machine={};
         break;
+     }
     }
-   }
   };
 
   $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect);
@@ -136,6 +136,7 @@ angular.module( 'celestial.systemAdd', [
   $scope.submit = function(){
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
+    system.owner = $scope.owner;
     Systems.save($scope.intoPersisted(system),
       function(resp) {
         growl.addInfoMessage(resp.msg);
@@ -151,6 +152,7 @@ angular.module( 'celestial.systemAdd', [
 
   loginService.grabSession().then(function(data) {
     $scope.isSuper = loginService.isSuper(data);
+    $scope.owner = data.username;
     if($scope.isSuper) {
      usersService.grabUsers().then(function(users) {
 	$scope.users = _.map(users,function(user){return user.username;});
