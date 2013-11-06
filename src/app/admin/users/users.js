@@ -29,16 +29,12 @@ angular.module( 'celestial.users', [
     data:{ pageTitle: 'Users' }
   });
 })
-.controller( 'UsersCtrl', function UsersController($scope, $resource, $http) {
+.controller( 'UsersCtrl', function UsersController($scope, $resource, $http, usersService) {
   $scope.perPage = 10;
   $scope.data = {};
    
-  var Users = $resource('/users/',{},{
-    getAll: {method : "GET",url:'/users/',isArray:true}
-  });
-
   $scope.load = function(){
-    Users.getAll({}).$promise.then(function(users){
+    usersService.grabUsers().then(function(users){
      $scope.data.users= users;
      $scope.currentPage = 1;
      $scope.count = $scope.data.users.length;

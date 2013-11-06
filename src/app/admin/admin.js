@@ -13,5 +13,17 @@ angular.module( 'celestial.admin', [
     data:{ pageTitle: 'Admin' }
   });
 })
-.controller( 'AdminCtrl', function AdminController($scope, $resource, $http) { });
+.factory('usersService', function($cookieStore ,$cookies, $location, $resource, $window, $q) {
+   var usersService = {};
+   var Users = $resource('/users/',{},{
+    getAll: {method : "GET",url:'/users/',isArray:true}
+   });
+   
+   usersService.grabUsers = function() {
+      return Users.getAll({}).$promise;
+   }; 
+
+   return usersService;
+})
+.controller( 'AdminCtrl', function AdminController($scope, $resource, $http){});
 
