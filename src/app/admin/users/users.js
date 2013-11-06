@@ -10,6 +10,7 @@ angular.module( 'celestial.users', [
   
   rolesService.loadRoles = function(call){
     Roles.get(function(data){
+       delete data.roles['anonymous'];
        call(data.roles);
     });
   };
