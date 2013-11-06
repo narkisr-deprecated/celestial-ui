@@ -27,31 +27,34 @@ angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ng
         };
     });
 }])
-.factory('loginService', function($cookieStore ,$cookies, $location, $http,$window) {
-  var loginService = {};
+.factory('loginService', function($cookieStore ,$cookies, $location, $http, $window, $q) {
+   var loginService = {};
 
-  loginService.logout = function() {
+   loginService.logout = function() {
     $http.post('/logout').success(function(){
       $cookieStore.remove('celestial'); 
       $window.location = "/login";
+      loginService.session = null;
     }); 
-  };
-  
-
-   $http.get('/sessions').success(function(data){
-      loginService.session = data;
-   }); 
-
-   loginService.isSuper = function(call){
-    return _.contains(loginService.session.roles,'celestial.roles/super-user');
    };
 
-   loginService.isAdmin = function(call){
-    return _.contains(loginService.session.roles,'celestial.roles/admin');
+   loginService.grabSession = function(){
+    var d = $q.defer();
+    $http.get('/sessions').success(function(data){
+	d.resolve(data);
+    }); 
+    return d.promise;
+   };
+
+
+   loginService.isSuper = function(data){
+     return !_.isEmpty(_.intersection(data.roles, ['celestial.roles/super-user', 'celestial.roles/admin']));
+   };
+
+   loginService.isAdmin = function(data){
+     return _.contains(data.roles, 'celestial.roles/admin');
    };
 
   return loginService;
 })
-.controller('LoginCtrl', function LoginController ($scope,$http,$location,loginService) {
-  
-});
+.controller('LoginCtrl', function LoginController ($scope,$http,$location,loginService) {});
