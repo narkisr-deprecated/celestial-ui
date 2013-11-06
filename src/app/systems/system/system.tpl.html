@@ -5,6 +5,33 @@
 
   <div class='panel-body'> 
     <p> 
+
+	<h4> System info:</h4>
+	<table class="table table-bordered" >
+	  <thead>
+	    <tr>
+		<th>Section</th>
+		<th>Property</th>
+		<th>Value</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>		
+		<td rowspan='2'>Access control</td>
+		<td>Environment</td>
+		<td>{{system.env}}</td>
+	    </tr>
+	    <tr>		
+		<td>Owner</td>
+		<td>{{system.owner}}</td>
+	    </tr>
+	    <tr>		
+		<td rowspan='1'></td>
+		<td>Type</td>
+		<td>{{system.type}}</td>
+	    </tr>
+	  </tbody>
+	</table>
 	<div ng-include src="headerTemplate"></div>
     </p>
   </div>
