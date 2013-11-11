@@ -6,7 +6,7 @@
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
 
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
@@ -39,33 +39,39 @@
 	    <ul>
 		<li ui-route="/systems" ng-class="{active:$uiRoute}">
 		<a href="#/systems">
-		  <i class="icon-building"></i> 
+		  <i class="fa fa-building-o"></i> 
 		  Systems
 		</a>
 		</li>
 		<li ui-route="/types" ng-class="{active:$uiRoute}">
 		<a href="#/types">
-		  <i class="icon-info-sign"></i>
+		  <i class="fa fa-info"></i>
 		  Types
 		</a>
+	      <li ui-route="/actions" ng-class="{active:$uiRoute}">
+		<a href="#/actions">
+		  <i class="fa fa-sitemap"></i>
+		  Actions
+		</a>
+		</li>	
 		</li>
 		<li ui-route="/jobs" ng-class="{active:$uiRoute}">
 		<a href="#/jobs">
-		  <i class="icon-tasks"></i>
+		  <i class="fa fa-tasks"></i>
 		  Jobs
 		</a>
 		</li>
 		<li ui-route="/admin" ng-show="isAdmin" ng-class="{active:$uiRoute}">
-		<a href="#/admin"> <i class="icon-key"></i> Admin</a> </li>
+		<a href="#/admin"> <i class="fa fa-wrench"></i> Admin</a> </li>
 		<li>
 		<a href="https://github.com/celestial-ops">
-		  <i class="icon-github-alt"></i>
+		  <i class="fa fa-github-alt"></i>
 		  Github
 		</a>
 		</li>
 		<li>
 		<a href="http://celestial-ops.com/#contact">
-		  <i class="icon-comments"></i>
+		  <i class="fa fa-comments"></i>
 		  Support
 		</a>
 		</li>
