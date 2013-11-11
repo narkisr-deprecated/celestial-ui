@@ -13,7 +13,7 @@
     "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",
     "underscore": "1.5.1",
-    "components-font-awesome": "3.2.1", 
+    "components-font-awesome": "4.0.3", 
     "angular-growl":"0.3.0", 
     "underscore.string":"2.3.3", 
     "momentjs":"2.3.1"
