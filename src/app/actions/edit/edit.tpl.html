@@ -1,0 +1,38 @@
+<div>
+  <div>
+    <form class="form-horizontal" name="actionForm" ng-submit="submit()">
+	<fieldset>  
+	  <legend>Main</legend>
+	  <div class="control-group">
+	    <label class="control-label" for="action">action</label>
+	    <div class="controls">
+		<input id="action" name="action" class="input-large" required="" type="text" ng-model="actionId" readonly="readonly">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="textarea">Description</label>
+	    <div class="controls">                     
+		<textarea id="textarea" name="textarea" ng-model="action.description"></textarea>
+	    </div>
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="provisioner">Provisioner type</label>  
+	    <div class="controls">  
+		<select id="provisioner" ng-model="currentProvisioner">  
+		  <option>puppet-std</option>  
+		</select>  
+	    </div>  
+	  </div>
+	</fieldset>  
+
+	<div ng-include src="provisionerTemplate"></div>
+
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Update action</button>
+	  <button type="button" class="btn btn-danger" ng-click="remove()">Delete action</button>
+	</div>
+    </form>
+  </div>
+</div>	
