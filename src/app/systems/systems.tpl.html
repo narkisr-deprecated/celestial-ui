@@ -4,7 +4,6 @@
   </div>
   <div class='panel-body'> 
 
-
     <table class="table table-striped">
 	<thead>
 	  <tr>
@@ -28,26 +27,26 @@
 	    <td>{{system.description}}</td>
 	    <td>
 		<div class="btn-group">
-		  <a class="btn" href="" disabled><i class="icon-list-ul"></i></a>
+		  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
 		  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-		    <span class="icon-caret-down"></span></a>
+		    <span class="fa fa-caret-down"></span></a>
 		  <ul class="dropdown-menu">
-		    <li><a href="" ng-click="launchJob(system.id,'create')" tooltip-placement="bottom" tooltip="Create a running machine"><i class="icon-fixed-width icon-plus" ></i> Create</a></li>
-		    <li><a href="" ng-click="launchJob(system.id,'provision')" tooltip-placement="bottom" tooltip="Run provisioining"><i class="icon-fixed-width icon-gears" ></i> Provision</a></li>
-		    <li><a href="" ng-click="launchJob(system.id,'stage')" tooltip-placement="bottom" tooltip="Create and Provision"><i class="icon-fixed-width icon-refresh" ></i> Stage</a></li>
-		    <li><a href="" ng-click="launchJob(system.id,'start')" tooltip-placement="bottom" tooltip="Start the backing machine"><i class="icon-fixed-width icon-play" ></i> Start</a></li>
-		    <li><a href="" ng-click="launchJob(system.id,'stop')" tooltip-placement="bottom" tooltip="Stop the backing machine"><i class="icon-fixed-width icon-stop" ></i> Stop</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'create')" tooltip-placement="bottom" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus" ></i> Create</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'provision')" tooltip-placement="bottom" tooltip="Run provisioining"><i class="fa-fixed-width fa fa-gears" ></i> Provision</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'stage')" tooltip-placement="bottom" tooltip="Create and Provision"><i class="fa-fixed-width fa fa-refresh" ></i> Stage</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'start')" tooltip-placement="bottom" tooltip="Start the backing machine"><i class="fa-fixed-width fa fa-play" ></i> Start</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'stop')" tooltip-placement="bottom" tooltip="Stop the backing machine"><i class="fa-fixed-width fa fa-stop" ></i> Stop</a></li>
 		    <li class="divider"></li>
-		    <li><a href="" ng-click="launchJob(system.id,'destroy')" tooltip-placement="bottom" tooltip="Destroy machine"><i class="icon-fixed-width icon-trash" ></i> Destroy</a></li>
-		    <li><a href="" ng-click="launchJob(system.id,'reload')" tooltip-placement="bottom" tooltip="Destroy and re-create machine"><i class="icon-fixed-width icon-warning-sign" ></i> Reload</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'destroy')" tooltip-placement="bottom" tooltip="Destroy machine"><i class="fa-fixed-width fa fa-trash-o" ></i> Destroy</a></li>
+		    <li><a href="" ng-click="launchJob(system.id,'reload')" tooltip-placement="bottom" tooltip="Destroy and re-create machine"><i class="fa-fixed-width fa fa-warning" ></i> Reload</a></li>
 		  </ul>
 		</div>
 	    </td>
 	    <td> 
 		<div class="btn-group" ng-hide="!system.actions">
-		  <a class="btn" href="" disabled><i class="icon-list-ul"></i></a>
+		  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
 		  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-		    <span class="icon-caret-down"></span></a>
+		    <span class="fa fa-caret-down"></span></a>
 		  <ul class="dropdown-menu">
 		    <li ng-repeat="action in system.actions"><a href="#" ng-click="launchAction(system.id,action)">{{action}}</a></li>
 		  </ul>
@@ -60,7 +59,7 @@
     </table>
 
     <p class="text-right"> 
-	<a href="#/system/add/" ><i class="icon-plus"></i>Add a System</a> 
+	<a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
     </p>
 
 
