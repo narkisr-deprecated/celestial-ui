@@ -45,7 +45,7 @@ angular.module( 'celestial.types', [
 	},function(errors){
         growl.addInfoMessage(resp.errors);
         console.log(errors);
-	});
+     });
   };
 
   typesService.update = function(typeId,type) {
@@ -66,7 +66,7 @@ angular.module( 'celestial.types', [
 
   typesService.getAll = function() {
     return Types.get({}).$promise.then(function(data){
-        return  _.map(data.types,function(type){
+        return _.map(data.types,function(type){
            type.provisioner = typesService.provisionerOf(type);
            return type; 
         });
@@ -87,7 +87,7 @@ angular.module( 'celestial.types', [
   return typesService;
 })
 
-.controller( 'TypesCtrl', function TypesCtrl( $scope, $resource,typesService) {
+.controller( 'TypesCtrl', function TypesCtrl($scope, $resource, typesService) {
   $scope.perPage = 10;
   $scope.data = {};
 
