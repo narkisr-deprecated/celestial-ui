@@ -1,5 +1,5 @@
 angular.module( 'celestial', [
-  'templates-app', 'templates-common', 'celestial.systems',
+  'templates-app', 'templates-common', 'celestial.systems', 'celestial.actions',
   'celestial.types','celestial.jobs','celestial.login','celestial.admin',
   'ui.state', 'ui.route', 'angular-growl' , 'ngAnimate'
 ])
