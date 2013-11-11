@@ -49,7 +49,7 @@ angular.module( 'celestial.systems', [
         system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter','physical'],function(a){
            return system[1][a]!=null;
         })[0];
-        system[1]['actions'] = actionsService.loadActions(system[1].type);
+        system[1]['actions'] = actionsService.actionsKeys(system[1].type);
         
         $scope.systems.push(system[1]);
 	});
