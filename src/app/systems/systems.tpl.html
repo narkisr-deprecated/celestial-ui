@@ -48,7 +48,7 @@
 		  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 		    <span class="fa fa-caret-down"></span></a>
 		  <ul class="dropdown-menu">
-		    <li ng-repeat="action in system.actions"><a href="#" ng-click="launchAction(system.id,action)">{{action}}</a></li>
+		    <li ng-repeat="action in system.actions"><a href="#" ng-click="launchAction(system.id, action.name)">{{action.name}}</a></li>
 		  </ul>
 		  </li>
 		</ul>

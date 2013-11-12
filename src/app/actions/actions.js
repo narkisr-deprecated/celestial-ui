@@ -26,7 +26,7 @@ angular.module('celestial.actions', [
 
   var remoterType = function(action) {
    withType = _.clone(action);
-   withType.type = _.filter(['ruby','capistrano'],function(a){
+   withType.type = _.filter(['ruby','capistrano'], function(a){
     return withType[a]!=null;
    })[0];
    return withType;
@@ -34,12 +34,10 @@ angular.module('celestial.actions', [
 
   actionsService.actionsKeys = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
-         result = _.chain(actions).values().pluck('name').value();
-         if(!_.isEmpty(result)){
-           return  _.keys(result); 
-         } else {
-           return null;
-         }
+         var result = _.filter(actions, function(action){
+           return action.name!=null;
+         });
+         return !_.isEmpty(result) ? result:null;
 	});
   };
  
@@ -97,7 +95,7 @@ angular.module('celestial.actions', [
      });
   };
 
-  actionsService.remove= function(id, action){
+  actionsService.remove = function(id, action){
      Actions.remove({id:id}, function(resp) {
          $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
@@ -140,8 +138,6 @@ angular.module('celestial.actions', [
     $location.path("/actions/"+$scope.currentType);
   };
   
-
- 
   $scope.$watch('currentType', $scope.reloadActions);
   $scope.$watch('currentType', $scope.setPath);
 });
