@@ -15,13 +15,17 @@
 	<thead>
 	  <tr>
 	    <th>#</th>
+	    <th>Name</th>
+	    <th>Description</th>
 	    <th>Remoter type</th>
-	    <th>Run on</th>
+	    <th>Runon</th>
 	  </tr>
 	</thead>
 	<tbody>
 	  <tr ng-repeat="action in actions">
 	    <td><a href="#/action/edit/{{action.id}}">{{action.id}}</a></td>
+	    <td>{{action.name}}</td>
+	    <td>{{action.description}}</td>
 	    <td>{{action.type}}</td>
 	    <td></td>
 	  </tr>

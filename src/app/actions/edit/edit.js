@@ -3,7 +3,7 @@ angular.module( 'celestial.actionEdit', [
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'actionEdit', {
-    url: '/action/edit/:type',
+    url: '/action/edit/:id',
     views: {
 	"main": {
         controller: 'actionEditCtrl',
@@ -13,15 +13,18 @@ angular.module( 'celestial.actionEdit', [
     data:{ pageTitle: 'Edit action' }
   });
 })
-.controller( 'actionEditCtrl', function actionEditController($scope, $location, actionsService) {
+.controller( 'actionEditCtrl', function actionEditController($scope, $location, actionsService, typesService) {
 
   $scope.actionId = $location.path().replace("/action/edit/","");
 
+  typesService.getAll().then(function(data) {
+     $scope.types = _.pluck(data,'type');
+  });
+
+
   $scope.loadAction = function(){
-    actionsService.get($scope.actionId).$promise.then(function(action) {
+    actionsService.getAction($scope.actionId).then(function(action) {
 	$scope.action = action;
-	$scope.action.classes = JSON.stringify(action.classes);
-	// $scope.currentRemoter= actionsService.provisionerOf($scope.action);
     });
   };
 

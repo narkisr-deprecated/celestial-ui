@@ -1,5 +1,5 @@
 angular.module('celestial.actions', [
-  'ngResource', 'celestial.actionAdd'
+  'ngResource', 'celestial.actionAdd', 'celestial.actionEdit'
 
 ])
 .config(function config( $stateProvider ) {
@@ -17,9 +17,20 @@ angular.module('celestial.actions', [
 .factory('actionsService', function($resource, $http, growl, $location) {
   var actionsService = {};
 
-  var Actions =  $resource('/actions/', {},{
-   byType: {method : "GET", params:{type:'@type'},url:'/actions/type/:type'}
+  var Actions =  $resource('/actions/', {}, {
+   byType: {method : "GET", params:{type:'@type'},url:'/actions/type/:type'},
+   get: {method : "GET", params:{id:'@id'},url:'/actions/:id'},
+   remove: {method : "DELETE", params:{id:'@id'},url:'/actions/:id'},
+   update: {method : "PUT", params:{id:'@id'},url:'/actions/:id'}
   });
+
+  var remoterType = function(action) {
+   withType = _.clone(action);
+   withType.type = _.filter(['ruby','capistrano'],function(a){
+    return withType[a]!=null;
+   })[0];
+   return withType;
+  };
 
   actionsService.actionsKeys = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
@@ -34,16 +45,15 @@ angular.module('celestial.actions', [
  
   actionsService.grabActions = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
-        return _.chain(actions)
-        .filter(function(action,id) {
-          return action.name != null;
-        })
-        .map(function(action, id) {
-          action.id = id; 
-          action.type = _.filter(['ruby','capistrano'],function(a){
-           return action[a]!=null;
-          })[0];
-          return action;
+        return _.chain(actions).map(function(action, id) {
+         if(action.name!=null) {
+           action.id = id; 
+           return remoterType(action);
+         } else {
+           return null;
+         }
+        }).filter(function(action) {
+          return action != null;
         }).value();
       });
   };
@@ -57,8 +67,17 @@ angular.module('celestial.actions', [
     });
   };
 
+  var joinArgs = function(action) {
+    var newAction = _.clone(action);
+    newAction[newAction.type] = {args:newAction.args.split(' ')};
+    delete newAction['args'];
+    delete newAction['type'];
+    return newAction;
+  };
+
   actionsService.saveAction = function(action){
-     Actions.save(action, function(resp) {
+     var newAction = joinArgs(action);
+     Actions.save(newAction, function(resp) {
          $location.path('/actions');
          growl.addInfoMessage(resp.msg);
 	},function(errors){
@@ -67,10 +86,38 @@ angular.module('celestial.actions', [
      });
   };
 
+  actionsService.update = function(id, action){
+     var updatedAction = joinArgs(action);
+     Actions.update({id:id},updatedAction, function(resp) {
+         $location.path('/actions');
+         growl.addInfoMessage(resp.msg);
+	},function(errors){
+        growl.addInfoMessage(resp.errors);
+        console.log(errors);
+     });
+  };
+
+  actionsService.remove= function(id){
+     Actions.remove({id:id}, function(resp) {
+         $location.path('/actions');
+         growl.addInfoMessage(resp.msg);
+	},function(errors){
+        growl.addInfoMessage(resp.errors);
+        console.log(errors);
+     });
+  };
+
+  actionsService.getAction = function(id){
+    return Actions.get({id:id}).$promise.then(function(action) {
+      action = remoterType(action);
+	action.args =  action[action.type].args.join(' ');
+      return action;
+    });
+  };
 
   return actionsService;
 })
-.controller('ActionsCtrl', function ActionsCtrl( $scope, $resource, actionsService, typesService) {
+.controller('ActionsCtrl', function ActionsCtrl($scope, $resource, actionsService, typesService) {
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');

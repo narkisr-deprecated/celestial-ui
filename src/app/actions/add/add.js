@@ -15,9 +15,7 @@ angular.module( 'celestial.actionAdd', [
 })
 .controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService) {
 
-  $scope.args = '';
-  $scope.currentRemoter= 'capistrano';
-  $scope.action = {};
+  $scope.action = {type:'capistrano'};
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
@@ -25,7 +23,6 @@ angular.module( 'celestial.actionAdd', [
   });
 
   $scope.submit = function(){
-    $scope.action[$scope.currentRemoter] = {args:$scope.args.split(" ")};
     actionsService.saveAction($scope.action); 
   };
   

@@ -2,11 +2,12 @@
   <div>
     <form class="form-horizontal" name="actionForm" ng-submit="submit()">
 	<fieldset>  
-	  <legend>Main</legend>
+	  <legend>Action</legend>
+
 	  <div class="control-group">
-	    <label class="control-label" for="action">action</label>
+	    <label class="control-label" for="name">Name</label>
 	    <div class="controls">
-		<input id="action" name="action" class="input-large" required="" type="text" ng-model="actionId" readonly="readonly">
+		<input id="name" name="name" class="input-large" required="" type="text" ng-model="action.name">
 	    </div>
 	  </div>
 
@@ -18,16 +19,38 @@
 	  </div>
 
 	  <div class="control-group">  
-	    <label class="control-label" for="provisioner">Provisioner type</label>  
+	    <label class="control-label" for="operatesOn">Target type</label>  
 	    <div class="controls">  
-		<select id="provisioner" ng-model="currentProvisioner">  
-		  <option>puppet-std</option>  
+		<select id="operatesOn" ng-model="action['operates-on']" ng-options="type for type in types"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="remoter">Remoter type</label>  
+	    <div class="controls">  
+		<select id="remoter"  ng-model="action.type">  
+		  <option>capistrano</option>  
+		  <option>ruby</option>  
 		</select>  
 	    </div>  
 	  </div>
-	</fieldset>  
 
-	<div ng-include src="provisionerTemplate"></div>
+	  <div class="control-group">
+	    <label class="control-label" for="args">Arguments</label>
+	    <div class="controls">
+		<input id="args" name="args" class="input-large" required="" type="text" ng-model="action.args">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="src">Source url</label>
+	    <div class="controls">
+		<input id="src" name="src" class="input-large" required="" type="text" ng-model="action.src">
+	    </div>
+	  </div>
+
+
+	</fieldset>  
 
 	<div class="form-actions">
 	  <button type="submit" class="btn btn-primary">Update action</button>

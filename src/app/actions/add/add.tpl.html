@@ -28,7 +28,7 @@
 	  <div class="control-group">  
 	    <label class="control-label" for="remoter">Remoter type</label>  
 	    <div class="controls">  
-		<select id="remoter"  ng-model="currentRemoter">  
+		<select id="remoter"  ng-model="action.type">  
 		  <option>capistrano</option>  
 		  <option>ruby</option>  
 		</select>  
@@ -38,7 +38,7 @@
 	  <div class="control-group">
 	    <label class="control-label" for="args">Arguments</label>
 	    <div class="controls">
-		<input id="args" name="args" class="input-large" required="" type="text" ng-model="args">
+		<input id="args" name="args" class="input-large" required="" type="text" ng-model="action.args">
 	    </div>
 	  </div>
 
