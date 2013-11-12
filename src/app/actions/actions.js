@@ -4,7 +4,7 @@ angular.module('celestial.actions', [
 ])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'actions', {
-    url: '/actions',
+    url: '/actions/:type',
     views: {
       "main": {
         controller: 'ActionsCtrl',
@@ -78,7 +78,7 @@ angular.module('celestial.actions', [
   actionsService.saveAction = function(action){
      var newAction = joinArgs(action);
      Actions.save(newAction, function(resp) {
-         $location.path('/actions');
+         $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
 	},function(errors){
         growl.addInfoMessage(resp.errors);
@@ -89,7 +89,7 @@ angular.module('celestial.actions', [
   actionsService.update = function(id, action){
      var updatedAction = joinArgs(action);
      Actions.update({id:id},updatedAction, function(resp) {
-         $location.path('/actions');
+        $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
 	},function(errors){
         growl.addInfoMessage(resp.errors);
@@ -97,9 +97,9 @@ angular.module('celestial.actions', [
      });
   };
 
-  actionsService.remove= function(id){
+  actionsService.remove= function(id, action){
      Actions.remove({id:id}, function(resp) {
-         $location.path('/actions');
+         $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
 	},function(errors){
         growl.addInfoMessage(resp.errors);
@@ -117,12 +117,18 @@ angular.module('celestial.actions', [
 
   return actionsService;
 })
-.controller('ActionsCtrl', function ActionsCtrl($scope, $resource, actionsService, typesService) {
+.controller('ActionsCtrl', function ActionsCtrl($scope, actionsService, typesService, $location) {
+
+  $scope.currentType = $location.path().replace('/actions/','');
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
-     $scope.currentType = $scope.types[0];
+     console.log($scope.currentType );
+     if($scope.currentType === '') {
+      $scope.currentType = $scope.types[0];
+     }
   });
+
 
   $scope.reloadActions = function () {
     $scope.actions = actionsService.grabActions($scope.currentType).then(function(actions){
@@ -130,6 +136,13 @@ angular.module('celestial.actions', [
     });
   };
   
+  $scope.setPath = function () {
+    $location.path("/actions/"+$scope.currentType);
+  };
+  
+
+ 
   $scope.$watch('currentType', $scope.reloadActions);
+  $scope.$watch('currentType', $scope.setPath);
 });
 

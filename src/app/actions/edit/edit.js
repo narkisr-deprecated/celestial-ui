@@ -35,7 +35,7 @@ angular.module( 'celestial.actionEdit', [
   };
 
   $scope.remove = function() {
-    actionsService.remove($scope.actionId);
+    actionsService.remove($scope.actionId, $scope.action);
   };
   
 });
