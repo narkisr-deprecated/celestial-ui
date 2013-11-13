@@ -9,7 +9,7 @@
 	</div>
     </div>
 
-    <div ng-repeat="arg in action.provided">
+    <div class="control-group" ng-repeat="arg in action.provided">
 	<label class="control-label" for="name">{{arg}}:</label>
 	<div class="controls">
 	  <input id="name" name="name" class="input-large" required="" type="text" ng-model="userArgs[arg]">
