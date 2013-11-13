@@ -15,9 +15,11 @@ angular.module( 'celestial.systems', [
     data:{ pageTitle: 'Systems' }
   });
 })
-.controller( 'SystemsCtrl', function SystemsController($scope, $resource, $http, actionsService, growl, $modal, $cookieStore) {
+.controller( 'SystemsCtrl', 
+  function SystemsController($scope, $resource, actionsService, growl, $modal, $cookieStore, runService) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
+
   var Jobs = $resource('/jobs/', {},{
    create:{method : "POST", params:{id:'@id'},url:'/jobs/create/:id'},
    provision:{method : "POST", params:{id:'@id'},url:'/jobs/provision/:id'},
@@ -49,8 +51,7 @@ angular.module( 'celestial.systems', [
         system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter','physical'],function(a){
            return system[1][a]!=null;
         })[0];
-        system[1]['actions'] = actionsService.actionsKeys(system[1].type);
-        
+        system[1]['actions'] = actionsService.grabActions(system[1].type);
         $scope.systems.push(system[1]);
 	});
     });
@@ -90,8 +91,12 @@ angular.module( 'celestial.systems', [
     }
   };
 
-  $scope.launchAction = function(id,action) {
-    actionsService.launchAction(id,action);
+  $scope.launchAction = function(id, action) {
+    if(action.provided === null || action.provided  === undefined) {
+      actionsService.launchAction(id,action);
+    } else {
+      runService.run([id], action);            
+    }
   };
 
   $scope.loadCount();
