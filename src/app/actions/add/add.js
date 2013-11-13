@@ -3,7 +3,7 @@ angular.module( 'celestial.actionAdd', [
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'actionAdd', {
-    url: '/action/add/',
+    url: '/action/add/:type',
     views: {
 	"main": {
         controller: 'ActionAddCtrl',
@@ -13,13 +13,13 @@ angular.module( 'celestial.actionAdd', [
     data:{ pageTitle: 'New action' }
   });
 })
-.controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService) {
+.controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService, $location) {
 
   $scope.action = {type:'capistrano'};
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
-     $scope.action['operates-on'] = $scope.types[0];
+     $scope.action['operates-on'] = $location.path().replace('/action/add/','');
   });
 
   $scope.submit = function(){

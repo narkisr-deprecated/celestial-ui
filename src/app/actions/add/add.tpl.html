@@ -21,7 +21,7 @@
 	  <div class="control-group">  
 	    <label class="control-label" for="operatesOn">Target type</label>  
 	    <div class="controls">  
-	      <select id="operatesOn" ng-model="action['operates-on']" ng-options="type for type in types"> </select>
+		<select id="operatesOn" ng-model="action['operates-on']" ng-options="type for type in types"> </select>
 	    </div>  
 	  </div>
 
@@ -42,14 +42,12 @@
 	    </div>
 	  </div>
 
-        <div class="control-group">
+	  <div class="control-group">
 	    <label class="control-label" for="src">Source url</label>
 	    <div class="controls">
 		<input id="src" name="src" class="input-large" required="" type="text" ng-model="action.src">
 	    </div>
 	  </div>
-
-
 	</fieldset>  
 
 	<div class="form-actions">
