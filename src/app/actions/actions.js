@@ -122,7 +122,6 @@ angular.module('celestial.actions', [
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
-     console.log($scope.currentType );
      if($scope.currentType === '') {
       $scope.currentType = $scope.types[0];
      }
