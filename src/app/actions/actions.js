@@ -58,7 +58,7 @@ angular.module('celestial.actions', [
 
 
   actionsService.launchAction = function(id, action){
-    $http.post('/jobs/'+action.name+'/'+id, {args : action.userArgs})
+    $http.post('/jobs/'+action.name+'/'+id, action.userArgs)
       .success(function(data) {
         growl.addInfoMessage(data.msg);
       }).error(function(data){
