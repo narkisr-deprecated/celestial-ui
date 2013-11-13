@@ -1,0 +1,46 @@
+<form class="form-horizontal" name="typeForm" ng-submit="submit()">
+  <fieldset>  
+    <legend>Action</legend>
+
+    <div class="control-group">
+	<label class="control-label" for="name">Name</label>
+	<div class="controls">
+	  <input id="name" name="name" class="input-large" required="" type="text" ng-model="action.name" readonly="readonly">
+	</div>
+    </div>
+
+    <div ng-repeat="arg in action.provided">
+	<label class="control-label" for="name">{{arg}}:</label>
+	<div class="controls">
+	  <input id="name" name="name" class="input-large" required="" type="text" ng-model="userArgs[arg]">
+	</div>
+    </div>
+  </fieldset>  
+
+  <div class="control-group">
+    <legend>Target systems</legend>
+    <table class="table">
+	<thead>
+	  <tr>
+	    <th>#</th>
+	    <th>Hostname</th>
+	    <th>Type</th>
+	    <th>Environment</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <tr ng-repeat="system in systems">
+	    <td><a href="#/system/{{system.id}}">{{system.id}}</a></td>
+	    <td>{{system.machine.hostname}}</td>
+	    <td>{{system.type}}</td>
+	    <td>{{system.env}}</td>
+	  </tr>
+	</tbody>
+    </table>
+  </div>
+
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Run Action</button>
+  </div>
+</form>
