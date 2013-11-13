@@ -1,6 +1,5 @@
 angular.module('celestial.actions', [
-  'ngResource', 'celestial.actionAdd', 'celestial.actionEdit'
-
+  'ngResource', 'celestial.actionAdd', 'celestial.actionEdit', 'celestial.actionRun'
 ])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'actions', {
@@ -43,7 +42,7 @@ angular.module('celestial.actions', [
  
   actionsService.grabActions = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
-        return _.chain(actions).map(function(action, id) {
+        var result = _.chain(actions).map(function(action, id) {
          if(action.name!=null) {
            action.id = id; 
            return remoterType(action);
@@ -53,6 +52,7 @@ angular.module('celestial.actions', [
         }).filter(function(action) {
           return action != null;
         }).value();
+       return !_.isEmpty(result) ? result : null;
       });
   };
 
