@@ -56,6 +56,7 @@ angular.module( 'celestial.actionRun', [
     _.each(runService.targets,function(id){
       $scope.action.userArgs = $scope.userArgs;
       actionsService.launchAction(id, $scope.action);
+	$location.path('/systems');
     });
    };
   
