@@ -27,6 +27,15 @@
 	  <td>type</td>
 	  <td>{{system.type}}</td>
 	</tr>
+	<tr>		
+	  <td rowspan='2'>User</td>
+	  <td>name</td>
+	  <td>{{system.machine.user}}</td>
+	</tr>
+	<tr>		
+	  <td>sudo</td>
+	  <td>{{system.machine.sudo}}</td>
+	</tr>
     </tbody>
   </table>
 </div>
@@ -42,7 +51,7 @@
 	</tr>
     </thead>
     <tbody>
-      <tr>		
+	<tr>		
 	  <td rowspan='4'>Networking</td>
 	  <td>hostname</td>
 	  <td>{{system.machine.hostname}}.{{system.machine.search}}</td>
