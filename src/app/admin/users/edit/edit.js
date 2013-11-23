@@ -37,10 +37,13 @@ angular.module( 'celestial.userEdit', [ ])
 
   $scope.submit = function(){
     user = $scope.user;
-    if(user.envs!== ""){ 
+    if(user.envs !== ""){ 
 	user.envs= user.envs.split(" ");
     }
     user.roles = [user.roles];
+    if(user.password === ""){
+      delete user.password;
+    }
     Users.update(user,
       function(resp) {
         $location.path( '/admin/users');
