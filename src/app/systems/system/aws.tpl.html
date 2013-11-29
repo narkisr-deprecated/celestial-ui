@@ -44,8 +44,16 @@
 	<td>{{system.aws['key-name']}}</td>
     </tr>
     <tr>		
+	<td>security groups</td>
+	<td>{{system.aws['security-groups'].join(',')}}</td>
+    </tr>
+    <tr>		
 	<td>endpoint</td>
 	<td>{{system.aws['endpoint']}}</td>
+    </tr>
+    <tr>		
+	<td>availability zone</td>
+	<td>{{system.aws['availibility-zone']}}</td>
     </tr>
     <tr>		
 	<td>instance type</td>
