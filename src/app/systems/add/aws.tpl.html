@@ -29,8 +29,8 @@
   <label class="control-label" for="env">OS</label>  
   <div class="controls">  
     <select id="type"  name="type" ng-model="machine.os" ng-options="os for os in oses"> </select>
+    <p class="help-block">Operating system</p>
   </div>  
-  <p class="help-block">Operating system</p>
 </div>
 
 <div class="control-group">
@@ -38,6 +38,14 @@
   <div class="controls">
     <input id="keyname" name="keyname" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.aws['key-name']">
     <p class="help-block">EC2 keypair</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="keyname">Security groups</label>
+  <div class="controls">
+    <input id="keyname" name="keyname" placeholder="default" class="input-large" type="text" ng-model="hypervisor.aws['security-groups']">
+    <p class="help-block">Security group list</p>
   </div>
 </div>
 
@@ -58,6 +66,14 @@
   </div>
 </div>
 
+
+<div class="control-group">
+  <label class="control-label" for="keyname">Zone</label>
+  <div class="controls">
+    <input id="keyname" name="keyname" placeholder="default" class="input-large" type="text" ng-model="hypervisor.aws['availibility-zone']">
+    <p class="help-block">Availability zone</p>
+  </div>
+</div>
 
 <legend>Machine</legend>
 

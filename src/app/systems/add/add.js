@@ -88,6 +88,9 @@ angular.module( 'celestial.systemAdd', [
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;
+      if(system.aws['security-groups'] !== undefined){
+        system.aws['security-groups'] = system.aws['security-groups'].split(" ");
+      }
       break;
     }
    return system;
