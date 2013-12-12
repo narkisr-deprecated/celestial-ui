@@ -14,6 +14,8 @@ Celestial webui, implemented using:
 $ node -v                                                                    
 v0.10.18
 
+# Ubuntu version does not work (verified on 13.10 nodejs 10.15)
+$ sudo add-apt-repository ppa:chris-lea/node.js
 $ sudo npm -g install grunt-cli karma bower
 $ npm install
 $ bower install
