@@ -17,6 +17,7 @@
 		<select id="type"  name="type" ng-model="env" ng-options="env for env in envs"> </select>
 	    </div>  
 	  </div>
+
 	  <div class="control-group">  
 	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
 	    <div class="controls">  
@@ -25,9 +26,16 @@
 	  </div>
 
 	  <div ng-hide="!isSuper" class="control-group">  
-	    <label class="control-label" for="env">Owner</label>  
+	    <label class="control-label" for="owner">Owner</label>  
 	    <div class="controls">  
 		<select id="owner"  name="owner" ng-model="owner" ng-options="user for user in users"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="desc">Description</label>  
+	    <div class="controls">  
+	      <textarea id="textarea" name="textarea" ng-model="description"></textarea>
 	    </div>  
 	  </div>
 

@@ -21,6 +21,7 @@ angular.module( 'celestial.systemAdd', [
   $scope.machine = {};
   $scope.hypervisor = {};
   $scope.type = '';
+  $scope.description = '';
 
   $scope.loadTypes = function () {
     $http({method: 'GET', url: '/types'}).
@@ -140,6 +141,7 @@ angular.module( 'celestial.systemAdd', [
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
     system.owner = $scope.owner;
+    system.description= $scope.description;
     Systems.save($scope.intoPersisted(system),
       function(resp) {
         growl.addInfoMessage(resp.msg);

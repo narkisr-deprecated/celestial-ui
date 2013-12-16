@@ -6,7 +6,11 @@
   <div class='panel-body'> 
     <p> 
 
-	<h4> System info:</h4>
+	<h2 ng-show="system.description">Description:</h2>
+     
+	{{system.description}}
+
+	<h2>System info:</h2>
 	<table class="table table-bordered" >
 	  <thead>
 	    <tr>
