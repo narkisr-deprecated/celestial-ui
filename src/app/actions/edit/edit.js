@@ -24,6 +24,7 @@ angular.module( 'celestial.actionEdit', [
 
   $scope.loadAction = function(){
     actionsService.getAction($scope.actionId).then(function(action) {
+	action.timeout = action.timeout / 1000;
 	$scope.action = action;
     });
   };
@@ -31,7 +32,9 @@ angular.module( 'celestial.actionEdit', [
   $scope.loadAction();
 
   $scope.submit = function(){
-    actionsService.update($scope.actionId,$scope.action);
+    action = angular.copy($scope.action);
+    action.timeout = action.timeout * 1000;
+    actionsService.update($scope.actionId,action);
   };
 
   $scope.remove = function() {

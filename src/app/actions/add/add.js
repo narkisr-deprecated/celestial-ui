@@ -15,7 +15,7 @@ angular.module( 'celestial.actionAdd', [
 })
 .controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService, $location) {
 
-  $scope.action = {type:'capistrano'};
+  $scope.action = {type:'capistrano', timeout:360};
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
@@ -23,7 +23,9 @@ angular.module( 'celestial.actionAdd', [
   });
 
   $scope.submit = function(){
-    actionsService.saveAction($scope.action); 
+    action = angular.copy($scope.action);
+    action.timeout = action.timeout * 1000;
+    actionsService.saveAction(action); 
   };
   
 });
