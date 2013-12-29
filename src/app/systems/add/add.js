@@ -147,8 +147,8 @@ angular.module( 'celestial.systemAdd', [
         growl.addInfoMessage(resp.msg);
         $location.path( '/system/'+resp.id);
 	},function(errors){
-        growl.addErrorMessage(errors.data,{ttl: 3000});
-        console.log(errors.data);
+        growl.addErrorMessage(errors.data.msg, {ttl: 3000});
+        console.log(errors);
       }
      );
   };

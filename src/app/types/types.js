@@ -43,7 +43,7 @@ angular.module( 'celestial.types', [
         $location.path('/types');
          growl.addInfoMessage(resp.msg);
 	},function(errors){
-        growl.addInfoMessage(resp.errors);
+        growl.addInfoMessage(errors.data.msg);
         console.log(errors);
      });
   };

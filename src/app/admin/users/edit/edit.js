@@ -48,7 +48,7 @@ angular.module( 'celestial.userEdit', [ ])
       function(resp) {
         $location.path( '/admin/users');
       },function(errors){
-        growl.addErrorMessage(errors.data);
+        growl.addErrorMessage(errors.data.msg);
       }
      );
   };

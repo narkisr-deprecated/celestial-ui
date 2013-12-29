@@ -79,9 +79,9 @@ angular.module( 'celestial.systems', [
     runJob = function() {
        Jobs[job]({id:id},function(resp) {
          growl.addInfoMessage(resp.msg);
-        },function(resp){
-         growl.addWarnMessage(resp.errors);
-         console.log(resp.errors);
+        },function(errors){
+         growl.addErrorMessage(errors.data.msg);
+         console.log(errors);
        });
      };
 
