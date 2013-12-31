@@ -11,7 +11,7 @@ angular.module( 'celestial.userEdit', [ ])
     data:{ pageTitle: 'Edit User' }
   });
 })
-.controller( 'UserEditCtrl', function UserEditController($scope, $resource, $location, growl,rolesService) {
+.controller( 'UserEditCtrl', function UserEditController($scope, $resource, $location, growl, rolesService, loggingService) {
 
   var Users = $resource('/users/:name',{name:'@name'},{
     update: {method : "PUT",url:'/users/'}
@@ -47,10 +47,7 @@ angular.module( 'celestial.userEdit', [ ])
     Users.update(user,
       function(resp) {
         $location.path( '/admin/users');
-      },function(errors){
-        growl.addErrorMessage(errors.data.msg);
-      }
-     );
+      },loggingService.error);
   };
 
   $scope.remove = function(){
@@ -58,10 +55,7 @@ angular.module( 'celestial.userEdit', [ ])
       function(resp) {
         growl.addInfoMessage('User deleted');
         $location.path( '/admin/users');
-      },function(errors){
-        growl.addErrorMessage(errors.data);
-      }
-     );
+      },loggingService.error);
   }; 
   
 });

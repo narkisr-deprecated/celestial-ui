@@ -11,6 +11,17 @@ angular.module( 'celestial', [
   growlProvider.globalTimeToLive(2000);
 })
 
+.factory('loggingService', function(growl) {
+   var loggingService = {};
+
+   loggingService.error = function(errors){
+      growl.addErrorMessage(errors.data.message);
+      console.log(errors);
+   };
+   
+   return loggingService;
+})
+
 .directive('eatClick', function() {
     return function(scope, element, attrs) {
         $(element).click(function(event) {

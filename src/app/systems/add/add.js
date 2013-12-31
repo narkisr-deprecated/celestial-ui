@@ -13,7 +13,8 @@ angular.module( 'celestial.systemAdd', [
     data:{ pageTitle: 'New System' }
   });
 })
-.controller('SystemAddCtrl', function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService) {
+.controller('SystemAddCtrl', 
+   function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService, loggingService) {
 
   var Systems = $resource('/systems/');
   var Environments = $resource('/environments/');
@@ -146,11 +147,7 @@ angular.module( 'celestial.systemAdd', [
       function(resp) {
         growl.addInfoMessage(resp.msg);
         $location.path( '/system/'+resp.id);
-	},function(errors){
-        growl.addErrorMessage(errors.data.msg, {ttl: 3000});
-        console.log(errors);
-      }
-     );
+	},loggingService.error);
   };
  
   $scope.isSuper = true;

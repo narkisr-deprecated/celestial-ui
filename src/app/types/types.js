@@ -14,7 +14,7 @@ angular.module( 'celestial.types', [
     data:{ pageTitle: 'Types' }
   });
 })
-.factory('typesService', function($location, $http, $resource,growl) {
+.factory('typesService', function($location, $http, $resource, growl, loggingService) {
   var typesService = {};
 
   var Types = $resource('/types/',{},{
@@ -41,23 +41,17 @@ angular.module( 'celestial.types', [
     newType = intoPersisted(newType);
     Types.save(newType, function(resp) {
         $location.path('/types');
-         growl.addInfoMessage(resp.msg);
-	},function(errors){
-        growl.addInfoMessage(errors.data.msg);
-        console.log(errors);
-     });
+         growl.addInfoMessage(resp.message);
+	},loggingService.error);
   };
 
   typesService.update = function(typeId,type) {
     updatedType = type;
     updatedType = intoPersisted(updatedType);
     Types.update(updatedType, function(resp) {
-        growl.addInfoMessage(resp.msg);
+        growl.addInfoMessage(resp.message);
         $location.path('/types');
-      },function(resp){
-        growl.addInfoMessage(resp.errors);
-        console.log(resp);
-      });
+      },loggingService.error);
   };
   
   typesService.provisionerOf = function(type) {
@@ -76,12 +70,9 @@ angular.module( 'celestial.types', [
   typesService.remove =  function(typeId){
     Types.remove({type:typeId},
       function(resp) {
-        growl.addInfoMessage(resp.msg);
+        growl.addInfoMessage(resp.message);
         $location.path( '/types');
-      },function(errors){
-        growl.addErrorMessage(errors.data);
-      }
-     );
+      },loggingService.error);
   }; 
 
   return typesService;

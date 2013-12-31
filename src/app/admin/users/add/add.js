@@ -11,7 +11,7 @@ angular.module( 'celestial.userAdd', [ ])
     data:{ pageTitle: 'New User' }
   });
 })
-.controller( 'UserAddCtrl', function UserAddController($scope, $resource, $location, growl,rolesService) {
+.controller( 'UserAddCtrl', function UserAddController($scope, $resource, $location, growl, rolesService, loggingService) {
 
   var Users = $resource('/users/',{});
   
@@ -38,10 +38,7 @@ angular.module( 'celestial.userAdd', [ ])
     Users.save($scope.user,
       function(resp) {
         $location.path( '/admin/users');
-      },function(errors){
-        growl.addErrorMessage(errors.data,{ttl: 3000});
-      }
-     );
+      },loggingService.error);
   };
   
 });

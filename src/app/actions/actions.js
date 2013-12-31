@@ -13,7 +13,7 @@ angular.module('celestial.actions', [
     data:{ pageTitle: 'Actions' }
   });
 })
-.factory('actionsService', function($resource, $http, growl, $location) {
+.factory('actionsService', function($resource, $http, growl, $location, loggingService) {
   var actionsService = {};
 
   var Actions =  $resource('/actions/', {}, {
@@ -61,9 +61,7 @@ angular.module('celestial.actions', [
     $http.post('/jobs/'+action.name+'/'+id, action.userArgs)
       .success(function(data) {
         growl.addInfoMessage(data.msg);
-      }).error(function(errors){
-        growl.addErrorMessage(errors.data.msg);
-    });
+      }).error(loggingService.error);
   };
 
   var joinArgs = function(action) {
@@ -79,10 +77,7 @@ angular.module('celestial.actions', [
      Actions.save(newAction, function(resp) {
          $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
-	},function(errors){
-        growl.addErrorMessage(errors.data.msg);
-        console.log(errors);
-     });
+	},loggingService.error);
   };
 
   actionsService.update = function(id, action){
@@ -90,10 +85,7 @@ angular.module('celestial.actions', [
      Actions.update({id:id},updatedAction, function(resp) {
         $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.msg);
-	},function(errors){
-        growl.addErrorMessage(errors.data.msg);
-        console.log(errors);
-     });
+	},loggingService.error);
   };
 
   actionsService.remove = function(id, action){

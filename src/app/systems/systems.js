@@ -16,7 +16,7 @@ angular.module( 'celestial.systems', [
   });
 })
 .controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, growl, $modal, $cookieStore, runService) {
+  function SystemsController($scope, $resource, actionsService, growl, $modal, $cookieStore, runService, loggingService) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
 
@@ -79,10 +79,7 @@ angular.module( 'celestial.systems', [
     runJob = function() {
        Jobs[job]({id:id},function(resp) {
          growl.addInfoMessage(resp.msg);
-        },function(errors){
-         growl.addErrorMessage(errors.data.msg);
-         console.log(errors);
-       });
+       }, loggingService.error);
      };
 
     if($cookieStore.get('skipSystemConfirm')){
