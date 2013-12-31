@@ -28,11 +28,12 @@ angular.module( 'celestial.types', [
   };
 
   var intoPersisted = function(type) {
-    if(type['puppet-std']['args']!==undefined){
-      type['puppet-std']['args'] = type['puppet-std']['args'].split(" ");
+    var saved = angular.copy(type);
+    if(saved['puppet-std']['args']!==undefined){
+      saved['puppet-std']['args'] = saved['puppet-std']['args'].split(" ");
     }
-    type['classes'] = JSON.parse(type.classes);
-    return type;
+    saved['classes'] = JSON.parse(saved.classes);
+    return saved;
   };
 
   typesService.save = function(typeName,type) {
