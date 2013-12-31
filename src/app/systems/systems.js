@@ -76,10 +76,8 @@ angular.module( 'celestial.systems', [
   };
 
   $scope.launchJob = function(id,job) {
-    runJob = function() {
-       Jobs[job]({id:id},function(resp) {
-         growl.addInfoMessage(resp.msg);
-       }, loggingService.error);
+     runJob = function() {
+       Jobs[job]({id:id}, loggingService.info, loggingService.error);
      };
 
     if($cookieStore.get('skipSystemConfirm')){

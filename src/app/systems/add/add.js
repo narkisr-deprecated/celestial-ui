@@ -145,7 +145,7 @@ angular.module( 'celestial.systemAdd', [
     system.description= $scope.description;
     Systems.save($scope.intoPersisted(system),
       function(resp) {
-        growl.addInfoMessage(resp.msg);
+        growl.addInfoMessage(resp.message);
         $location.path( '/system/'+resp.id);
 	},loggingService.error);
   };

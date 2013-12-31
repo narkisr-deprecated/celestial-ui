@@ -60,7 +60,7 @@ angular.module('celestial.actions', [
   actionsService.launchAction = function(id, action){
     $http.post('/jobs/'+action.name+'/'+id, action.userArgs)
       .success(function(data) {
-        growl.addInfoMessage(data.msg);
+        growl.addInfoMessage(data.message);
       }).error(loggingService.error);
   };
 
@@ -76,7 +76,7 @@ angular.module('celestial.actions', [
      var newAction = joinArgs(action);
      Actions.save(newAction, function(resp) {
          $location.path('/actions/'+action['operates-on']);
-         growl.addInfoMessage(resp.msg);
+         growl.addInfoMessage(resp.message);
 	},loggingService.error);
   };
 
@@ -84,16 +84,16 @@ angular.module('celestial.actions', [
      var updatedAction = joinArgs(action);
      Actions.update({id:id},updatedAction, function(resp) {
         $location.path('/actions/'+action['operates-on']);
-         growl.addInfoMessage(resp.msg);
+         growl.addInfoMessage(resp.message);
 	},loggingService.error);
   };
 
   actionsService.remove = function(id, action){
      Actions.remove({id:id}, function(resp) {
          $location.path('/actions/'+action['operates-on']);
-         growl.addInfoMessage(resp.msg);
+         growl.addInfoMessage(resp.message);
 	},function(errors){
-        growl.addInfoMessage(errors.data.msg);
+        growl.addInfoMessage(errors.data.message);
         console.log(errors);
      });
   };

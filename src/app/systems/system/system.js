@@ -38,7 +38,7 @@ angular.module( 'celestial.system', [
 
   $scope.remove= function(){
    System.remove({id:$scope.id},function(data){
-     growl.addInfoMessage(data.msg);
+     growl.addInfoMessage(data.message);
      $location.path("/systems"); 
    });
   };

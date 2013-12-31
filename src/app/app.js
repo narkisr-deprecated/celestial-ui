@@ -18,7 +18,11 @@ angular.module( 'celestial', [
       growl.addErrorMessage(errors.data.message);
       console.log(errors);
    };
-   
+ 
+   loggingService.info = function(resp){
+      growl.addErrorMessage(resp.message);
+   };  
+
    return loggingService;
 })
 

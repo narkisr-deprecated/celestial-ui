@@ -13,7 +13,7 @@ describe( 'Systems section', function() {
     }
   };
 
-  var SystemsCtrl, $scope, $location, $httpBackend, growl, $cookieStore;
+  var SystemsCtrl, $scope, $location, $httpBackend, loggingService, $cookieStore;
 
   beforeEach(inject(function($injector, $controller, _$location_, $rootScope) {
      $location = _$location_;
@@ -21,16 +21,16 @@ describe( 'Systems section', function() {
      $scope = $rootScope.$new();
      $httpBackend = $injector.get('$httpBackend');
      $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
-     growl = {
-       addInfoMessage : function(msg) {}
+     loggingService = {
+       info : function(message) {}
      };
      $cookieStore = {
         get: function(key){return false;}
      }; 
-     spyOn(growl,'addInfoMessage').andCallThrough();
+     spyOn(loggingService,'info').andCallThrough();
      spyOn(confirmModal, 'open').andCallThrough();
      SystemsCtrl = $controller( 'SystemsCtrl', {
-         $location: $location, $scope: $scope, growl: growl, $modal : confirmModal, $cookieStore: $cookieStore
+         $location: $location, $scope: $scope, loggingService: loggingService, $modal : confirmModal, $cookieStore: $cookieStore
      });
   }));
 
@@ -39,10 +39,10 @@ describe( 'Systems section', function() {
      $scope.launchJob("13","create");
      expect(confirmModal.open).toHaveBeenCalled();
      $httpBackend.expectPOST('/jobs/create/13', {id:"13"}).respond(200, {
-        msg:"submitted system creation", id:"13", job:"07fe5900-81ab-4473-aec3-24474991ab03" 
+        message:"submitted system creation", id:"13", job:"07fe5900-81ab-4473-aec3-24474991ab03" 
      });
     $httpBackend.flush();
-    expect(growl.addInfoMessage).toHaveBeenCalled();
+    expect(loggingService.info).toHaveBeenCalled();
   }));
 
   it('has skip for confirm dialog', inject( function() {
@@ -51,10 +51,10 @@ describe( 'Systems section', function() {
      expect($cookieStore.get).toHaveBeenCalledWith("skipSystemConfirm");
      expect(confirmModal.open).not.toHaveBeenCalled();
      $httpBackend.expectPOST('/jobs/create/13', {id:"13"}).respond(200, {
-        msg:"submitted system creation", id:"13", job:"07fe5900-81ab-4473-aec3-24474991ab03" 
+        message:"submitted system creation", id:"13", job:"07fe5900-81ab-4473-aec3-24474991ab03" 
      });
     $httpBackend.flush();
-    expect(growl.addInfoMessage).toHaveBeenCalled();
+    expect(loggingService.info).toHaveBeenCalled();
   }));
 
   
