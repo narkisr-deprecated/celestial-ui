@@ -1,32 +1,32 @@
-angular.module( 'celestial.typeAdd', [
+angular.module( 'celestial.auditAdd', [
   'ui.state',  'ngResource'
 ])
 .config(function config($stateProvider) {
-  $stateProvider.state( 'typeAdd', {
-    url: '/type/add/',
+  $stateProvider.state( 'auditAdd', {
+    url: '/audit/add/',
     views: {
 	"main": {
-        controller: 'TypeAddCtrl',
-        templateUrl: 'types/add/add.tpl.html'
+        controller: 'AuditAddCtrl',
+        templateUrl: 'audit/add/add.tpl.html'
        }
     },
-    data:{ pageTitle: 'New type' }
+    data:{ pageTitle: 'New audit' }
   });
 })
-.controller( 'TypeAddCtrl', function typeAddController($scope, $http, $resource ,typesService) {
+.controller( 'AuditAddCtrl', function typeAddController($scope, $http, $resource ,auditService) {
 
-  $scope.typeId = '';
-  $scope.currentProvisioner = 'puppet-std';
-  $scope.type = {'puppet-std':{module:{}}};
+  $scope.name = '';
+  $scope.currentType = 'kibana';
+  $scope.audit= {};
 
   $scope.typeSelect = function() {
-    $scope.provisionerTemplate = 'types/add/'+$scope.currentProvisioner+'.tpl.html';
+    $scope.provisionerTemplate = 'audit/add/'+$scope.currentType+'.tpl.html';
   };
 
-  $scope.$watch( 'currentProvisioner', $scope.typeSelect );
+  $scope.$watch( 'currentType', $scope.typeSelect);
 
   $scope.submit = function(){
-    typesService.save($scope.typeId,$scope.type); 
+    auditService.save($scope.audit); 
   };
   
 });

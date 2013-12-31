@@ -1,5 +1,6 @@
 angular.module( 'celestial.audits', [
-  'ui.state', 'ui.bootstrap','celestial.auditAdd','celestial.auditEdit'
+  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd'
+  //,'celestial.auditEdit'
 ])
 
 .config(function config( $stateProvider ) {
@@ -7,7 +8,7 @@ angular.module( 'celestial.audits', [
     url: '/audits',
     views: {
       "main": {
-        controller: 'auditsCtrl',
+        controller: 'AuditsCtrl',
         templateUrl: 'audits/audits.tpl.html'
       }
     },
@@ -73,7 +74,7 @@ angular.module( 'celestial.audits', [
   return auditsService;
 })
 
-.controller( 'auditsCtrl', function auditsCtrl($scope, $resource, auditsService) {
+.controller( 'AuditsCtrl', function auditsCtrl($scope, $resource, auditsService) {
   $scope.perPage = 10;
   $scope.data = {};
 

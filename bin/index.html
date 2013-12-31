@@ -61,14 +61,15 @@
 		  Jobs
 		</a>
 		</li>
+
 		<li ui-route="/admin" ng-show="isAdmin" ng-class="{active:$uiRoute}">
-		<a href="#/admin"> <i class="fa fa-wrench"></i> Admin</a> </li>
-		<li>
-		<a href="/audit">
-		  <i class="fa fa-eye"></i>
-		  Audit
-		</a>
+		<a href="#/admin"> <i class="fa fa-wrench"></i> Admin</a>
 		</li>
+
+		<li ui-route="/audits" ng-show="isAdmin" ng-class="{active:$uiRoute}">
+		<a href="#/audits"> <i class="fa fa-eye"></i> Audit</a>
+		</li>
+
 		<li>
 		<a href="http://celestial-ops.com/#contact">
 		  <i class="fa fa-comments"></i>
