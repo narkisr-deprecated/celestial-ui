@@ -57,7 +57,7 @@ angular.module( 'celestial.audits', [
   auditsService.getAll = function() {
     return audits.get({}).$promise.then(function(data){
         return _.map(data.audits,function(audit){
-           audit.provisioner = auditsService.provisionerOf(audit);
+           // audit.provisioner = auditsService.provisionerOf(audit);
            return audit; 
         });
     });

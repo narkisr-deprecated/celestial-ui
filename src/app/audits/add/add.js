@@ -7,7 +7,7 @@ angular.module( 'celestial.auditAdd', [
     views: {
 	"main": {
         controller: 'AuditAddCtrl',
-        templateUrl: 'audit/add/add.tpl.html'
+        templateUrl: 'audits/add/add.tpl.html'
        }
     },
     data:{ pageTitle: 'New audit' }

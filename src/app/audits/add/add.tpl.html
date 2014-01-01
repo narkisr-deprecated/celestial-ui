@@ -4,16 +4,23 @@
 	<fieldset>  
 	  <legend>Main</legend>
 	  <div class="control-group">
-	    <label class="control-label" for="type">Type</label>
+	    <label class="control-label" for="type">Name</label>
 	    <div class="controls">
-		<input id="type" name="type" class="input-large" required="" type="text" ng-model="typeId">
+		<input id="type" name="type" class="input-large" required="" type="text" ng-model="name">
+	    </div>
+	  </div>
+
+	  <div class="control-group">
+	    <label class="control-label" for="textarea">Query</label>
+	    <div class="controls">                     
+		<textarea id="textarea" name="textarea" ng-model="query"></textarea>
 	    </div>
 	  </div>
 
 	  <div class="control-group">
 	    <label class="control-label" for="textarea">Description</label>
 	    <div class="controls">                     
-		<textarea id="textarea" name="textarea" ng-model="type.description"></textarea>
+		<textarea id="textarea" name="textarea" ng-model="description"></textarea>
 	    </div>
 	  </div>
 
