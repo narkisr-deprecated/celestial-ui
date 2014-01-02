@@ -13,20 +13,14 @@ angular.module( 'celestial.auditAdd', [
     data:{ pageTitle: 'New audit' }
   });
 })
-.controller( 'AuditAddCtrl', function typeAddController($scope, $http, $resource ,auditService) {
+.controller( 'AuditAddCtrl', function typeAddController($scope, $http, $resource ,auditsService) {
 
   $scope.name = '';
   $scope.currentType = 'kibana';
   $scope.audit= {};
 
-  $scope.typeSelect = function() {
-    $scope.provisionerTemplate = 'audit/add/'+$scope.currentType+'.tpl.html';
-  };
-
-  $scope.$watch( 'currentType', $scope.typeSelect);
-
   $scope.submit = function(){
-    auditService.save($scope.audit); 
+    auditsService.save($scope.audit); 
   };
   
 });
