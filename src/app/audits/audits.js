@@ -32,11 +32,8 @@ angular.module( 'celestial.audits', [
     return audit;
   };
 
-  auditsService.save = function(auditName,audit, loggingService) {
-    newaudit = audit;
-    newaudit['audit'] = auditName;
-    newaudit = intoPersisted(newaudit);
-    audits.save(newaudit, function(resp) {
+  auditsService.save = function(audit) {
+    audits.save(audit, function(resp) {
         $location.path('/audits');
          growl.addInfoMessage(resp.message);
 	},loggingService.error);
