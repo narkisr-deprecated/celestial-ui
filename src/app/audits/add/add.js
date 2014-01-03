@@ -15,9 +15,7 @@ angular.module( 'celestial.auditAdd', [
 })
 .controller( 'AuditAddCtrl', function typeAddController($scope, $http, $resource ,auditsService) {
 
-  $scope.name = '';
-  $scope.currentType = 'kibana';
-  $scope.audit= {};
+  $scope.audit= {type:'kibana'};
 
   $scope.submit = function(){
     auditsService.save($scope.audit); 
