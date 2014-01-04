@@ -1,5 +1,6 @@
 angular.module( 'celestial.audits', [
-  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd', 'celestial.auditEdit'
+  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd', 
+  'celestial.auditEdit', 'celestial.auditLaunch'
 ])
 
 .config(function config( $stateProvider ) {
@@ -20,15 +21,17 @@ angular.module( 'celestial.audits', [
   var audits = $resource('/audits/',{},{
     getAudit: {method : "GET", params:{name:'@name'},url:'/audits/:name'},
     remove: {method : "DELETE", params:{name:'@name'},url:'/audits/:name'},
+    linkFor: {method : "GET", params:{args:'@args', name:'@name'},url:'/audits/link/'},
     update: {method : "PUT",url:'/audits/'}
   });
 
-  auditsService.get = function(name) {
-    return audits.getAudit({name:name});
+  auditsService.linkFor= function(name, userArgs) {
+    return audits.linkFor({name:name, userArgs:userArgs});
   };
 
-  var intoPersisted = function(audit) {
-    return audit;
+
+  auditsService.get = function(name) {
+    return audits.getAudit({name:name});
   };
 
   auditsService.save = function(audit) {
@@ -64,7 +67,7 @@ angular.module( 'celestial.audits', [
   return auditsService;
 })
 
-.controller( 'AuditsCtrl', function auditsCtrl($scope, $resource, auditsService) {
+.controller( 'AuditsCtrl', function auditsCtrl($scope, $resource, auditsService, $location) {
   $scope.perPage = 10;
   $scope.data = {};
 
@@ -88,4 +91,9 @@ angular.module( 'celestial.audits', [
   
   $scope.$watch( 'currentPage', $scope.setPage );
   $scope.$watch( 'data.audits', $scope.setPage );
+ 
+  $scope.launchAudit = function(name) {
+    console.log(name);
+    $location.path("/audits/launch/"+name);
+  };
 });

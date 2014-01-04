@@ -1,0 +1,23 @@
+<form class="form-horizontal" name="typeForm" ng-submit="submit()">
+  <fieldset>  
+    <legend>Audit</legend>
+
+    <div class="control-group">
+	<label class="control-label" for="name">Name</label>
+	<div class="controls">
+	  <input id="name" name="name" class="input-large" required="" type="text" ng-model="audit.name" readonly="readonly">
+	</div>
+    </div>
+
+    <div class="control-group" ng-repeat="arg in audit.args">
+	<label class="control-label" for="name">{{arg}}:</label>
+	<div class="controls">
+	  <input id="name" name="name" class="input-large" required="" type="text" ng-model="userArgs[arg]">
+	</div>
+    </div>
+  </fieldset>  
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Launch audit</button>
+  </div>
+</form>

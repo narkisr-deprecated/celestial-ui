@@ -10,14 +10,16 @@
 	  <tr>
 	    <th>Name</th>
 	    <th>Description</th>
-	    <th>View</th>
+	    <th></th>
 	  </tr>
 	</thead>
 	<tbody>
 	  <tr ng-repeat="audit in audits">
 	    <td><a href="#/audit/edit/{{audit.name}}">{{audit.name}}</a></td>
 	    <td>{{audit.description}}</td>
-	    <td>{{audit.link}}</td>
+	    <td>
+		<a href="" ng-click="launchAudit(audit.name)"> </i> View </a>
+	    </td>
 	  </tr>
 	</tbody>
     </table>
