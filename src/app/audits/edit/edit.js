@@ -26,11 +26,11 @@ angular.module( 'celestial.auditEdit', [
   $scope.loadAudit();
 
   $scope.submit = function(){
-    auditService.update($scope.audit);
+    auditsService.update($scope.audit);
   };
 
   $scope.remove = function() {
-    auditService.remove($scope.name);
+    auditsService.remove($scope.audit.name);
   };
   
 });

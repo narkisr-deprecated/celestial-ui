@@ -38,29 +38,23 @@ angular.module( 'celestial.audits', [
 	},loggingService.error);
   };
 
-  auditsService.update = function(auditId,audit) {
-    updatedaudit = audit;
-    updatedaudit = intoPersisted(updatedaudit);
-    audits.update(updatedaudit, function(resp) {
+  auditsService.update = function(audit) {
+    audits.update(audit, function(resp) {
         growl.addInfoMessage(resp.message);
         $location.path('/audits');
-      },function(resp){
-        growl.addInfoMessage(resp.errors);
-        console.log(resp);
-      });
+      },loggingService.error);
   };
   
   auditsService.getAll = function() {
     return audits.get({}).$promise.then(function(data){
         return _.map(data.audits,function(audit){
-           // audit.provisioner = auditsService.provisionerOf(audit);
            return audit; 
         });
     });
   };
 
-  auditsService.remove =  function(auditId){
-    audits.remove({audit:auditId},
+  auditsService.remove =  function(name){
+    audits.remove({name:name},
       function(resp) {
         growl.addInfoMessage(resp.message);
         $location.path( '/audits');
