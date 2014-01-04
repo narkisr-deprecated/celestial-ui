@@ -1,42 +1,36 @@
-angular.module( 'celestial.typeEdit', [
+angular.module( 'celestial.auditEdit', [
   'ui.state',  'ngResource'
 ])
 .config(function config($stateProvider) {
-  $stateProvider.state( 'typeEdit', {
-    url: '/type/edit/:type',
+  $stateProvider.state( 'auditEdit', {
+    url: '/audit/edit/:name',
     views: {
 	"main": {
-        controller: 'TypeEditCtrl',
-        templateUrl: 'types/edit/edit.tpl.html'
+        controller: 'AuditEditCtrl',
+        templateUrl: 'audits/edit/edit.tpl.html'
        }
     },
-    data:{ pageTitle: 'Edit type' }
+    data:{ pageTitle: 'Edit audit' }
   });
 })
-.controller( 'TypeEditCtrl', function typeEditController($scope, $location, typesService) {
+.controller( 'AuditEditCtrl', function auditEditController($scope, $location, auditsService) {
 
-  $scope.typeId = $location.path().replace("/type/edit/","");
+  $scope.name = $location.path().replace("/audit/edit/","");
 
-  $scope.loadType = function(){
-    typesService.get($scope.typeId).$promise.then(function(type) {
-      $scope.type = type;
-      $scope.type.classes = JSON.stringify(type.classes);
-	if($scope.type['puppet-std'].args !==undefined){
-        $scope.type['puppet-std'].args = type['puppet-std'].args.join(" ");
-      }
-      $scope.currentProvisioner = typesService.provisionerOf($scope.type);
-      $scope.provisionerTemplate = 'types/edit/'+$scope.currentProvisioner+'.tpl.html';
+  $scope.loadAudit = function(){
+    auditsService.get($scope.name).$promise.then(function(res) {
+      $scope.audit = res;
     });
   };
 
-  $scope.loadType();
+  $scope.loadAudit();
 
   $scope.submit = function(){
-    typesService.update($scope.typeId,$scope.type);
+    auditService.update($scope.audit);
   };
 
   $scope.remove = function() {
-    typesService.remove($scope.typeId);
+    auditService.remove($scope.name);
   };
   
 });

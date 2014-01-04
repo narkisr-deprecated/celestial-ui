@@ -1,6 +1,5 @@
 angular.module( 'celestial.audits', [
-  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd'
-  //,'celestial.auditEdit'
+  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd', 'celestial.auditEdit'
 ])
 
 .config(function config( $stateProvider ) {
@@ -19,13 +18,13 @@ angular.module( 'celestial.audits', [
   var auditsService = {};
 
   var audits = $resource('/audits/',{},{
-    getAudit: {method : "GET", params:{audit:'@name'},url:'/audits/:name'},
-    remove: {method : "DELETE", params:{audit:'@name'},url:'/audits/:name'},
+    getAudit: {method : "GET", params:{name:'@name'},url:'/audits/:name'},
+    remove: {method : "DELETE", params:{name:'@name'},url:'/audits/:name'},
     update: {method : "PUT",url:'/audits/'}
   });
 
   auditsService.get = function(name) {
-    return audits.getaudit({audit:name});
+    return audits.getAudit({name:name});
   };
 
   var intoPersisted = function(audit) {
