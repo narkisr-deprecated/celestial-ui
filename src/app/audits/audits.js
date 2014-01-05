@@ -21,12 +21,12 @@ angular.module( 'celestial.audits', [
   var audits = $resource('/audits/',{},{
     getAudit: {method : "GET", params:{name:'@name'},url:'/audits/:name'},
     remove: {method : "DELETE", params:{name:'@name'},url:'/audits/:name'},
-    linkFor: {method : "GET", params:{args:'@args', name:'@name'},url:'/audits/link/'},
+    linkFor: {method : "GET", params:{args:'@args', name:'@name'},url:'/audits/:name/:args'},
     update: {method : "PUT",url:'/audits/'}
   });
 
-  auditsService.linkFor= function(name, userArgs) {
-    return audits.linkFor({name:name, userArgs:userArgs});
+  auditsService.linkFor= function(name, args) {
+    return audits.linkFor({name:name, args:angular.toJson(args)});
   };
 
 

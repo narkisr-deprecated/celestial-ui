@@ -28,17 +28,9 @@ angular.module( 'celestial.auditLaunch', [
    $scope.loadAudit();
 
    $scope.submit = function(){
-     auditsService.linkFor($scope.name, $scope.userArgs).$promise.then(function(link) {
-      $scope.link = link;
+     auditsService.linkFor($scope.name, $scope.userArgs).$promise.then(function(res) {
+      $scope.link = res.link;
+      $window.open($scope.link);
      });
    };
-  
-  $scope.openLink = function() {
-   if($scope.link !== undefined) {
-     $window.open($scope.link);
-   }
-  };
-
-  $scope.$watch('link', $scope.openLink);
-
-});
+ });
