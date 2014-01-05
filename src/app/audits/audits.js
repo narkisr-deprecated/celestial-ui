@@ -26,7 +26,7 @@ angular.module( 'celestial.audits', [
   });
 
   auditsService.linkFor= function(name, args) {
-    return audits.linkFor({name:name, args:angular.toJson(args)});
+    return audits.linkFor({name:name, args:btoa(angular.toJson(args))});
   };
 
 
