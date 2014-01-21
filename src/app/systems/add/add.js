@@ -72,6 +72,11 @@ angular.module( 'celestial.systemAdd', [
         $scope.hypervisor= {physical:{}};
         $scope.machine={};
         break;
+      case "docker": 
+        $scope.hypervisor= {docker:{}};
+        $scope.machine={};
+        break;
+
      }
     }
   };
