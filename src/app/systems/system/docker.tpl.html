@@ -60,11 +60,11 @@
   <tbody>
     <tr>		
 	<td>Exposed</td>
-	<td>{{system.docker['exposed-ports']}}</td>
+	<td>{{system.docker['exposed-ports'].join(" ")}}</td>
     </tr>
     <tr>		
 	<td>Bindings</td>
-	<td>{{system.docker['port-bindings']}}</td>
+	<td>{{system.docker['port-bindings'].join(" ")}}</td>
     </tr>
   </tbody>
 </table>

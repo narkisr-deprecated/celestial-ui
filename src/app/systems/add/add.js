@@ -83,21 +83,28 @@ angular.module( 'celestial.systemAdd', [
 
   $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect);
 
-  $scope.intoPersisted =function(system){
+  $scope.intoPersisted = function(system){
+    var splitProps = function (props,dest) {
+	_.each(props, function(v) {
+       if(dest[v] !== undefined){
+         dest[v] = dest[v].split(" "); 
+       }
+     });
+    };
+
     switch ($scope.currentHypervisor) {
      case "proxmox":
-	if(system.proxmox.features !== undefined){
-        system.proxmox.features = system.proxmox.features.split(" ");
-      }
+      splitProps(['features'], system.proxmox);
       break;
      case "vcenter": 
-      system.machine.names = system.machine.names.split(" ");
+      splitProps(['names'], system.machine);
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;
-      if(system.aws['security-groups'] !== undefined){
-        system.aws['security-groups'] = system.aws['security-groups'].split(" ");
-      }
+      splitProps(['security-groups'], system.aws);
+      break;
+     case "docker":
+      splitProps(['volumes', 'exposed-ports', 'port-bindings'], system.docker);
       break;
     }
    return system;
