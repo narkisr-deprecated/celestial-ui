@@ -21,7 +21,7 @@
     <label class="control-label" for="volumes">Volumes</label>
     <div class="controls">
 	<input id="volumes" name="volumes" placeholder="/tmp:/tmp" class="input-large" type="text" ng-model="hypervisor.docker.volumes">
-	<p class="help-block">Mounted disk volumes</p>
+	<p class="help-block">Mounted disk volumes list</p>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
     <label class="control-label" for="ports">Exposed</label>
     <div class="controls">
 	<input id="ports" name="ports" placeholder='22/tcp' class="input-large" type="text" ng-model="hypervisor.docker['exposed-ports']">
-	<p class="help-block">port/protocol</p>
+	<p class="help-block">port/protocol list</p>
     </div>
   </div>
 
@@ -39,12 +39,21 @@
     <label class="control-label" for="ports">Bindings</label>
     <div class="controls">
 	<input id="ports" name="ports" placeholder="22/tcp:2222/0.0.0.0" class="input-large" type="text" ng-model="hypervisor.docker['port-bindings']">
-	<p class="help-block">container-port/protocol:host-port/interface</p>
+	<p class="help-block">container-port/protocol:host-port/interface list</p>
     </div>
   </div>
 
 
   <legend>Machine</legend>
+
+  <div class="control-group">
+    <label class="control-label" for="hostname">Hostname</label>
+    <div class="controls">
+	<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
+	<p class="help-block">Machine hostname</p>
+    </div>
+  </div>
+
 
   <div class="control-group">
     <label class="control-label" for="cpus">CPUs</label>
@@ -57,7 +66,7 @@
   <div class="control-group">
     <label class="control-label" for="memory">Memory</label>
     <div class="controls">
-	<input id="memory" name="memory" min="16" type="number" placeholder="" class="input-large" required="" ng-model="machine.memory" >
+	<input id="memory" name="memory" min="1" type="number" placeholder="" class="input-large" required="" ng-model="machine.memory" >
 	<p class="help-block">Memory in MB</p>
     </div>
   </div>
