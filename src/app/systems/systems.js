@@ -5,7 +5,7 @@ angular.module( 'celestial.systems', [
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {
-    url: '/systems',
+    url: '/systems/:page',
     views: {
       "main": {
         controller: 'SystemsCtrl',
@@ -16,7 +16,7 @@ angular.module( 'celestial.systems', [
   });
 })
 .controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, growl, $modal, $cookieStore, runService, loggingService) {
+  function SystemsController($scope, $resource, actionsService, growl, $modal, $cookieStore, runService, loggingService, $location) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
 
@@ -34,6 +34,7 @@ angular.module( 'celestial.systems', [
 
   $scope.perPage = 10;
   $scope.currentPage = 1;
+  $scope.currentPage= $location.path().replace('/systems/','');
 
   $scope.loadCount = function(){
      Systems.get({page:1,offset:$scope.perPage},function(data,resp){
@@ -45,6 +46,8 @@ angular.module( 'celestial.systems', [
 
   $scope.setPage = function () {
     var page = {page:$scope.currentPage,offset: $scope.perPage};
+    console.log($scope.currentPage);
+    $location.path('/systems/'+$scope.currentPage);
     Systems.get(page,function (data){
 	$scope.systems = [];
       angular.forEach(data.systems,function(system){

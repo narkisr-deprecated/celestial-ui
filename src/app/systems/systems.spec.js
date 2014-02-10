@@ -17,7 +17,7 @@ describe( 'Systems section', function() {
 
   beforeEach(inject(function($injector, $controller, _$location_, $rootScope) {
      $location = _$location_;
-     $location.path("/systems");
+     $location.path("/systems/1");
      $scope = $rootScope.$new();
      $httpBackend = $injector.get('$httpBackend');
      $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
