@@ -1,6 +1,7 @@
 describe( 'Systems section', function() {
-  beforeEach( module( 'celestial' ) );
+  beforeEach(module( 'celestial'));
 
+ 
   var confirmModal = {
     command: null,
     open: function(args) {
@@ -15,12 +16,8 @@ describe( 'Systems section', function() {
 
   var SystemsCtrl, $scope, $location, $httpBackend, loggingService, $cookieStore;
 
-  beforeEach(inject(function($injector, $controller, _$location_, $rootScope) {
-     $location = _$location_;
-     $location.path("/systems/1");
-     $scope = $rootScope.$new();
-     $httpBackend = $injector.get('$httpBackend');
-     $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
+  beforeEach(function() {
+   module(function ($provide) {
      loggingService = {
        info : function(message) {}
      };
@@ -29,9 +26,19 @@ describe( 'Systems section', function() {
      }; 
      spyOn(loggingService,'info').andCallThrough();
      spyOn(confirmModal, 'open').andCallThrough();
-     SystemsCtrl = $controller( 'SystemsCtrl', {
-         $location: $location, $scope: $scope, loggingService: loggingService, $modal : confirmModal, $cookieStore: $cookieStore
-     });
+     $provide.value('$modal', confirmModal);
+     $provide.value('loggingService', loggingService);
+     $provide.value('$cookieStore', $cookieStore);
+   });
+  });
+
+  beforeEach(inject(function($injector, $controller, _$location_, $rootScope ,systemsService) {
+     $location = _$location_;
+     $location.path("/systems/1");
+     $scope = $rootScope.$new();
+     $httpBackend = $injector.get('$httpBackend');
+     $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
+     SystemsCtrl = $controller( 'SystemsCtrl', {$location: $location, $scope: $scope,  systemsService : systemsService });
   }));
 
 
