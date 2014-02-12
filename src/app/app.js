@@ -7,7 +7,7 @@ angular.module( 'celestial', [
 
 .config(function myAppConfig ( $stateProvider, $urlRouterProvider,growlProvider ) {
   _.mixin(_.string.exports());
-  $urlRouterProvider.otherwise( '/systems' );
+  $urlRouterProvider.otherwise( '/systems/1' );
   growlProvider.globalTimeToLive(2000);
 })
 
@@ -20,7 +20,7 @@ angular.module( 'celestial', [
    };
  
    loggingService.info = function(resp){
-      growl.addErrorMessage(resp.message);
+      growl.addInfoMessage(resp.message);
    };  
 
    return loggingService;
