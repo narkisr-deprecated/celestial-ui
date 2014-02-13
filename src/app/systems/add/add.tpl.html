@@ -2,6 +2,32 @@
   <div>
     <form class="form-horizontal" name="systemForm" ng-submit="submit()">
 	<fieldset>  
+	  <legend>General</legend>
+
+	  <div ng-hide="!isSuper" class="control-group">  
+	    <label class="control-label" for="owner">Owner</label>  
+	    <div class="controls">  
+		<select id="owner"  name="owner" ng-model="owner" ng-options="user for user in users"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="desc">Description</label>  
+	    <div class="controls">  
+		<textarea id="textarea" name="textarea" ng-model="description"></textarea>
+	    </div>  
+	  </div>
+	  <div class="control-group">
+	    <label class="control-label" for="operation">Operation</label>
+	    <div class="controls">
+		<select id="operation" name="operation" class="input-large" ng-model="operation">
+		  <option>stage</option>
+		  <option>create</option>
+		</select>
+		<p class="help-block">Operation to perform after save</p>
+	    </div>
+	  </div>
+
 	  <legend>Type</legend>
 
 	  <div class="control-group">  
@@ -19,23 +45,9 @@
 	  </div>
 
 	  <div class="control-group">  
-	    <label class="control-label" for="hypervisor">Hypervisor type</label>  
+	    <label class="control-label" for="hypervisor">Hypervisor</label>  
 	    <div class="controls">  
 		<select id="hypervisor"  name="hypervisor" ng-model="currentHypervisor" ng-options="hyp for hyp in hypervisors"> </select>
-	    </div>  
-	  </div>
-
-	  <div ng-hide="!isSuper" class="control-group">  
-	    <label class="control-label" for="owner">Owner</label>  
-	    <div class="controls">  
-		<select id="owner"  name="owner" ng-model="owner" ng-options="user for user in users"> </select>
-	    </div>  
-	  </div>
-
-	  <div class="control-group">  
-	    <label class="control-label" for="desc">Description</label>  
-	    <div class="controls">  
-	      <textarea id="textarea" name="textarea" ng-model="description"></textarea>
 	    </div>  
 	  </div>
 

@@ -14,7 +14,7 @@ angular.module( 'celestial.systemAdd', [
   });
 })
 .controller('SystemAddCtrl', 
-   function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService, loggingService) {
+   function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService, loggingService, systemsService) {
 
   var Systems = $resource('/systems/');
   var Environments = $resource('/environments/');
@@ -23,6 +23,7 @@ angular.module( 'celestial.systemAdd', [
   $scope.hypervisor = {};
   $scope.type = '';
   $scope.description = '';
+  $scope.operation = 'No operation';
 
   $scope.loadTypes = function () {
     $http({method: 'GET', url: '/types'}).
@@ -155,10 +156,13 @@ angular.module( 'celestial.systemAdd', [
     system[$scope.currentHypervisor] = $scope.hypervisor[$scope.currentHypervisor];
     system.owner = $scope.owner;
     system.description= $scope.description;
-    Systems.save($scope.intoPersisted(system),
+    Systems.save($scope.intoPersisted(system), 
       function(resp) {
         growl.addInfoMessage(resp.message);
-        $location.path( '/system/'+resp.id);
+        $location.path('/system/'+resp.id);
+        if($scope.operation !== 'No operation'){
+          systemsService.runJob($scope.operation, resp.id);
+        }
 	},loggingService.error);
   };
  

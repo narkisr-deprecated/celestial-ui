@@ -45,15 +45,16 @@ angular.module( 'celestial.systems', [
 
   };
 
+  systemsService.runJob = function(job, id) {
+     Jobs[job]({id:id}, loggingService.info, loggingService.error);
+  };
+
   systemsService.launchJob = function(id, target, job) {
-     runJob = function() {
-       Jobs[job]({id:id}, loggingService.info, loggingService.error);
-     };
 
     if($cookieStore.get('skipSystemConfirm')){
-      runJob();  
+      systemsService.runJob(job, id);  
     } else {
-      systemsService.safeLaunch(target,job,runJob); 
+	systemsService.safeLaunch(target,job,function(){systemsService.runJob(job, id);}); 
     }
   };
 
