@@ -22,7 +22,7 @@ angular.module( 'celestial.system', [
         }
     };
 })
-.controller( 'SystemCtrl', function SystemController($scope,$resource,$location,growl) {
+.controller( 'SystemCtrl', function SystemController($scope, $resource, $location, growl, systemsService) {
 
   var System = $resource('/systems/:id', {id:'@id'},{remove:{method:"DELETE"}});
 
@@ -33,6 +33,7 @@ angular.module( 'celestial.system', [
       $scope.hypervisor = _.filter(['aws','proxmox','vcenter','physical','docker'], function(a){return sys[a]!=null; })[0];
       $scope.hypervisorData = sys[$scope.hypervisor];
       $scope.headerTemplate = 'systems/system/'+$scope.hypervisor+'.tpl.html';
+      $scope.system.id = $scope.id;
     });
   };
 
@@ -42,6 +43,11 @@ angular.module( 'celestial.system', [
      $location.path("/systems"); 
    });
   };
+
+  $scope.launchJob = function(id,job) { 
+    systemsService.launchJob(id, $scope.system, job);
+  };
+
 
   $scope.loadSystem();
 });

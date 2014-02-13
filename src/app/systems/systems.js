@@ -58,6 +58,29 @@ angular.module( 'celestial.systems', [
   };
 
   return systemsService;
+}).
+directive('operations', function () {
+    return {
+      restrict: 'E',
+      template: '<div class="btn-group">'+
+       '<a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>'+
+       '<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">'+
+          '<span class="fa fa-caret-down"></span></a>'+
+        '<ul class="dropdown-menu">'+
+          '<li><a href="" ng-click="launchJob(system.id,"create")" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus" ></i> Create</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"provision")" tooltip-placement="right" tooltip="Run provisioining"><i class="fa-fixed-width fa fa-gears" ></i> Provision</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"stage")" tooltip-placement="right" tooltip="Create and Provision"><i class="fa-fixed-width fa fa-refresh" ></i> Stage</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"start")" tooltip-placement="right" tooltip="Start the backing machine"><i class="fa-fixed-width fa fa-play" ></i> Start</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"stop")" tooltip-placement="right" tooltip="Stop the backing machine"><i class="fa-fixed-width fa fa-stop" ></i> Stop</a></li>'+
+          '<li class="divider"></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"destroy")" tooltip-placement="right" tooltip="Destroy machine"><i class="fa-fixed-width fa fa-trash-o" ></i> Destroy</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"reload")" tooltip-placement="right" tooltip="Destroy and re-create machine"><i class="fa-fixed-width fa fa-warning" ></i> Reload</a></li>'+
+          '<li><a href="" ng-click="launchJob(system.id,"clear")" tooltip-placement="right" tooltip="Clear system model"><i class="fa-fixed-width fa fa-eraser" ></i> Clear</a></li>'+
+           '</ul>'+ '</div>',
+      scope: {
+        system: '='
+      }
+  };
 })
 .controller( 'SystemsCtrl', 
   function SystemsController($scope, $resource, actionsService, runService, $location, systemsService) {
