@@ -20,6 +20,7 @@ angular.module( 'celestial.systems', [
 
   var Jobs = $resource('/jobs/', {},{
     create:{method : "POST", params:{id:'@id'},url:'/jobs/create/:id'},
+    clone:{method : "POST", params:{id:'@id'},url:'/jobs/clone/:id'},
     provision:{method : "POST", params:{id:'@id'},url:'/jobs/provision/:id'},
     stage:{method : "POST", params:{id:'@id'},url:'/jobs/stage/:id'},
     start:{method : "POST", params:{id:'@id'},url:'/jobs/start/:id'},
