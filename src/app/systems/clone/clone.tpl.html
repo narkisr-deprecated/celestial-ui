@@ -1,0 +1,26 @@
+<form class="form-horizontal" name="typeForm" ng-submit="submit()">
+  <fieldset>  
+    <legend>Target</legend>
+
+    <div class="control-group">
+	<label class="control-label" for="hostname">Hostname</label>
+	<div class="controls">
+	  <input id="hostname" name="hostname" class="input-large" required="" type="text" ng-model="hostname">
+	</div>
+    </div>
+
+    <div ng-hide="!isSuper" class="control-group">  
+	<label class="control-label" for="owner">Owner</label>  
+	<div class="controls">  
+	  <select id="owner"  name="owner" ng-model="owner" ng-options="user for user in users"> </select>
+	</div>  
+    </div>
+
+  </fieldset>  
+
+  <div ng-include src="hypervisorTemplate"></div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Clone</button>
+  </div>
+</form>
