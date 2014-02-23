@@ -20,7 +20,7 @@ angular.module( 'celestial.systems', [
 
   var Jobs = $resource('/jobs/', {},{
     create:{method : "POST", params:{id:'@id'},url:'/jobs/create/:id'},
-    clone:{method : "POST", params:{id:'@id'},url:'/jobs/clone/:id'},
+    clone:{method : "POST", params:{id:'@id','clone-spec':'@clone-spec'},url:'/jobs/clone/:id'},
     provision:{method : "POST", params:{id:'@id'},url:'/jobs/provision/:id'},
     stage:{method : "POST", params:{id:'@id'},url:'/jobs/stage/:id'},
     start:{method : "POST", params:{id:'@id'},url:'/jobs/start/:id'},
@@ -46,8 +46,11 @@ angular.module( 'celestial.systems', [
 
   };
 
-  systemsService.runJob = function(job, id) {
-     Jobs[job]({id:id}, loggingService.info, loggingService.error);
+  systemsService.runJob = function(job, id, args) {
+     if (args === undefined){args = {};}
+     args['id'] = id;
+     console.log(args);
+     Jobs[job](args, loggingService.info, loggingService.error);
   };
 
   systemsService.launchJob = function(id, target, job) {
@@ -126,6 +129,7 @@ directive('operations', function () {
     var target = _.find($scope.systems,function(s){return s.id==id;});
     systemsService.launchJob(id, target, job);
   };
+
 
   $scope.launchAction = function(id, action) {
     if(action.provided === null || action.provided  === undefined) {
