@@ -30,7 +30,7 @@ angular.module( 'celestial.system', [
 
   $scope.loadSystem = function(){
     $scope.system = System.get({id:$scope.id},function(sys,resp){
-      $scope.hypervisor = _.filter(['aws','proxmox','vcenter','physical','docker'], function(a){return sys[a]!=null; })[0];
+	$scope.hypervisor = systemsService.hypervisor(sys);
       $scope.hypervisorData = sys[$scope.hypervisor];
       $scope.headerTemplate = 'systems/system/'+$scope.hypervisor+'.tpl.html';
       $scope.system.id = $scope.id;

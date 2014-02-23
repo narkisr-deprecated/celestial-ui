@@ -59,6 +59,11 @@ angular.module( 'celestial.systems', [
     }
   };
 
+  systemsService.hypervisor = function(system) {
+    hs = ['aws','proxmox','vcenter','physical','docker'];
+    return _.filter(hs, function(a){return system[a]!=null; })[0];
+  };
+
   return systemsService;
 }).
 directive('operations', function () {
