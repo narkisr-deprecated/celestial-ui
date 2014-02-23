@@ -167,16 +167,7 @@ angular.module( 'celestial.systemAdd', [
   };
  
   $scope.isSuper = true;
-
-  loginService.grabSession().then(function(data) {
-    $scope.isSuper = loginService.isSuper(data);
-    $scope.owner = data.username;
-    if($scope.isSuper) {
-     usersService.grabUsers().then(function(users) {
-	$scope.users = _.map(users,function(user){return user.username;});
-     });
-    }
-  });
+  usersService.loadUsers($scope);
 
   $scope.loadTypes();
   $scope.loadEnvs();
