@@ -2,6 +2,7 @@ angular.module( 'celestial', [
   'templates-app', 'templates-common','celestial.login',
   'celestial.systems', 'celestial.actions', 'celestial.audits',
   'celestial.types','celestial.jobs','celestial.admin',
+  'celestial.environments',
   'ui.state', 'ui.route', 'angular-growl' , 'ngAnimate'
 ])
 

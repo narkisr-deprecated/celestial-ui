@@ -1,4 +1,5 @@
 angular.module( 'celestial.quotas', [
+  'celestial.quotaAdd'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'quotas', {
@@ -21,10 +22,13 @@ angular.module( 'celestial.quotas', [
   });
 
   $scope.load = function(){
-    Quotas.getAll({}).$promise.then(function(users){
-     $scope.data.users= users;
+    Quotas.getAll({}).$promise.then(function(quotas){
+     $scope.data.quotas = _.map(quotas, function(quota) {
+       quota.quotaList = _.keys(quota.quotas).join(' ');
+       return quota;
+     });
      $scope.currentPage = 1;
-     $scope.count = $scope.data.users.length;
+     $scope.count = $scope.data.quotas.length;
     });
   };
 
@@ -39,8 +43,7 @@ angular.module( 'celestial.quotas', [
   };
   
   $scope.$watch( 'currentPage', $scope.setPage );
-  $scope.$watch( 'data.users', $scope.setPage );
-
+  $scope.$watch( 'data.quotas', $scope.setPage );
 
 });
 

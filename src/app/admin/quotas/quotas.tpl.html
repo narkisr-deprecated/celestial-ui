@@ -1,22 +1,22 @@
 <div>
-  <h3 class="panel-title"> Users </h3>
+  <h3 class="panel-title"> Quotas </h3>
   <table class="table table-striped">
     <thead>
 	<tr>
 	  <th>Name</th>
-	  <th>Roles</th>
+	  <th>Enabled quotas</th>
 	</tr>
     </thead>
     <tbody>
-	<tr ng-repeat="user in data.users">
-	  <td><a href="#/user/{{user.username}}">{{user.username}}</a></td>
-	  <td>{{user.roles}}</td>
+	<tr ng-repeat="quota in data.quotas">
+	  <td><a href="#/quota/{{quota.username}}">{{quota.username}}</a></td>
+	  <td>{{quota.quotaList}}</td>
 	</tr>
     </tbody>
   </table>
 
   <p class="text-right"> 
-    <a href="#/user/add/"> <i class="icon-plus"></i>Add a User</a> 
+    <a href="#/admin/quota/add/"> <i class="icon-plus"></i>Add a Quota</a> 
   </p>
 
   <p class="text-center"> 

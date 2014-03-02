@@ -14,9 +14,11 @@ angular.module( 'celestial.systemAdd', [
   });
 })
 .controller('SystemAddCtrl', 
-   function SystemAddController($scope, $http, $resource, $location, growl, loginService, usersService, loggingService, systemsService) {
+   function SystemAddController($scope, $http, $resource, $location, growl,
+         loginService, usersService, loggingService, systemsService, envsService) {
 
   var Systems = $resource('/systems/');
+
   var Environments = $resource('/environments/');
   
   $scope.machine = {};
@@ -38,20 +40,7 @@ angular.module( 'celestial.systemAdd', [
       });
   };
 
-  $scope.loadEnvs = function() {
-    Environments.get({},function(data){
-	$scope.rawEnvs = data.environments;
-      $scope.envs = [];
-      angular.forEach(data.environments,function(v,k){
-        $scope.envs.push(k);
-      });
-     $scope.env = $scope.envs[0];
-    },function(error){
-       console.log('failed to fetch environments');
-    });
-  };
-
-  $scope.hypervisorSelect = function() {
+ $scope.hypervisorSelect = function() {
    if($scope.currentHypervisor !== undefined){
      $scope.hypervisorTemplate = 'systems/add/'+$scope.currentHypervisor+'.tpl.html';
      switch ($scope.currentHypervisor) {
@@ -170,5 +159,5 @@ angular.module( 'celestial.systemAdd', [
   usersService.loadUsers($scope);
 
   $scope.loadTypes();
-  $scope.loadEnvs();
+  envsService.loadEnvs($scope);
 });
