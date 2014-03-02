@@ -1,5 +1,5 @@
 angular.module( 'celestial.admin', [
-   'celestial.users'
+   'celestial.users', 'celestial.quotas'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'admin', {
