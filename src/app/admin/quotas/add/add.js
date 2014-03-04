@@ -35,11 +35,11 @@ angular.module( 'celestial.quotaAdd', [ ])
   $scope.setEnvs = function() {
     if($scope.user!== undefined){
       $scope.envs = $scope.user.envs;
+	$scope.env = $scope.user.envs[0];
     }
   };
 
   $scope.$watch('env', $scope.setHypervisors);
   $scope.$watch('user', $scope.setEnvs);
-  // $scope.$watch('user', $scope.setHypervisors);
   envsService.loadEnvs($scope);
 });
