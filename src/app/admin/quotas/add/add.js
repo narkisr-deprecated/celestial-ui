@@ -22,7 +22,6 @@ angular.module( 'celestial.quotaAdd', [ ])
 
   usersService.grabUsers().then(function(users){
     $scope.users = users;
-    $scope.usernames = _.map(users, function(user){return user.username;});
     $scope.user = $scope.users[0];
   });
  
@@ -33,7 +32,14 @@ angular.module( 'celestial.quotaAdd', [ ])
     }
   };
 
+  $scope.setEnvs = function() {
+    if($scope.user!== undefined){
+      $scope.envs = $scope.user.envs;
+    }
+  };
+
   $scope.$watch('env', $scope.setHypervisors);
+  $scope.$watch('user', $scope.setEnvs);
   // $scope.$watch('user', $scope.setHypervisors);
   envsService.loadEnvs($scope);
 });
