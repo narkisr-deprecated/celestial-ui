@@ -39,6 +39,13 @@ angular.module( 'celestial.quotaAdd', [ ])
     }
   };
 
+  $scope.submit = function(){
+    Quotas.save($scope.user,
+      function(resp) {
+        $location.path( '/admin/users');
+      },loggingService.error);
+  };
+
   $scope.$watch('env', $scope.setHypervisors);
   $scope.$watch('user', $scope.setEnvs);
   envsService.loadEnvs($scope);
