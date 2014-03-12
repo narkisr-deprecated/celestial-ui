@@ -11,7 +11,8 @@ angular.module( 'celestial.quotaEdit', [ ])
     data:{ pageTitle: 'New Quota' }
   });
 })
-.controller( 'QuotaEditCtrl', function QuotaEditController($scope, $resource, $location, envsService, usersService, loggingService) {
+.controller( 'QuotaEditCtrl', function QuotaEditController($scope, $resource, $location, envsService, 
+                                    growl ,usersService, loggingService) {
 
   $scope.username = $location.path().replace("/admin/quota/edit/","");
 
@@ -55,6 +56,27 @@ angular.module( 'celestial.quotaEdit', [ ])
    },loggingService.error);
   };
 
+  $scope.remove = function(){
+    delete $scope.quota.quotas[$scope.env][$scope.currentHypervisor];
+    if (_.isEmpty($scope.quota.quotas[$scope.env])){
+      delete $scope.quota.quotas[$scope.env];
+    }
+    if (_.isEmpty($scope.quota['quotas'])){
+      Quotas.remove({name:$scope.quota.username},
+       function(resp) {
+         growl.addInfoMessage('Quota deleted');
+         $location.path( '/admin/quotas');
+       },loggingService.error);
+    } else {
+      Quotas.update($scope.quota,
+       function(resp) {
+         growl.addInfoMessage('Quota deleted');
+         $location.path( '/admin/quotas');
+      }, loggingService.error);
+
+    }
+  }; 
+ 
   $scope.$watch('env', $scope.setHypervisors);
   $scope.$watch('currentHypervisor', $scope.setCount);
 });
