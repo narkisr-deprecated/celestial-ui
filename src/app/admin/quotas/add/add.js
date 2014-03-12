@@ -85,5 +85,6 @@ angular.module( 'celestial.quotaAdd', [ ])
 
   envsService.loadEnvs($scope);
   $scope.$watch('env', $scope.setHypervisors);
+  $scope.$watch('envs', $scope.setHypervisors);// fixes lack of update on refresh or initial load
   $scope.$watch('user', $scope.setEnvs);
 });
