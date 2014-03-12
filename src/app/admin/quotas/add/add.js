@@ -11,11 +11,13 @@ angular.module( 'celestial.quotaAdd', [ ])
     data:{ pageTitle: 'New Quota' }
   });
 })
-.controller( 'QuotaAddCtrl', function UserAddController($scope, $resource, $location, growl, envsService, usersService) {
+.controller( 'QuotaAddCtrl', function UserAddController($scope, $resource, $location, envsService, usersService, loggingService) {
 
-  var Users = $resource('/quota/',{});
+  var Quotas = $resource('/quotas/',{
+   
+  });
   
-  $scope.user= {};
+  $scope.user= undefined;
 
   $scope.submit = function(){
   };
@@ -26,27 +28,42 @@ angular.module( 'celestial.quotaAdd', [ ])
   });
  
   $scope.setHypervisors = function() {
-    if($scope.env !== undefined){
+    if($scope.env !== undefined && $scope.rawEnvs !== undefined){
       $scope.hypervisors = _.keys($scope.rawEnvs[$scope.env]); 
       $scope.currentHypervisor = $scope.hypervisors[0];
     }
   };
 
   $scope.setEnvs = function() {
-    if($scope.user!== undefined){
+    if($scope.user !== undefined ){
       $scope.envs = $scope.user.envs;
 	$scope.env = $scope.user.envs[0];
     }
   };
 
   $scope.submit = function(){
-    Quotas.save($scope.user,
-      function(resp) {
-        $location.path( '/admin/users');
-      },loggingService.error);
+   var quota = {
+      "username": $scope.user.username,
+      "quotas": {}
+   };
+
+   quota['quotas'][$scope.env] = {};
+   quota['quotas'][$scope.env][$scope.currentHypervisor] = {
+      "used": {
+        "count": 0
+       },
+       "limits": {
+        "count": $scope.count
+       }
+   };
+
+   Quotas.save(quota,
+     function(resp) {
+        $location.path( '/admin/quotas');
+   },loggingService.error);
   };
 
+  envsService.loadEnvs($scope);
   $scope.$watch('env', $scope.setHypervisors);
   $scope.$watch('user', $scope.setEnvs);
-  envsService.loadEnvs($scope);
 });
