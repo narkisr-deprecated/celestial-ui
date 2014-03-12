@@ -4,12 +4,12 @@
     <thead>
 	<tr>
 	  <th>Name</th>
-	  <th>Enabled quotas</th>
+	  <th>Quota environments</th>
 	</tr>
     </thead>
     <tbody>
 	<tr ng-repeat="quota in data.quotas">
-	  <td><a href="#/quota/{{quota.username}}">{{quota.username}}</a></td>
+	  <td><a href="#/admin/quota/edit/{{quota.username}}">{{quota.username}}</a></td>
 	  <td>{{quota.quotaList}}</td>
 	</tr>
     </tbody>

@@ -1,5 +1,5 @@
 angular.module( 'celestial.quotas', [
-  'celestial.quotaAdd'
+  'celestial.quotaAdd', 'celestial.quotaEdit'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'quotas', {

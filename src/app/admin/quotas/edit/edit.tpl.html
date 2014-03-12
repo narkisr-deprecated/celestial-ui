@@ -1,0 +1,42 @@
+<div>
+  <div>
+    <form class="form-horizontal" name="typeForm" ng-submit="submit()">
+
+	<legend>User</legend>
+
+	<div class="control-group">  
+	  <label class="control-label" for="username">Name</label>  
+	  <div class="controls">  
+	   <input id="username" name="username" class="input-large" required="" type="text" ng-model="username" readonly="readonly">
+	  </div>  
+	</div>
+
+	<div class="control-group">  
+	  <label class="control-label" for="env">Environment</label>  
+	  <div class="controls">  
+	    <select id="type"  name="type" ng-model="env" ng-options="env for env in envs"> </select>
+	  </div>  
+	</div>
+
+
+	<div class="control-group">  
+	  <label class="control-label" for="hypervisor">Hypervisor</label>  
+	  <div class="controls">  
+	    <select id="hypervisor"  name="hypervisor" ng-model="currentHypervisor" ng-options="hyp for hyp in hypervisors"> </select>
+	  </div>  
+	</div>
+
+	<div class="control-group">
+	  <label class="control-label" for="count">Count</label>
+	  <div class="controls">
+	    <input id="count" name="count" placeholder="" class="input-large" type="number" ng-model="count" required="" >
+	    <p class="help-block">Total allowed instances</p>
+	  </div>
+	</div>
+
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save Quota</button>
+	</div>
+    </form>
+  </div>
+</div>	

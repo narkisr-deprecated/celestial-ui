@@ -11,16 +11,17 @@ angular.module( 'celestial.quotaAdd', [ ])
     data:{ pageTitle: 'New Quota' }
   });
 })
-.controller( 'QuotaAddCtrl', function UserAddController($scope, $resource, $location, envsService, usersService, loggingService) {
+.controller( 'QuotaAddCtrl', function QuotaAddController($scope, $resource, $location, envsService, usersService, loggingService) {
 
-  var Quotas = $resource('/quotas/',{
-   
+  var Quotas = $resource('/quotas/:name',{name:'@name'}, {
+    update: {method : "PUT",url:'/quotas/'} 
   });
   
   $scope.user= undefined;
 
   $scope.submit = function(){
   };
+
 
   usersService.grabUsers().then(function(users){
     $scope.users = users;
@@ -41,26 +42,45 @@ angular.module( 'celestial.quotaAdd', [ ])
     }
   };
 
-  $scope.submit = function(){
-   var quota = {
-      "username": $scope.user.username,
-      "quotas": {}
-   };
-
-   quota['quotas'][$scope.env] = {};
-   quota['quotas'][$scope.env][$scope.currentHypervisor] = {
+  var intoPersisted = function(quota){
+    quota['quotas'][$scope.env] = {};
+    quota['quotas'][$scope.env][$scope.currentHypervisor] = {
       "used": {
         "count": 0
        },
        "limits": {
         "count": $scope.count
        }
+    };
+   return quota;
+  };
+
+  var newQuota = function() {
+   var quota = {
+      "username": $scope.user.username,
+      "quotas": {}
    };
 
-   Quotas.save(quota,
-     function(resp) {
+   return quota;
+  };
+
+  $scope.submit = function(){
+   Quotas.get({name:$scope.user.username}, function(data){
+    var quota = data;
+    if(data.quotas === undefined) {
+     quota = intoPersisted(newQuota());
+     Quotas.save(quota,
+       function(resp) {
+         $location.path( '/admin/quotas');
+       },loggingService.error);
+    } else {
+      Quotas.update(intoPersisted(quota),
+      function(resp) {
         $location.path( '/admin/quotas');
-   },loggingService.error);
+      },loggingService.error);
+    }
+   
+   });
   };
 
   envsService.loadEnvs($scope);
