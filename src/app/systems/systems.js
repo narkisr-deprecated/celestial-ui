@@ -72,7 +72,9 @@ angular.module( 'celestial.systems', [
 }).controller( 'SystemsCtrl', 
   function SystemsController($scope, $resource, actionsService, runService, $location, systemsService) {
 
-  var Systems = $resource('/systems/', {page:'@page',offset:'@offset'});
+  var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
+     query:{method : "GET", url:'/systems/query'}
+  });
   
   $scope.perPage = 10;
   $scope.currentPage = 1;
@@ -86,10 +88,7 @@ angular.module( 'celestial.systems', [
      });
   };
 
-  $scope.setPage = function () {
-    var page = {page:$scope.currentPage,offset: $scope.perPage};
-    $location.path('/systems/'+$scope.currentPage);
-    Systems.get(page,function (data){
+  var displaySystems = function(data){
 	$scope.systems = [];
       angular.forEach(data.systems,function(system){
         system[1]['id'] = system[0];
@@ -99,7 +98,17 @@ angular.module( 'celestial.systems', [
         system[1]['actions'] = actionsService.grabActions(system[1].type);
         $scope.systems.push(system[1]);
 	});
-    });
+  };
+
+  $scope.setPage = function () {
+    var page = {page:$scope.currentPage,offset: $scope.perPage};
+    $location.path('/systems/'+$scope.currentPage);
+    if($scope.query === undefined){
+      Systems.get(page,displaySystems);
+    } else {
+	page['query']  = $scope.query;
+      Systems.query(page,displaySystems);
+    }
   };
 
   $scope.launchJob = function(id,job) { 
@@ -108,16 +117,59 @@ angular.module( 'celestial.systems', [
   };
 
 
+  $scope.search = function() { 
+    $scope.currentPage = 1;
+    $scope.offset = $scope.perPage;
+  };
+
   $scope.launchAction = function(id, action) {
     if(action.provided === null || action.provided  === undefined) {
-      actionsService.launchAction(id,action);
+	actionsService.launchAction(id,action);
     } else {
-      runService.run([id], action);            
+	runService.run([id], action);            
     }
   };
 
   $scope.loadCount();
   $scope.$watch( 'currentPage', $scope.setPage );
-   
+
 });
 
+/*
+{
+  function makeInteger(o) {
+    return parseInt(o.join(""), 10);
+  }
+}
+start
+  = query
+
+query = 
+  must / must_not / wildcard
+
+must
+  = left:field "=" right:value {
+      res = {must:{}};
+      res['must'][left]=right;
+      return res;
+    }
+
+must_not
+  = left:field "!=" right:value {  
+      res = {must:{}};
+      res['must'][left]=right;
+      return res;
+   }
+
+wildcard = "type:" right:value {  
+      res = {wildcard:{}};
+      res['wildcard']['type']=right;
+      return res;
+   }
+
+field "alpha"
+  = alpha:([a-z]+.[a-z]+) { return alpha; }
+
+value "alpha"
+  = alpha:[a-z]+ { return alpha; } / digits:[0-9]+ { return makeInteger(digits); }
+*/

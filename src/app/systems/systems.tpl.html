@@ -4,6 +4,11 @@
   </div>
   <div class='panel-body'> 
 
+    <form class="form-search pull-right">
+	<input type="text" ng-model="query" class="input-medium search-query">
+	<button class="btn" ng-click="search()">Search</button>
+    </form>
+
     <table class="table table-striped">
 	<thead>
 	  <tr>
@@ -55,19 +60,19 @@
 		  </li>
 		</ul>
 	    </div>
-	    </td>
-	  </tr>
-	</tbody>
-    </table>
+	  </td>
+	</tr>
+    </tbody>
+  </table>
 
-    <p class="text-right"> 
-	<a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
-    </p>
+  <p class="text-right"> 
+    <a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
+  </p>
 
 
-    <p class="text-center"> 
-	<pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-    </p>
-  </div>
+  <p class="text-center"> 
+    <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+  </p>
+</div>
 </div>
 
