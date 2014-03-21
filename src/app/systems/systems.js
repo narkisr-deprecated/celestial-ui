@@ -2,7 +2,8 @@ angular.module( 'celestial.systems', [
   'ui.state', 'ui.bootstrap', 'ngResource',
   'celestial.system', 'celestial.systemAdd',
   'celestial.actions', 'celestial.confirm',
-  'celestial.systemClone', 'angular-growl', 'ngAnimate' 
+  'celestial.systemClone', 'celestial.systems.query',
+   'angular-growl', 'ngAnimate'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {
@@ -70,7 +71,7 @@ angular.module( 'celestial.systems', [
 
   return systemsService;
 }).controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService) {
+  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
      query:{method : "GET", url:'/systems/query'}
@@ -103,10 +104,10 @@ angular.module( 'celestial.systems', [
   $scope.setPage = function () {
     var page = {page:$scope.currentPage,offset: $scope.perPage};
     $location.path('/systems/'+$scope.currentPage);
-    if($scope.query === undefined){
+    if($scope.parsedQuery === undefined){
       Systems.get(page,displaySystems);
     } else {
-	page['query']  = $scope.query;
+	page['query']  = btoa(angular.toJson($scope.parsedQuery));
       Systems.query(page,displaySystems);
     }
   };
@@ -118,6 +119,7 @@ angular.module( 'celestial.systems', [
 
 
   $scope.search = function() { 
+    $scope.parsedQuery = systemsQueryService.parseQuery($scope.query);
     $scope.currentPage = 1;
     $scope.offset = $scope.perPage;
   };
@@ -135,41 +137,3 @@ angular.module( 'celestial.systems', [
 
 });
 
-/*
-{
-  function makeInteger(o) {
-    return parseInt(o.join(""), 10);
-  }
-}
-start
-  = query
-
-query = 
-  must / must_not / wildcard
-
-must
-  = left:field "=" right:value {
-      res = {must:{}};
-      res['must'][left]=right;
-      return res;
-    }
-
-must_not
-  = left:field "!=" right:value {  
-      res = {must:{}};
-      res['must'][left]=right;
-      return res;
-   }
-
-wildcard = "type:" right:value {  
-      res = {wildcard:{}};
-      res['wildcard']['type']=right;
-      return res;
-   }
-
-field "alpha"
-  = alpha:([a-z]+.[a-z]+) { return alpha; }
-
-value "alpha"
-  = alpha:[a-z]+ { return alpha; } / digits:[0-9]+ { return makeInteger(digits); }
-*/
