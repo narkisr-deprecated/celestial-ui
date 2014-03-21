@@ -73,7 +73,8 @@ module.exports = {
       'vendor/angular-growl/build/angular-growl.js',
       'vendor/angular-cookies/angular-cookies.js' ,
       'vendor/jquery/jquery.js', 
-      'vendor/momentjs/min/moment.min.js'
+      'vendor/momentjs/min/moment.min.js', 
+      'static-vendor/js/peg-0.8.0.min.js'
 
     ],
     css: [
