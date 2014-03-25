@@ -63,5 +63,3 @@ angular.module( 'celestial', [
 
 
 });
-
-
