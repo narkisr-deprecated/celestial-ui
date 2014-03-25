@@ -14,9 +14,11 @@ angular.module( 'celestial.systems.query', [
   '= query' +
 
 '\nquery =' +
-  'must / must_not / wildcard' +
+  'must / must_not / wildcard / all' +
 
 '\nspace = " "*' +
+
+'\nall= "*"' +
 
 'must' +
   '= left:field "=" right:value space? rest:query? {' +
