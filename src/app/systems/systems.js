@@ -107,8 +107,7 @@ angular.module( 'celestial.systems', [
 
   $scope.setPage = function () {
     var page = {page:$scope.currentPage,offset: $scope.perPage};
-    var binaryQuery = btoa($scope.query);
-    $location.path('/systems/'+ encodeURIComponent(binaryQuery) + '/' + $scope.currentPage);
+    $location.path('/systems/'+ encodeURIComponent(btoa($scope.query)) + '/' + $scope.currentPage);
     if($scope.query === '*'){
       Systems.get(page,displaySystems);
     } else {
