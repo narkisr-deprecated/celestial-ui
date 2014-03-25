@@ -7,7 +7,7 @@ angular.module( 'celestial.systems', [
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {
-    url: '/systems/:page',
+    url: '/systems/:query/:page',
     views: {
       "main": {
         controller: 'SystemsCtrl',
@@ -51,7 +51,6 @@ angular.module( 'celestial.systems', [
   systemsService.runJob = function(job, id, args) {
      if (args === undefined){args = {};}
      args['id'] = id;
-     console.log(args);
      Jobs[job](args, loggingService.info, loggingService.error);
   };
 
@@ -78,8 +77,8 @@ angular.module( 'celestial.systems', [
   });
   
   $scope.perPage = 10;
-  $scope.currentPage = 1;
-  $scope.currentPage= $location.path().replace('/systems/','');
+  $scope.currentPage= $location.path().replace('/systems/','').split('\/')[1];
+  $scope.query = atob(decodeURIComponent($location.path().replace('/systems/','').split('\/')[0]));
 
   $scope.loadCount = function(){
      Systems.get({page:1,offset:$scope.perPage},function(data,resp){
@@ -98,16 +97,23 @@ angular.module( 'celestial.systems', [
         })[0];
         system[1]['actions'] = actionsService.grabActions(system[1].type);
         $scope.systems.push(system[1]);
+        if(data.meta!=null){
+          $scope.count = data.meta.total;
+        } else {
+          $scope.count = 0;
+        }
 	});
   };
 
   $scope.setPage = function () {
     var page = {page:$scope.currentPage,offset: $scope.perPage};
-    $location.path('/systems/'+$scope.currentPage);
-    if($scope.parsedQuery === undefined){
+    var binaryQuery = btoa($scope.query);
+    $location.path('/systems/'+ encodeURIComponent(binaryQuery) + '/' + $scope.currentPage);
+    if($scope.query === '*'){
       Systems.get(page,displaySystems);
     } else {
-	page['query']  = btoa(angular.toJson($scope.parsedQuery));
+      var parsedQuery = systemsQueryService.parseQuery($scope.query);
+	page['query']  = btoa(angular.toJson(parsedQuery));
       Systems.query(page,displaySystems);
     }
   };
@@ -119,9 +125,8 @@ angular.module( 'celestial.systems', [
 
 
   $scope.search = function() { 
-    $scope.parsedQuery = systemsQueryService.parseQuery($scope.query);
-    $scope.currentPage = 1;
-    $scope.offset = $scope.perPage;
+     var parsedQuery = systemsQueryService.parseQuery($scope.query);
+     $location.path('/systems/' + encodeURIComponent(btoa($scope.query)) + '/1');
   };
 
   $scope.launchAction = function(id, action) {
@@ -132,7 +137,6 @@ angular.module( 'celestial.systems', [
     }
   };
 
-  $scope.loadCount();
   $scope.$watch( 'currentPage', $scope.setPage );
 
 });
