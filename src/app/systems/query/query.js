@@ -1,6 +1,6 @@
 angular.module( 'celestial.systems.query', [
 ])
-.factory('systemsQueryService', function($resource)  {
+.factory('systemsQueryService', function($resource, growl)  {
   var service = {};
 
   var rules = 
@@ -58,9 +58,11 @@ angular.module( 'celestial.systems.query', [
    '}' +
 
 'field ' +
-  '= prefix:([a-z]*) dot:(.?) key:([a-z]*)? { ' +
+  '= prefix:([a-z]+) dot:"." key:([a-z]+) { ' +
      'return prefix.join("")+ "." + key.join(""); ' +
-  '}' +
+  '}' + '/' +
+
+  'key:([a-z]+) { return key.join(""); }' + 
 
 'value ' +
   '= alpha:[a-z]+ { return alpha.join(""); } /' +
@@ -75,6 +77,7 @@ angular.module( 'celestial.systems.query', [
       var parser = PEG.buildParser(rules);
 	return parser.parse(input);
     } catch(e) {
+      growl.addErrorMessage(e.message);
 	throw e;
     }
   };
