@@ -14,7 +14,7 @@ angular.module( 'celestial.systems.query', [
   '= query' +
 
 '\nquery =' +
-  'must / must_not / wildcard / all' +
+  'env / must / must_not / all' +
 
 '\nspace = " "*' +
 
@@ -35,25 +35,29 @@ angular.module( 'celestial.systems.query', [
     '}' +
 
 'must_not' +
-  '= left:field "!=" right:value space? rest:query? {  ' +
+  '= left:field "!=" right:value space? rest:query? {' +
 	'if(!rest) {' +
          'rest = {};' +
 	'}' +
 	'if(!rest["must_not"]) {' +
-         'rest["must_not"] = {};' +
+         'rest["must_not"] = [];' +
 	'}' +
-	'rest["must_not"][left]=right;' +
+      'term = {term:{}};' +
+      'term["term"][left] = right;' +
+	'rest["must_not"].push(term);' +
 	'return rest;' +
-   '}' +
+    '}' +
 
-'wildcard = "type:" right:value space? rest:query? {  ' +
-      'if(!rest) {' +
+'env = "env=" right:value space? rest:query? {  ' +
+	'if(!rest) {' +
          'rest = {};' +
 	'}' +
-	'if(!rest["wildcard"]) {' +
-         'rest["wildcard"] = {};' +
+	'if(!rest["should"]) {' +
+         'rest["should"] = [];' +
 	'}' +
-	'rest["wildcard"]["type"]=right;' +
+      'term = {term:{}};' +
+      'term["term"]["env"] = right;' +
+	'rest["should"].push(term);' +
 	'return rest;' +
    '}' +
 
