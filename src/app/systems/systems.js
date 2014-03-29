@@ -122,6 +122,9 @@ angular.module( 'celestial.systems', [
     systemsService.launchJob(id, target, job);
   };
 
+  $scope.launchHelp= function(id,job) { 
+    systemsQueryService.queryHelp();
+  };
 
   $scope.search = function() { 
      var parsedQuery = systemsQueryService.parseQuery($scope.query);

@@ -1,6 +1,7 @@
 angular.module( 'celestial.systems.query', [
+ 'celestial.query.help'
 ])
-.factory('systemsQueryService', function($resource, growl)  {
+.factory('systemsQueryService', function($resource, growl, $modal)  {
   var service = {};
 
   var rules = 
@@ -85,5 +86,14 @@ angular.module( 'celestial.systems.query', [
 	throw e;
     }
   };
+
+  service.queryHelp = function() {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'systems/query/help.tpl.html',
+      controller: 'QueryHelpCtrl'
+    });
+  };
+
   return service;
 });

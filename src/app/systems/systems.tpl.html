@@ -4,9 +4,12 @@
   </div>
   <div class='panel-body'> 
 
-    <form class="form-search pull-right">
-	<input type="text" ng-model="query" class="input-medium search-query">
+    <form class="form-search pull-left">
+	<input type="text" ng-model="query" class="input-medium search-query" style="width:400px">
 	<button class="btn" ng-click="search()">Search</button>
+	<a href="" ng-click="launchHelp()" tooltip-placement="right" tooltip="Query syntax help">
+	  <i class="fa-fixed-question fa fa-question" tooltip-placement="right"></i>
+	</a>
     </form>
 
     <table class="table table-striped">

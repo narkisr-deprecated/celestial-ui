@@ -1,0 +1,27 @@
+<div>
+  <div class="modal-header">
+    <h2>Query syntax help</h2>
+  </div>
+  <div class="modal-body">
+    <p>
+	The basic syntax is composed of prefix.key with =/!= some value for example:
+	<pre style='background:lightgray'><code> 
+   owner=foo env!=prod machine.cpus=4	
+	</code></pre>
+
+	The query is performed on the raw system model json structure, to view json example the <a href="/swagger/index.html#!/systems/getSystem_get_3">Swagger</a> API can be used.
+
+    </p>
+
+    <p> In order to fetch all systems a star query can be used:
+	<pre style='background:lightgray'><code>
+    *
+	</code></pre>
+    </p>
+
+    <p> Note that the query is encoded in the <a href="#/systems/bWFjaGluZS5jcHVzPTQ%253D/1" ng-click="ok()">url</a>, so you can share them and move back and forward between them.</p>
+    <div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+    </div>
+  </div>
+</div>
