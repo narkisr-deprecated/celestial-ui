@@ -27,6 +27,8 @@
 	  <li><a href="" ng-click="launchJobs('destroy')" tooltip-placement="right" tooltip="Destroy machine"><i class="fa-fixed-width fa fa-trash-o" ></i> Destroy</a></li>
 	  <li><a href="" ng-click="launchJobs('reload')" tooltip-placement="right" tooltip="Destroy and re-create machine"><i class="fa-fixed-width fa fa-warning" ></i> Reload</a></li>
 	  <li><a href="" ng-click="launchJobs('clear')" tooltip-placement="right" tooltip="Clear system model"><i class="fa-fixed-width fa fa-eraser" ></i> Clear</a></li>
+	  <li class="divider"></li>
+	  <li ng-repeat="action in actions"><a ng-click="launchAction(system.id, action)">{{action.name}}</a></li>
 	</ul>
     </div>
 
@@ -39,7 +41,6 @@
 	    <th>Hypervisor</th>
 	    <th>Environment</th>
 	    <th>Owner</th>
-	    <th>Actions</th>
 	  </tr>
 	</thead>
 	<tbody class="select">
@@ -50,18 +51,6 @@
 	    <td style="background-color:{{isSelected()}};">{{system.hypervisor}}</td>
 	    <td style="background-color:{{isSelected()}};">{{system.env}}</td>
 	    <td style="background-color:{{isSelected()}};">{{system.owner}}</td>
-	    <td style="background-color:{{isSelected()}};"> 
-		<div class="btn-group" ng-hide="!system.actions">
-		  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
-		  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-		    <span class="fa fa-caret-down"></span></a>
-		  <ul class="dropdown-menu">
-		    <li ng-repeat="action in system.actions"><a ng-click="launchAction(system.id, action)">{{action.name}}</a></li>
-		  </ul>
-		  </li>
-		</ul>
-	    </div>
-	  </td>
 	</tr>
     </tbody>
   </table>

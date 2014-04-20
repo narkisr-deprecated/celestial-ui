@@ -114,7 +114,6 @@ angular.module( 'celestial.systems', [
         system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter','physical','docker'],function(a){
            return system[1][a]!=null;
         })[0];
-        system[1]['actions'] = actionsService.grabActions(system[1].type);
         $scope.systems.push(system[1]);
         if(data.meta!=null){
           $scope.count = data.meta.total;
@@ -165,6 +164,7 @@ angular.module( 'celestial.systems', [
   $scope.$watch( 'currentPage', $scope.setPage );
   
   $scope.selected = {};
+  $scope.actions = [];
 
   $scope.setSelected = function() {
     if($scope.selected[this.system.id]) {
@@ -172,6 +172,12 @@ angular.module( 'celestial.systems', [
     } else {
       $scope.selected[this.system.id] = this.system;
     }
+   var types = _.groupBy(_.values($scope.selected), 'type');
+   if(_.keys(types).length == 1){
+     $scope.actions = actionsService.grabActions(_.first(_.values($scope.selected)).type);
+   } else {
+     $scope.actions = [];
+   }
   };
 
   // 1 is not a legal color this will cause the original color to appear
