@@ -58,20 +58,27 @@ angular.module( 'celestial.systems', [
     if($cookieStore.get('skipSystemConfirm')){
       systemsService.runJob(job, id);  
     } else {
-	systemsService.safeLaunch(target,job,function(){systemsService.runJob(job, id);}); 
+	systemsService.safeLaunch(target.machine.hostname ,job ,function(){systemsService.runJob(job, id);}); 
     }
   };
 
-  systemsService.launchJobs = function(ids, job) {
+  systemsService.launchJobs = function(systems, job) {
+    var ids = _.map(systems, function(s){return s.id;});
     if(_.isEmpty(ids)){
        growl.addErrorMessage('Select systems first');
        return;
     }
     if($cookieStore.get('skipSystemConfirm')){
-    } else {
       _.each(ids, function(id) {
         systemsService.runJob(job, id);
       });
+    } else {
+	var names = _.map(systems, function(s){return s.machine.hostname;}).join(',');
+      systemsService.safeLaunch(names, job, function(){
+        _.each(ids, function(id) {
+          systemsService.runJob(job, id);
+        });
+      }); 
     }
   };
 
@@ -135,7 +142,7 @@ angular.module( 'celestial.systems', [
   };
 
   $scope.launchJobs = function(job) { 
-    systemsService.launchJobs(_.keys($scope.selected), job);
+    systemsService.launchJobs(_.values($scope.selected), job);
   };
 
   $scope.launchHelp= function(id,job) { 
@@ -160,10 +167,10 @@ angular.module( 'celestial.systems', [
   $scope.selected = {};
 
   $scope.setSelected = function() {
-    if($scope.selected[this.system.id] === true) {
+    if($scope.selected[this.system.id]) {
       delete $scope.selected[this.system.id];
     } else {
-      $scope.selected[this.system.id] = true;
+      $scope.selected[this.system.id] = this.system;
     }
   };
 
