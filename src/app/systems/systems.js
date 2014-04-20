@@ -55,11 +55,23 @@ angular.module( 'celestial.systems', [
   };
 
   systemsService.launchJob = function(id, target, job) {
-
     if($cookieStore.get('skipSystemConfirm')){
       systemsService.runJob(job, id);  
     } else {
 	systemsService.safeLaunch(target,job,function(){systemsService.runJob(job, id);}); 
+    }
+  };
+
+  systemsService.launchJobs = function(ids, job) {
+    if(_.isEmpty(ids)){
+       growl.addErrorMessage('Select systems first');
+       return;
+    }
+    if($cookieStore.get('skipSystemConfirm')){
+    } else {
+      _.each(ids, function(id) {
+        systemsService.runJob(job, id);
+      });
     }
   };
 
@@ -122,6 +134,10 @@ angular.module( 'celestial.systems', [
     systemsService.launchJob(id, target, job);
   };
 
+  $scope.launchJobs = function(job) { 
+    systemsService.launchJobs(_.keys($scope.selected), job);
+  };
+
   $scope.launchHelp= function(id,job) { 
     systemsQueryService.queryHelp();
   };
@@ -140,6 +156,22 @@ angular.module( 'celestial.systems', [
   };
 
   $scope.$watch( 'currentPage', $scope.setPage );
+  
+  $scope.selected = {};
 
+  $scope.setSelected = function() {
+    if($scope.selected[this.system.id] === true) {
+      delete $scope.selected[this.system.id];
+    } else {
+      $scope.selected[this.system.id] = true;
+    }
+  };
+
+  // 1 is not a legal color this will cause the original color to appear
+  $scope.isSelected = function() {
+     return $scope.selected[this.system.id] ? 'lightsteelblue':1;
+  };
+    
+ 
 });
 
