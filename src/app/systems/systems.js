@@ -153,11 +153,13 @@ angular.module( 'celestial.systems', [
      $location.path('/systems/' + encodeURIComponent(btoa($scope.query)) + '/1');
   };
 
-  $scope.launchAction = function(id, action) {
+  $scope.launchAction = function(action) {
     if(action.provided === null || action.provided  === undefined) {
-	actionsService.launchAction(id,action);
+	_.each(_.keys($scope.selected), function(id){
+         actionsService.launchAction(id, action);
+      });
     } else {
-	runService.run([id], action);            
+	runService.run(_.keys($scope.selected), action);            
     }
   };
 

@@ -28,7 +28,7 @@
 	  <li><a href="" ng-click="launchJobs('reload')" tooltip-placement="right" tooltip="Destroy and re-create machine"><i class="fa-fixed-width fa fa-warning" ></i> Reload</a></li>
 	  <li><a href="" ng-click="launchJobs('clear')" tooltip-placement="right" tooltip="Clear system model"><i class="fa-fixed-width fa fa-eraser" ></i> Clear</a></li>
 	  <li class="divider"></li>
-	  <li ng-repeat="action in actions"><a ng-click="launchAction(system.id, action)">{{action.name}}</a></li>
+	  <li ng-repeat="action in actions"><a ng-click="launchAction(action)">{{action.name}}</a></li>
 	</ul>
     </div>
 
