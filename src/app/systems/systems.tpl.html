@@ -51,18 +51,25 @@
 	    <td style="background-color:{{isSelected()}};">{{system.hypervisor}}</td>
 	    <td style="background-color:{{isSelected()}};">{{system.env}}</td>
 	    <td style="background-color:{{isSelected()}};">{{system.owner}}</td>
-	</tr>
-    </tbody>
-  </table>
+	  </tr>
+	</tbody>
+    </table>
 
-  <p class="text-right"> 
-    <a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
-  </p>
+    <div class='panel-body'> 
+	<p class="text-right pull-right"> 
+	  <a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
+	</p>
 
+	<select id="perPage" class='input-small pull-left' ng-model="perPage">
+	  <option>10</option>
+	  <option>25</option>
+	  <option>50</option>
+	</select>
+    </div>
 
-  <p class="text-center"> 
-    <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-  </p>
-</div>
+    <p class="text-center"> 
+	<pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+    </p>
+  </div>
 </div>
 

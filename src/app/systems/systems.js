@@ -164,6 +164,7 @@ angular.module( 'celestial.systems', [
   };
 
   $scope.$watch( 'currentPage', $scope.setPage );
+  $scope.$watch( 'perPage', $scope.setPage );
   
   $scope.selected = {};
   $scope.actions = [];
