@@ -188,6 +188,17 @@ angular.module( 'celestial.systems', [
      return $scope.selected[this.system.id] ? 'lightsteelblue':1;
   };
     
+  $scope.selectAll = function() {
+    _.each($scope.systems, function(s) {
+       $scope.selected[s.id] = s;
+    });   
+  };
+
+  $scope.selectNone= function() {
+    _.each($scope.selected, function(s) {
+	delete $scope.selected[s.id];
+    });   
+  }; 
  
 });
 

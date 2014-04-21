@@ -17,7 +17,8 @@
 	<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  <span class="fa fa-caret-down"></span></a>
 	<ul class="dropdown-menu">
-	  <li><a href="" ng-click="launchJobs('create')" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus" ></i> Create</a></li>
+	  <li><a href="#/system/add/" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
+	  <li><a href="" ng-click="launchJobs('create')" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-check-square-o" ></i> Create</a></li>
 	  <li><a href="/#/systems/clone/{{system.id}}" tooltip-placement="right" tooltip="Clone an existing machine"><i class="fa-fixed-width fa fa-copy" ></i> Clone</a></li>
 	  <li><a href="" ng-click="launchJobs('provision')" tooltip-placement="right" tooltip="Run provisioining"><i class="fa-fixed-width fa fa-gears" ></i> Provision</a></li>
 	  <li><a href="" ng-click="launchJobs('stage')" tooltip-placement="right" tooltip="Create and Provision"><i class="fa-fixed-width fa fa-refresh" ></i> Stage</a></li>
@@ -57,7 +58,8 @@
 
     <div class='panel-body'> 
 	<p class="text-right pull-right"> 
-	  <a href="#/system/add/" ><i class="fa fa-plus"></i>Add a System</a> 
+	  <a href="" ng-click="selectAll()" >Select all</a> /
+	  <a href="" ng-click="selectNone()" >Clear</a> 
 	</p>
 
 	<select id="perPage" class='input-small pull-left' ng-model="perPage">
