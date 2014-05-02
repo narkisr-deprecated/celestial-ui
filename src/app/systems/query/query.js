@@ -70,7 +70,7 @@ angular.module( 'celestial.systems.query', [
   'key:([a-z]+) { return key.join(""); }' + 
 
 'value ' +
-  '= alpha:[a-z]+ { return alpha.join(""); } /' +
+  '= alpha:[a-z\\-\\?\\*0-9]+ { return alpha.join(""); } /' +
     'digits:[0-9]+ { return makeInteger(digits); }';
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
