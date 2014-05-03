@@ -29,8 +29,13 @@ angular.module( 'celestial.systems.query', [
 	'if(!rest["must"]) {' +
          'rest["must"] = [];' +
 	'}' +
-      'term = {term:{}};' +
-      'term["term"][left] = right;' +
+      'if( right.substr(-1) === "*" ) {' +
+        'term = {wildcard:{}};' +
+        'term["wildcard"][left] = right;' +
+      '} else {' + 
+        'term = {term:{}};' +
+        'term["term"][left] = right;' +
+      '}' + 
 	'rest["must"].push(term);' +
 	'return rest;' +
     '}' +
@@ -43,8 +48,13 @@ angular.module( 'celestial.systems.query', [
 	'if(!rest["must_not"]) {' +
          'rest["must_not"] = [];' +
 	'}' +
-      'term = {term:{}};' +
-      'term["term"][left] = right;' +
+      'if( right.substr(-1) === "*" ) {' +
+        'term = {wildcard:{}};' +
+        'term["wildcard"][left] = right;' +
+      '} else {' + 
+        'term = {term:{}};' +
+        'term["term"][left] = right;' +
+      '}' + 
 	'rest["must_not"].push(term);' +
 	'return rest;' +
     '}' +
