@@ -177,7 +177,9 @@ angular.module( 'celestial.systems', [
     }
    var types = _.groupBy(_.values($scope.selected), 'type');
    if(_.keys(types).length == 1){
-     $scope.actions = actionsService.grabActions(_.first(_.values($scope.selected)).type);
+     actionsService.grabActions(_.first(_.values($scope.selected)).type).then(function(actions){
+	$scope.actions = actions;
+    });
    } else {
      $scope.actions = [];
    }

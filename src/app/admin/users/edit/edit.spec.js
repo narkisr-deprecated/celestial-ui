@@ -34,7 +34,7 @@ describe( 'UserEditCtrl', function() {
     it('should split envs for submit', inject( function() {
        $scope.user = {user:'foo',roles:'user',envs:'dev prod'};
        $scope.submit();
-       $httpBackend.expectPUT('/users?', {user:'foo',roles:['user'],envs:['dev','prod']}).respond(200, {message:"user update"});
+       $httpBackend.expectPUT('/users', {user:'foo',roles:['user'],envs:['dev','prod']}).respond(200, {message:"user update"});
        $httpBackend.flush();
      }));
   });
