@@ -16,11 +16,16 @@ angular.module( 'celestial.admin', [
 .factory('usersService', function($cookieStore ,$cookies, $location, $resource, $window, $q, loginService) {
    var usersService = {};
    var Users = $resource('/users/',{},{
-    getAll: {method : "GET",url:'/users/',isArray:true}
+    getAll: {method : "GET",url:'/users/',isArray:true},
+    operations: {method : "GET",url:'/users/operations/'}
    });
    
    usersService.grabUsers = function() {
       return Users.getAll({}).$promise;
+   }; 
+
+   usersService.operations = function() {
+      return Users.operations({}).$promise;
    }; 
 
    /*
@@ -31,8 +36,8 @@ angular.module( 'celestial.admin', [
       $scope.isSuper = loginService.isSuper(data);
       $scope.owner = data.username;
       if($scope.isSuper) {
-         usersService.grabUsers().then(function(users) {
-         $scope.users = _.map(users,function(user){return user.username;});
+        usersService.grabUsers().then(function(users) {
+           $scope.users = _.map(users,function(user){return user.username;});
         });
        }
      });

@@ -11,7 +11,7 @@ angular.module( 'celestial.userEdit', [ ])
     data:{ pageTitle: 'Edit User' }
   });
 })
-.controller( 'UserEditCtrl', function UserEditController($scope, $resource, $location, growl, rolesService, loggingService) {
+.controller( 'UserEditCtrl', function UserEditController($scope, $resource, $location, growl, rolesService, loggingService, usersService) {
 
   var Users = $resource('/users/:name',{name:'@name'},{
     update: {method : "PUT",url:'/users/'}
@@ -24,6 +24,9 @@ angular.module( 'celestial.userEdit', [ ])
     Users.get({name:$scope.username}, function(data){
       data.password = '';
 	data.roles = _.invert(roles)[data.roles];
+      usersService.operations().then(function(data) {
+         $scope.operations = data.operations;
+      });
       $scope.user = data;
       $scope.roleKeys = _.keys(roles);
       if($scope.user.envs !== undefined){
@@ -57,5 +60,4 @@ angular.module( 'celestial.userEdit', [ ])
         $location.path( '/admin/users');
       },loggingService.error);
   }; 
-  
 });

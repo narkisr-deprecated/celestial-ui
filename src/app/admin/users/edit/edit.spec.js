@@ -16,6 +16,10 @@ describe( 'UserEditCtrl', function() {
       $httpBackend.when('GET', '/users/roles').respond({
          "roles":{"user":"celestial.roles/user","anonymous":"celestial.roles/anonymous","admin":"celestial.roles/admin"}
       });
+
+      $httpBackend.when('GET', '/users/operations').respond({
+         "operations":[]
+      });
       
       rolesService = {
          loadRoles:function(call){call({user: "celestial.roles/user", admin:"celestial.roles/admin"});}
