@@ -159,5 +159,8 @@ angular.module( 'celestial.systemAdd', [
   usersService.loadUsers($scope);
 
   $scope.loadTypes();
-  envsService.loadEnvs($scope);
+  envsService.loadEnvs().then(function(data){
+     $scope.envs = data.environments;
+     $scope.env = $scope.envs[0];
+  });
 });

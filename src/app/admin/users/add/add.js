@@ -11,7 +11,7 @@ angular.module( 'celestial.userAdd', [ ])
     data:{ pageTitle: 'New User' }
   });
 })
-.controller( 'UserAddCtrl', function UserAddController($scope, $resource, $location, growl, rolesService, loggingService, usersService) {
+.controller( 'UserAddCtrl', function UserAddController($scope, $resource, $location, growl, rolesService, loggingService, usersService, envsService) {
 
   var Users = $resource('/users/',{});
   
@@ -25,6 +25,7 @@ angular.module( 'celestial.userAdd', [ ])
     $scope.operations = data.operations;
   });
 
+  
   $scope.roleDefault = function() {
     if($scope.roleKeys!==undefined){
       $scope.user.roles =  $scope.roleKeys[0];
