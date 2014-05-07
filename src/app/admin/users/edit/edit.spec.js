@@ -28,18 +28,5 @@ describe( 'UserEditCtrl', function() {
       UserEditCtrl = $controller( 'UserEditCtrl', { $location: $location, $scope: $scope,growl:null,rolesService:rolesService});
     }));
 
-    it('should join envs for view', inject( function() {
-       expect(UserEditCtrl).toBeTruthy();
-       $httpBackend.flush();
-       expect($scope.username).toBe('foo');
-       expect($scope.user.envs).toBe('dev prod');
-     }));
-
-    it('should split envs for submit', inject( function() {
-       $scope.user = {user:'foo',roles:'user',envs:'dev prod'};
-       $scope.submit();
-       $httpBackend.expectPUT('/users', {user:'foo',roles:['user'],envs:['dev','prod']}).respond(200, {message:"user update"});
-       $httpBackend.flush();
-     }));
   });
 });

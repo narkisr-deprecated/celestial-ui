@@ -28,13 +28,13 @@
 	<div class="control-group">
 	  <label class="control-label" for="envs">Environments</label>
 	  <div class="controls">
-	    <input id="envs" name="envs" placeholder="" class="input-large" type="text" ng-model="user.envs" required="" >
-	    <p class="help-block">Allowed environments</p>
+	    <select multiple name="envs" ng-model="user.envs" required="true" ng-options="env for env in envs"> </select>
+	    <p class="help-block">Select multiple items</p>
 	  </div>
 	</div>
 
 	<div class="control-group">
-	  <label class="control-label" for="envs">Operations</label>
+	  <label class="control-label" for="operations">Operations</label>
 	  <div class="controls">
 	    <select multiple ng-model="user.operations" ng-options="op for op in operations" required="true">
 	    </select>

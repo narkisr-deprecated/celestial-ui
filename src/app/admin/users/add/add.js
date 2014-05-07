@@ -24,8 +24,11 @@ angular.module( 'celestial.userAdd', [ ])
   usersService.operations().then(function(data) {
     $scope.operations = data.operations;
   });
+ 
+  envsService.loadEnvKeys().then(function(data){
+     $scope.envs = data.environments;
+  }); 
 
-  
   $scope.roleDefault = function() {
     if($scope.roleKeys!==undefined){
       $scope.user.roles =  $scope.roleKeys[0];
@@ -36,9 +39,6 @@ angular.module( 'celestial.userAdd', [ ])
 
   $scope.submit = function(){
     user = $scope.user;
-    if(user.envs !== "" && user.envs !== undefined){ 
-	user.envs= user.envs.split(" ");
-    }
     user.roles = [user.roles];
     Users.save($scope.user,
       function(resp) {
