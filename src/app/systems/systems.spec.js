@@ -39,6 +39,8 @@ describe( 'Systems section', function() {
      $scope.systems = [{id:'13', machine:{hostname:'foo'}}];
      $httpBackend = $injector.get('$httpBackend');
      $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
+     $httpBackend.when('GET', '/sessions').respond({username:'admin' });
+     $httpBackend.when('GET', '/users/admin').respond({username:'admin' });
      SystemsCtrl = $controller( 'SystemsCtrl', {$location: $location, $scope: $scope,  systemsService : systemsService });
   }));
 
