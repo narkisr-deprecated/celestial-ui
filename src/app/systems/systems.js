@@ -87,15 +87,8 @@ angular.module( 'celestial.systems', [
     return _.filter(hs, function(a){return system[a]!=null; })[0];
   };
 
-  return systemsService;
-}).controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService) {
 
-  var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
-     query:{method : "GET", url:'/systems/query'}
-  });
-
-  $scope.Operations = {
+  systemsService.Operations = {
     create:{icon:'fa-check-square-o', tooltip:'Create a running machine' ,destructive:false}, 
     provision:{icon:'fa-gears', tooltip:'Run provisioining'}, 
     stage:{icon:'fa-refresh', tooltip:'Create and Provision'},
@@ -106,12 +99,21 @@ angular.module( 'celestial.systems', [
     reload:{icon:'fa-warning', tooltip:'Destroy and re-create machine'},
     clear:{icon:'fa-eraser', tooltip:'Clear system model'}
   };
+  return systemsService;
+}).controller( 'SystemsCtrl', 
+  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService) {
+
+  var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
+     query:{method : "GET", url:'/systems/query'}
+  });
+
+  $scope.Operations = systemsService.Operations;
+  usersService.loadOperations($scope);
   
   $scope.perPage = 10;
   $scope.currentPage= $location.path().replace('/systems/','').split('\/')[1];
   $scope.query = atob(decodeURIComponent($location.path().replace('/systems/','').split('\/')[0]));
 
-  usersService.loadOperations($scope);
 
   $scope.loadCount = function(){
      Systems.get({page:1,offset:$scope.perPage},function(data,resp){

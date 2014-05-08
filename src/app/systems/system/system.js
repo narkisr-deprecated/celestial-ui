@@ -22,12 +22,14 @@ angular.module( 'celestial.system', [
         }
     };
 })
-.controller( 'SystemCtrl', function SystemController($scope, $resource, $location, growl, systemsService) {
+.controller( 'SystemCtrl', function SystemController($scope, $resource, $location, growl, systemsService, usersService) {
 
   var System = $resource('/systems/:id', {id:'@id'},{remove:{method:"DELETE"}});
 
   $scope.id = $location.path().replace("/system/", "");
-
+  $scope.Operations = systemsService.Operations;
+  usersService.loadOperations($scope);
+  
   $scope.loadSystem = function(){
     $scope.system = System.get({id:$scope.id},function(sys,resp){
 	$scope.hypervisor = systemsService.hypervisor(sys);

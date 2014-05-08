@@ -19,18 +19,19 @@
 	<ul class="dropdown-menu">
 	  <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
 
-	  <li ng-repeat="op in constructive | filter:'!run-action'">
-	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-		tooltip="{{Operations[op].tooltip}}">
-		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	 </li>
-	  <!-- <li><a href="/#/systems/clone/{{system.id}}" tooltip&#45;placement="right" tooltip="Clone an existing machine"><i class="fa&#45;fixed&#45;width fa fa&#45;copy" ></i> Clone</a></li> -->
+	  <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
+	  <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+	    tooltip="{{Operations[op].tooltip}}">
+	    <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	  </li>
+
 	  <li class="divider"></li>
+
 	  <li ng-repeat="op in destructive | filter:'!run-action'">
-	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-		tooltip="{{Operations[op].tooltip}}">
-		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	 </li>
+	  <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+	    tooltip="{{Operations[op].tooltip}}">
+	    <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	  </li>
 
 	  <li class="divider"></li>
 	  <li ng-repeat="action in actions"><a ng-click="launchAction(action)">{{ action.name }}</a></li>
