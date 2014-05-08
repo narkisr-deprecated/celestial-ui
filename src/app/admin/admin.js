@@ -16,7 +16,8 @@ angular.module( 'celestial.admin', [
 .factory('usersService', function($cookieStore ,$cookies, $location, $resource, $window, $q, loginService) {
    var usersService = {};
    var Users = $resource('/users/',{},{
-    getAll: {method : "GET",url:'/users/',isArray:true},
+    getAll: {method : "GET", url:'/users/', isArray:true},
+    getUser: {method : "GET", params:{name:'@name'}, url:'/users/:name'},
     operations: {method : "GET",url:'/users/operations/'}
    });
    
@@ -26,6 +27,21 @@ angular.module( 'celestial.admin', [
 
    usersService.operations = function() {
       return Users.operations({}).$promise;
+   }; 
+
+   usersService.loadOperations = function($scope) {
+     loginService.grabSession().then(function(data){
+       var username = data.username;
+       Users.getUser({name:username}, function(user){
+         $scope.operations = user.operations; 
+         $scope.constructive = _.filter(user.operations, function(op) {
+           return !_.contains(['clear', 'destroy', 'reload'],op);
+         });
+         $scope.destructive = _.filter(user.operations, function(op) {
+           return _.contains(['clear', 'destroy', 'reload'],op);
+         });
+       });
+     });
    }; 
 
    /*

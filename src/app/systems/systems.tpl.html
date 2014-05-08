@@ -17,17 +17,21 @@
 	<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
 	  <span class="fa fa-caret-down"></span></a>
 	<ul class="dropdown-menu">
-	  <li><a href="#/system/add/" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
-	  <li><a href="" ng-click="launchJobs('create')" tooltip-placement="right" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-check-square-o" ></i> Create</a></li>
-	  <li><a href="/#/systems/clone/{{system.id}}" tooltip-placement="right" tooltip="Clone an existing machine"><i class="fa-fixed-width fa fa-copy" ></i> Clone</a></li>
-	  <li><a href="" ng-click="launchJobs('provision')" tooltip-placement="right" tooltip="Run provisioining"><i class="fa-fixed-width fa fa-gears" ></i> Provision</a></li>
-	  <li><a href="" ng-click="launchJobs('stage')" tooltip-placement="right" tooltip="Create and Provision"><i class="fa-fixed-width fa fa-refresh" ></i> Stage</a></li>
-	  <li><a href="" ng-click="launchJobs('start')" tooltip-placement="right" tooltip="Start the backing machine"><i class="fa-fixed-width fa fa-play" ></i> Start</a></li>
-	  <li><a href="" ng-click="launchJobs('stop')" tooltip-placement="right" tooltip="Stop the backing machine"><i class="fa-fixed-width fa fa-stop" ></i> Stop</a></li>
+	  <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
+
+	  <li ng-repeat="op in constructive | filter:'!run-action'">
+	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+		tooltip="{{Operations[op].tooltip}}">
+		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	 </li>
+	  <!-- <li><a href="/#/systems/clone/{{system.id}}" tooltip&#45;placement="right" tooltip="Clone an existing machine"><i class="fa&#45;fixed&#45;width fa fa&#45;copy" ></i> Clone</a></li> -->
 	  <li class="divider"></li>
-	  <li><a href="" ng-click="launchJobs('destroy')" tooltip-placement="right" tooltip="Destroy machine"><i class="fa-fixed-width fa fa-trash-o" ></i> Destroy</a></li>
-	  <li><a href="" ng-click="launchJobs('reload')" tooltip-placement="right" tooltip="Destroy and re-create machine"><i class="fa-fixed-width fa fa-warning" ></i> Reload</a></li>
-	  <li><a href="" ng-click="launchJobs('clear')" tooltip-placement="right" tooltip="Clear system model"><i class="fa-fixed-width fa fa-eraser" ></i> Clear</a></li>
+	  <li ng-repeat="op in destructive | filter:'!run-action'">
+	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+		tooltip="{{Operations[op].tooltip}}">
+		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	 </li>
+
 	  <li class="divider"></li>
 	  <li ng-repeat="action in actions"><a ng-click="launchAction(action)">{{ action.name }}</a></li>
 	</ul>
