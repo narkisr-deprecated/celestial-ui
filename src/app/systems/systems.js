@@ -184,6 +184,7 @@ angular.module( 'celestial.systems', [
   
   $scope.selected = {};
   $scope.actions = [];
+  $scope.emptyActions= true;
 
   $scope.setSelected = function() {
     if($scope.selected[this.system.id]) {
@@ -194,10 +195,17 @@ angular.module( 'celestial.systems', [
    var types = _.groupBy(_.values($scope.selected), 'type');
    if(_.keys(types).length == 1){
      actionsService.grabActions(_.first(_.values($scope.selected)).type).then(function(actions){
-	$scope.actions = actions;
+      if(_.isEmpty(actions)){
+        $scope.emptyActions = true;
+        $scope.actions = [];
+      } else {
+        $scope.emptyActions = false;
+        $scope.actions = actions;
+      }
     });
    } else {
-     $scope.actions = [];
+      $scope.emptyActions= true;
+      $scope.actions = [];
    }
   };
 

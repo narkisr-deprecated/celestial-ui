@@ -12,30 +12,31 @@
 	</a>
     </form>
 
-    <div id="operations" class="btn-group pull-right">
-	<a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
-	<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	  <span class="fa fa-caret-down"></span></a>
-	<ul class="dropdown-menu">
-	  <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
+    <div class="pull-right"> 
+	<div id="operations" class="btn-group"  tooltip-placement="left" tooltip="Operations" >
+	  <label>Operations</label>
+	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	    <span class="fa fa-caret-down"></span></a>
+	  <ul class="dropdown-menu">
+	    <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
 
-	  <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
-	  <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-	    tooltip="{{Operations[op].tooltip}}">
-	    <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	  </li>
+	    <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
+	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+		tooltip="{{Operations[op].tooltip}}">
+		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	    </li>
 
-	  <li class="divider"></li>
+	    <li class="divider"></li>
 
-	  <li ng-repeat="op in destructive | filter:'!run-action'">
-	  <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-	    tooltip="{{Operations[op].tooltip}}">
-	    <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	  </li>
+	    <li ng-repeat="op in destructive | filter:'!run-action'">
+	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
+		tooltip="{{Operations[op].tooltip}}">
+		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+	    </li>
+	  </ul>
+	</div>
 
-	  <li class="divider"></li>
-	  <li ng-repeat="action in actions"><a ng-click="launchAction(action)">{{ action.name }}</a></li>
-	</ul>
     </div>
 
     <table class="table">
@@ -61,12 +62,39 @@
 	</tbody>
     </table>
 
+
     <div class='panel-body'> 
-	<p class="text-right pull-right"> 
+
+	<div ng-hide="emptyActions" id="actions" tooltip-placement="left" tooltip="Actions" class="btn-group pull-right">
+	  <label>Actions</label>
+	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	    <span class="fa fa-caret-down"></span></a>
+	  <ul class="dropdown-menu">
+	    <li ng-repeat="action in actions">
+	      <a ng-click="launchAction(action)">{{action.name}}</a>
+	    </li>
+	  </ul>
+	</div>
+	 
+      <div ng-hide="!emptyActions" id="actions" tooltip-placement="left" tooltip="Actions" class="btn-group pull-right">
+	  <label>Actions</label>
+	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
+	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+	    <span class="fa fa-caret-down"></span></a>
+	  <ul class="dropdown-menu">
+	    <li >
+	      <a href="">Select systems with actions</a>
+	    </li>
+	  </ul>
+	</div>
+
+	<div class=""> 
 	  <a href="" ng-click="selectAll()" >Select all</a> /
 	  <a href="" ng-click="selectNone()" >Clear</a> 
-	</p>
+	</div>
 
+	<p> </p>
 	<select id="perPage" class='input-small pull-left' ng-model="perPage">
 	  <option>10</option>
 	  <option>25</option>
