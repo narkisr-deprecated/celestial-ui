@@ -21,21 +21,30 @@ angular.module( 'celestial.jobs', [
     running:{method : "GET", params:{page:'@page', offset:'@offset'}, url:'/jobs/running', isArray:false}
   });
 
+  $scope.currentPage = 1;
+  $scope.perPage = 10;
   $scope.jobs = [];
+
+  $scope.doneJobs = function() {
+    Jobs.done({page:$scope.currentPage, offset:$scope.perPage},function(data,resp){
+       $scope.count=data.total;
+       var byStart = _.sortBy(data.jobs, function(s) {return s.end;}).reverse();
+         $scope.statuses = _.map(byStart, function(source) {
+         source.start = moment(source.start).format('MMMM Do YYYY, h:mm:ss a');
+         source.end = moment(source.end).format('MMMM Do YYYY, h:mm:ss a');
+         return source;
+       });
+    });
+  };
 
   (function tick() {
     Jobs.running({},function(data,resp){
         $scope.jobs = data.jobs;
         $timeout(tick, 5000);
     });
-
-    Jobs.done({page:1, offset:10},function(data,resp){
-       var byStart = _.sortBy(data.jobs, function(s) {return s.end;}).reverse();
-        $scope.statuses = _.map(byStart, function(source) {
-        source.start = moment(source.start).format('MMMM Do YYYY, h:mm:ss a');
-        source.end = moment(source.end).format('MMMM Do YYYY, h:mm:ss a');
-        return source;
-       });
-    });
+    $scope.doneJobs();
   })();
+
+  $scope.$watch( 'currentPage', $scope.doneJobs);
+ 
 });
