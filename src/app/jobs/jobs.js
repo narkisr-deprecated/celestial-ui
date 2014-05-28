@@ -28,8 +28,7 @@ angular.module( 'celestial.jobs', [
   $scope.doneJobs = function() {
     Jobs.done({page:$scope.currentPage, offset:$scope.perPage},function(data,resp){
        $scope.count=data.total;
-       var byStart = _.sortBy(data.jobs, function(s) {return s.end;}).reverse();
-         $scope.statuses = _.map(byStart, function(source) {
+       $scope.statuses = _.map(data.jobs, function(source) {
          source.start = moment(source.start).format('MMMM Do YYYY, h:mm:ss a');
          source.end = moment(source.end).format('MMMM Do YYYY, h:mm:ss a');
          return source;
