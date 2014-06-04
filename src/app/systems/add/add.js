@@ -71,7 +71,7 @@ angular.module( 'celestial.systemAdd', [
     }
   };
 
-  $scope.$watch( 'currentHypervisor', $scope.hypervisorSelect);
+  $scope.$watch('currentHypervisor', $scope.hypervisorSelect);
 
   $scope.intoPersisted = function(system){
     var splitProps = function (props,dest) {
@@ -120,7 +120,7 @@ angular.module( 'celestial.systemAdd', [
     }
   };
 
-  $scope.$watch( 'env', $scope.setHypervisors);
+  $scope.$watch('env', $scope.setHypervisors);
 
   $scope.addVolume = function() {
     var duplicate = _.find($scope.volumes,function(vol) {
@@ -160,7 +160,8 @@ angular.module( 'celestial.systemAdd', [
 
   $scope.loadTypes();
   envsService.loadEnvs().then(function(data){
-     $scope.envs = data.environments;
-     $scope.env = $scope.envs[0];
+     $scope.envs = _.keys(data.environments);
+     $scope.rawEnvs = data.environments;
+     $scope.env = _.keys(data.environments)[0];
   });
 });
