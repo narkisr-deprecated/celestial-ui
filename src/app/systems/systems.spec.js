@@ -40,6 +40,7 @@ describe( 'Systems section', function() {
      $httpBackend = $injector.get('$httpBackend');
      $httpBackend.when('GET', '/systems?offset=10&page=1').respond({ });
      $httpBackend.when('GET', '/sessions').respond({username:'admin' });
+     $httpBackend.when('GET', '/users/current/operations').respond({operations:['destroy','clean'] });
      $httpBackend.when('GET', '/users/admin').respond({username:'admin' });
      SystemsCtrl = $controller( 'SystemsCtrl', {$location: $location, $scope: $scope,  systemsService : systemsService });
   }));

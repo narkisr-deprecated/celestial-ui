@@ -17,6 +17,7 @@ angular.module( 'celestial.admin', [
    var usersService = {};
    var Users = $resource('/users/',{},{
     getAll: {method : "GET", url:'/users/', isArray:true},
+    currentOperations: {method : "GET", url:'/users/current/operations'},
     getUser: {method : "GET", params:{name:'@name'}, url:'/users/:name'},
     operations: {method : "GET",url:'/users/operations/'}
    });
@@ -30,18 +31,15 @@ angular.module( 'celestial.admin', [
    }; 
 
    usersService.loadOperations = function($scope) {
-     loginService.grabSession().then(function(data){
-       var username = data.username;
-       Users.getUser({name:username}, function(user){
-         $scope.operations = user.operations; 
-         $scope.constructive = _.filter(user.operations, function(op) {
+       Users.currentOperations( function(data){
+         $scope.operations = data.operations; 
+         $scope.constructive = _.filter(data.operations, function(op) {
            return !_.contains(['clear', 'destroy', 'reload'],op);
          });
-         $scope.destructive = _.filter(user.operations, function(op) {
+         $scope.destructive = _.filter(data.operations, function(op) {
            return _.contains(['clear', 'destroy', 'reload'],op);
          });
        });
-     });
    }; 
 
    /*
