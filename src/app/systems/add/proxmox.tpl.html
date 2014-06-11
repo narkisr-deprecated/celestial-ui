@@ -32,6 +32,16 @@
 	<input id="features" name="features" placeholder="" class="input-large" type="text" ng-model="hypervisor.proxmox.features">
 	<p class="help-block">Enabled features</p>
     </div>
+  <div class="control-group">
+    <label class="control-label" for="onboot">On boot</label>
+    <div class="controls">
+	<label class="checkbox inline" for="onboot">
+	  <input type="checkbox" ng-model="hypervisor.proxmox.onboot" name="onboot" id="onboot">
+	</label>
+    </div>
+  </div>
+
+
   </div>
 
 

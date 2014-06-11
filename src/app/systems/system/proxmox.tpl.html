@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <tr>		
-	<td rowspan='3'>Container</td>
+	<td rowspan='4'>Container</td>
 	<td>vmid</td>
 	<td>{{system.proxmox.vmid}}</td>
     </tr>
@@ -20,6 +20,11 @@
     <tr>		
 	<td>features</td>
 	<td>{{system.proxmox.features.join(" ")}}</td>
+    </tr>
+    <tr>		
+	<td>on boot</td>
+	<td>{{system.proxmox.onboot}}</td>
+
     </tr>
   </tbody>
 </table>
