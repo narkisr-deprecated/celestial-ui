@@ -49,7 +49,13 @@ angular.module( 'celestial.systemAdd', [
         $scope.machine={};
         break;
       case "aws": 
-        $scope.hypervisor = {aws:{endpoint:"ec2.us-east-1.amazonaws.com",'instance-type':'t1.micro'}};
+        $scope.hypervisor = {
+          aws: {
+          'ebs-optimized':false,
+           endpoint:"ec2.us-east-1.amazonaws.com",
+          'instance-type':'t1.micro'
+         }
+        };
         $scope.machine={};
         $scope.volumes=[];
         $scope.volume={clear:false};
