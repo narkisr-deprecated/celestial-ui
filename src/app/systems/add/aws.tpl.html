@@ -8,7 +8,7 @@
 	<option>m1.small</option>
 	<option>m1.medium</option>
 	<option>m1.large</option>
-     	<option>m1.xlarge</option>
+	<option>m1.xlarge</option>
 	<option>m3.medium</option>
 	<option>m3.large</option>
 	<option>m3.xlarge</option>
@@ -150,6 +150,30 @@
     <p class="help-block">Volume size in GB</p>
   </div>
 </div>
+
+<div class="control-group">
+  <label class="control-label" for="type">Type</label>
+  <div class="controls">
+    <select id="volume-type" name="volume-type" class="input-large" ng-model="volume['volume-type']">
+	<option value='standard' selected='selected'>Magnetic</option>
+	<option value='gp2'>General Purpose (SSD)</option>
+	<option value='io1'>Provisioned IOPS (SSD)</option>
+    </select>
+    <p class="help-block">EBS volume type</p>
+  </div>
+</div>
+
+<div ng-if="volume['volume-type']=='io1'" class="control-group">
+  <div class="control-group">
+    <label class="control-label" for="iops">IOPS</label>
+    <div class="controls">
+	<input id="iops" name="iops" type="number" min="1" placeholder="" class="input-large" ng-model="volume.iops">
+	<p class="help-block">IOPS count</p>
+    </div>
+  </div>
+</div>
+
+
 <div class="control-group">
   <label class="control-label" for="clear">Clear</label>
   <div class="controls">
@@ -172,6 +196,7 @@
     <tr>
 	<th>Device</th>
 	<th>Size (GB)</th>
+	<th>Type</th>
 	<th>Clear on destroy</th>
 	<th></th>
     </tr>
@@ -180,6 +205,7 @@
     <tr ng-repeat="vol in volumes">
 	<td>{{vol.device}}</td>
 	<td>{{vol.size}}</td>
+	<td>{{vol['volume-type']}}</td>
 	<td>{{vol.clear}}</td>
 	<td> 
 	  <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Remove" ng-click="removeVolume(vol.device)"></i>

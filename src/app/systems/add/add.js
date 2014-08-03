@@ -58,7 +58,7 @@ angular.module( 'celestial.systemAdd', [
         };
         $scope.machine={};
         $scope.volumes=[];
-        $scope.volume={clear:false};
+        $scope.volume={clear:false,'volume-type':'standard'};
         break;
       case "vcenter": 
         $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
@@ -136,7 +136,7 @@ angular.module( 'celestial.systemAdd', [
 	growl.addErrorMessage("cant add same device ("+ $scope.volume.device + ") twice.");
     } else {
       $scope.volumes.push($scope.volume);
-      $scope.volume={clear:false};
+      $scope.volume={clear:false, 'volume-type':'standard'};
     } 
   };
 
