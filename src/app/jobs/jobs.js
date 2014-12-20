@@ -29,8 +29,8 @@ angular.module( 'celestial.jobs', [
     Jobs.done({page:$scope.currentPage, offset:$scope.perPage},function(data,resp){
        $scope.count=data.total;
        $scope.statuses = _.map(data.jobs, function(source) {
-         source.start = moment(source.start).format('MMMM Do YYYY, h:mm:ss a');
-         source.end = moment(source.end).format('MMMM Do YYYY, h:mm:ss a');
+         source.start= moment(source.start).format('DD/MM/YY h:mm:ss a');
+         source.end = moment(source.end).format('DD/MM/YY h:mm:ss a');
          return source;
        });
     });

@@ -29,7 +29,8 @@
     <table class="table table-striped">
 	<thead>
 	  <tr>
-	    <th>System id</th>
+	    <th>Id</th>
+	    <th>Host</th>
 	    <th>Start</th>
 	    <th>End</th>
 	    <th>Queue</th>
@@ -40,7 +41,8 @@
 	<tbody>
 	  <tr ng-repeat="job in statuses" class="{{job.status}}";>
 	    <td><a href="#/system/{{job.identity}}">{{job.identity}}</a></td>
-	    <td>{{job.start}}</td>
+	    <td>{{job.hostname}}</td>
+	    <td>{{job.start | date:'yyyy'}}</td>
 	    <td>{{job.end}}</td>
 	    <td>{{job.queue}}</td>
 	    <td>{{job.status}}</td>
