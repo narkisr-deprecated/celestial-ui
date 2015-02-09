@@ -190,7 +190,7 @@
   </div>
 </div>
 
-<legend>Volumes</legend>
+<legend>EBS Volumes</legend>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -214,5 +214,50 @@
   </tbody>
 </table>
 
+
+<legend>Instance Store</legend>
+
+<div class="control-group">
+  <label class="control-label" for="device">Device</label>
+  <div class="controls">
+    <input id="device" name="device" type="text" placeholder="sdb" class="input-large" ng-model="block.device">
+    <p class="help-block">Device mapping</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="size">Volume</label>
+  <div class="controls">
+    <input id="volume" name="device" type="text" placeholder="ephemeral0" class="input-large" ng-model="block.volume">
+    <p class="help-block">ephemeral0,ephemeral1 etc..</p>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <div class="controls">
+    <button type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="addBlock()" >Add</button>
+  </div>
+</div>
+
+<legend>Store devices</legend>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Mapping</th>
+	<th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="block in blocks">
+	<td>{{block.device}}</td>
+	<td>{{block.volume}}</td>
+	<td> 
+	  <i class="icon-remove-circle" tooltip-placement="bottom" tooltip="Remove" ng-click="removeBlock(block.device)"></i>
+	</td>
+    </tr>
+  </tbody>
+</table>
 
 

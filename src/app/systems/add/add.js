@@ -58,7 +58,9 @@ angular.module( 'celestial.systemAdd', [
         };
         $scope.machine={};
         $scope.volumes=[];
+        $scope.blocks=[];
         $scope.volume={clear:false,'volume-type':'standard'};
+        $scope.block={};
         break;
       case "vcenter": 
         $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
@@ -97,6 +99,7 @@ angular.module( 'celestial.systemAdd', [
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;
+      system.aws['block-devices']= $scope.blocks;
       splitProps(['security-groups'], system.aws);
       break;
      case "docker":
@@ -140,11 +143,31 @@ angular.module( 'celestial.systemAdd', [
     } 
   };
 
+
+  $scope.addBlock= function() {
+    var duplicate = _.find($scope.blocks,function(block) {
+      return block.device == $scope.block.device;
+    });
+    if(duplicate) {
+	growl.addErrorMessage("cant add same device ("+ $scope.block.device + ") twice.");
+    } else {
+      $scope.blocks.push($scope.block);
+      $scope.block={};
+    } 
+  };
+
   $scope.removeVolume = function(device) {
     $scope.volumes = _.filter($scope.volumes,function(vol) {
       return vol.device != device;
     });
   };
+
+  $scope.removeBlock= function(device) {
+    $scope.blocks = _.filter($scope.blocks,function(block) {
+      return block.device != device;
+    });
+  };
+
 
   $scope.submit = function(){
     system = {type:$scope.type, env:$scope.env, machine:$scope.machine};
