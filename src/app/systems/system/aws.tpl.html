@@ -93,4 +93,19 @@
 </table>
 
 
+<h2>Store Devices:</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Mapping</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="block in system.aws['block-devices']">
+	<td>{{block.device}}</td>
+	<td>{{block.volume}}</td>
+    </tr>
+  </tbody>
+</table>
 
