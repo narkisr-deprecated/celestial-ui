@@ -62,6 +62,18 @@ angular.module( 'celestial.systemAdd', [
         $scope.volume={clear:false,'volume-type':'standard'};
         $scope.block={};
         break;
+      case "openstack": 
+        $scope.hypervisor = {
+          openstack: {
+            flavor:'m1.small'
+         }
+        };
+        $scope.machine={};
+        $scope.volumes=[];
+        $scope.networks=[];
+        $scope.volume={clear:false};
+        break;
+
       case "vcenter": 
         $scope.hypervisor= {vcenter:{'disk-format':'sparse'}};
         $scope.machine={};
@@ -96,6 +108,11 @@ angular.module( 'celestial.systemAdd', [
       break;
      case "vcenter": 
       splitProps(['names'], system.machine);
+      break;
+     case "openstack": 
+	system.openstack.volumes = $scope.volumes;
+      splitProps(['security-groups'], system.openstack);
+      splitProps(['networks'], system.openstack);
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;

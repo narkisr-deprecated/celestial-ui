@@ -1,0 +1,147 @@
+<legend>Openstack</legend>
+
+<div class="control-group">
+  <label class="control-label" for="instancetype">Flavor</label>
+  <div class="controls">
+    <select id="instancetype" name="instancetype" class="input-large" ng-model="hypervisor.openstack['flavor']">
+	<option>t1.micro</option>
+	<option>m1.small</option>
+	<option>m1.medium</option>
+	<option>m1.large</option>
+    </select>
+    <p class="help-block">Openstack instance type</p>
+  </div>
+</div>
+
+<div class="control-group">  
+  <label class="control-label" for="env">OS</label>  
+  <div class="controls">  
+    <select id="type"  name="type" ng-model="machine.os" ng-options="os for os in oses"> </select>
+    <p class="help-block">Operating system</p>
+  </div>  
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="tenant">Tenant</label>
+  <div class="controls">
+    <input id="tenant" name="tenant" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.openstack['tenant']">
+    <p class="help-block"></p>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <label class="control-label" for="keyname">Key Pair</label>
+  <div class="controls">
+    <input id="keyname" name="keyname" placeholder="" class="input-large" required="" type="text" ng-model="hypervisor.openstack['key-name']">
+    <p class="help-block">SSH keypair</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="security-groups">Security groups</label>
+  <div class="controls">
+    <input id="security-groups" name="security-groups" placeholder="default" class="input-large" type="text" ng-model="hypervisor.openstack['security-groups']">
+    <p class="help-block">Space delimited</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="networks">Networks</label>
+  <div class="controls">
+    <input id="networks" name="networks" placeholder="default" class="input-large" type="text" ng-model="hypervisor.openstack['networks']">
+    <p class="help-block">Space delimited</p>
+  </div>
+</div>
+
+<legend>Machine</legend>
+
+<div class="control-group">
+  <label class="control-label" for="user">User</label>
+  <div class="controls">
+    <input id="user" name="user" type="text" placeholder="" class="input-large" required="" ng-model="machine.user">
+    <p class="help-block">Machine user</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="hostname">Hostname</label>
+  <div class="controls">
+    <input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="machine.hostname">
+    <p class="help-block">Machine hostname</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="domain">Domain</label>
+  <div class="controls">
+    <input id="domain" name="domain" type="text" placeholder="" class="input-large" required="" ng-model="machine.domain">
+    <p class="help-block">Machine domain</p>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <label class="control-label" for="ip">IP</label>
+  <div class="controls">
+    <input id="ip" name="ip" type="text" placeholder="" class="input-large" ng-model="hypervisor.openstack['floating-ip']">
+    <p class="help-block">Floating IP</p>
+  </div>
+</div>
+
+
+<legend>Cinder</legend>
+
+<div class="control-group">
+  <label class="control-label" for="device">Device</label>
+  <div class="controls">
+    <input id="device" name="device" type="text" placeholder="/dev/sdh" class="input-large" ng-model="volume.device">
+    <p class="help-block"></p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="size">Size</label>
+  <div class="controls">
+    <input id="size" name="size" type="number" min="1" placeholder="" class="input-large" ng-model="volume.size">
+    <p class="help-block">Volume size in GB</p>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="clear">Clear</label>
+  <div class="controls">
+    <label class="checkbox inline" for="clear">
+	<input type="checkbox" name="clear" id="clear" ng-model="volume.clear" value="false">
+    </label>
+  </div>
+</div>
+
+
+<div class="control-group">
+  <div class="controls">
+    <button type="button" id="singlebutton" name="singlebutton" class="btn btn-primary" ng-click="addVolume()" >Add</button>
+  </div>
+</div>
+
+<legend>Volumes</legend>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Size (GB)</th>
+	<th>Clear on destroy</th>
+	<th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="vol in volumes">
+	<td>{{vol.device}}</td>
+	<td>{{vol.size}}</td>
+	<td>{{vol.clear}}</td>
+	<td> 
+	  <i class="fa fa-times" tooltip-placement="bottom" tooltip="Remove" ng-click="removeVolume(vol.device)"></i>
+	</td>
+    </tr>
+  </tbody>
+</table>
