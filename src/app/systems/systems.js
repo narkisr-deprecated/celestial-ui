@@ -83,7 +83,7 @@ angular.module( 'celestial.systems', [
   };
 
   systemsService.hypervisor = function(system) {
-    hs = ['aws','proxmox','vcenter','physical','docker'];
+    hs = ['aws','proxmox','vcenter','physical','docker','openstack'];
     return _.filter(hs, function(a){return system[a]!=null; })[0];
   };
 
@@ -127,7 +127,7 @@ angular.module( 'celestial.systems', [
 	$scope.systems = [];
       angular.forEach(data.systems,function(system){
         system[1]['id'] = system[0];
-        system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter','physical','docker'],function(a){
+        system[1]['hypervisor'] = _.filter(['aws','proxmox','vcenter','physical','docker','openstack'],function(a){
            return system[1][a]!=null;
         })[0];
         $scope.systems.push(system[1]);

@@ -1,0 +1,95 @@
+<h2>Machine:</h2>
+<table class="table table-bordered" >
+  <thead>
+    <tr>
+	<th>Property</th>
+	<th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>		
+	<td>OS</td>
+	<td>{{system.machine.os}}</td>
+    </tr>
+    <tr>		
+	<td>hostname</td>
+	<td>{{system.machine.hostname}}</td>
+    </tr>
+    <tr>		
+	<td>user</td>
+	<td>{{system.machine.user}}</td>
+    </tr>
+    <tr>		
+	<td>type</td>
+	<td>{{system.type}}</td>
+    </tr>
+    <tr>		
+	<td>IP</td>
+	<td>{{system.machine.ip}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Openstack:</h2>
+<table class="table table-bordered" >
+  <thead>
+    <tr>
+	<th>Property</th>
+	<th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>		
+	<td>instance id</td>
+	<td>{{system.openstack['id']}}</td>
+    </tr>
+    <tr>		
+	<td>key-name</td>
+	<td>{{system.openstack['key-name']}}</td>
+    </tr>
+    <tr>		
+	<td>security groups</td>
+	<td>{{system.openstack['security-groups'].join(',')}}</td>
+    </tr>
+    <tr>		
+	<td>endpoint</td>
+	<td>{{system.aws['endpoint']}}</td>
+    </tr>
+    <tr>		
+	<td>availability zone</td>
+	<td>{{system.aws['availability-zone']}}</td>
+    </tr>
+    <tr>		
+	<td>instance type</td>
+	<td>{{system.aws['instance-type']}}</td>
+    </tr>
+	<tr>		
+	  <td>EBS optimized</td>
+	  <td>{{system.aws['ebs-optimized']}}</td>
+	</tr>
+
+  </tbody>
+</table>
+
+
+<h2>Volumes:</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+	<th>Device</th>
+	<th>Size (GB)</th>
+	<th>Type</th>
+	<th>Clear on destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="vol in system.openstack.volumes">
+	<td>{{vol.device}}</td>
+	<td>{{vol.size}}</td>
+	<td>{{vol['volume-type']}}</td>
+	<td>{{vol.clear}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
