@@ -3,11 +3,8 @@
 <div class="control-group">
   <label class="control-label" for="instancetype">Flavor</label>
   <div class="controls">
-    <select id="instancetype" name="instancetype" class="input-large" ng-model="hypervisor.openstack['flavor']">
-	<option>t1.micro</option>
-	<option>m1.small</option>
-	<option>m1.medium</option>
-	<option>m1.large</option>
+    <select id="instancetype" name="instancetype" class="input-large" ng-model="hypervisor.openstack['flavor']" >
+	<option ng-repeat="flavor in flavors">{{flavor}}</option>
     </select>
     <p class="help-block">Openstack instance type</p>
   </div>

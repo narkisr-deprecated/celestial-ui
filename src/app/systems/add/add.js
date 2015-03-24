@@ -68,6 +68,8 @@ angular.module( 'celestial.systemAdd', [
             flavor:'m1.small'
          }
         };
+        
+        $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
         $scope.machine={};
         $scope.volumes=[];
         $scope.networks=[];
