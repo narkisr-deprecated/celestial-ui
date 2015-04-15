@@ -63,13 +63,14 @@ angular.module( 'celestial.systemAdd', [
         $scope.block={};
         break;
       case "openstack": 
+        $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
         $scope.hypervisor = {
           openstack: {
-            flavor:'m1.small'
+            flavor:''
          }
         };
         
-        $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
+        $scope.hypervisor['openstack']['flavor'] = $scope.flavors[0];
         $scope.machine={};
         $scope.volumes=[];
         $scope.networks=[];
@@ -141,14 +142,18 @@ angular.module( 'celestial.systemAdd', [
 
   $scope.$watch( 'currentHypervisor', $scope.setOses);
 
-  $scope.setHypervisors = function() {
+  $scope.envChanged = function() {
     if($scope.env !== undefined){
       $scope.hypervisors = _.keys($scope.rawEnvs[$scope.env]); 
       $scope.currentHypervisor = $scope.hypervisors[0];
     }
+     if($scope.currentHypervisor=='openstack'){
+       $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
+       $scope.hypervisor['openstack']['flavor'] = $scope.flavors[0];
+     }
   };
 
-  $scope.$watch('env', $scope.setHypervisors);
+  $scope.$watch('env', $scope.envChanged);
 
   $scope.addVolume = function() {
     var duplicate = _.find($scope.volumes,function(vol) {
