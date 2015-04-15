@@ -52,21 +52,14 @@
 	<td>{{system.openstack['security-groups'].join(',')}}</td>
     </tr>
     <tr>		
-	<td>endpoint</td>
-	<td>{{system.aws['endpoint']}}</td>
+	<td>flavor</td>
+	<td>{{system.openstack['flavor']}}</td>
     </tr>
     <tr>		
-	<td>availability zone</td>
-	<td>{{system.aws['availability-zone']}}</td>
+	<td>tenant</td>
+	<td>{{system.openstack['tenant']}}</td>
     </tr>
-    <tr>		
-	<td>instance type</td>
-	<td>{{system.aws['instance-type']}}</td>
-    </tr>
-	<tr>		
-	  <td>EBS optimized</td>
-	  <td>{{system.aws['ebs-optimized']}}</td>
-	</tr>
+
 
   </tbody>
 </table>
