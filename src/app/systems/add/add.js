@@ -116,6 +116,9 @@ angular.module( 'celestial.systemAdd', [
 	system.openstack.volumes = $scope.volumes;
       splitProps(['security-groups'], system.openstack);
       splitProps(['networks'], system.openstack);
+	system.openstack.hints = _.map(system.openstack.hints.split(' '), function(hint){
+         return hint.split('=');
+	});
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;

@@ -67,8 +67,10 @@
 	<td>Networks</td>
 	<td>{{system.openstack['networks'].join(',')}}</td>
     </tr>
-
-
+    <tr>		
+	<td>Hints</td>
+	<td>{{system.openstack['hints'].join(' ') | replaceCommas }}</td>
+    </tr>
 
   </tbody>
 </table>

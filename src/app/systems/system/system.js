@@ -21,6 +21,10 @@ angular.module( 'celestial.system', [
           return input;
         }
     };
+}).filter('replaceCommas', function(){
+  return function(text) {
+     return text ? text.replace(/,/g, '=') : '';
+  };
 })
 .controller( 'SystemCtrl', function SystemController($scope, $resource, $location, growl, systemsService, usersService) {
 
