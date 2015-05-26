@@ -4,7 +4,7 @@
   <div class="control-group">
     <label class="control-label" for="module-name">Name</label>
     <div class="controls">
-	<input id="name" name="name" placeholder="" class="input-large" required="" type="text" ng-model="type['puppet-std'].module.name">
+	<input id="name" name="name" placeholder="" class="input-large" required="" type="text" ng-model="type['puppet-std'][env].module.name">
 	<p class="help-block">Module name</p>
     </div>
   </div>
@@ -12,7 +12,7 @@
   <div class="control-group">
     <label class="control-label" for="src">Source</label>
     <div class="controls">
-	<input id="src" name="src" placeholder="http://" class="input-large" required="" type="text" ng-model="type['puppet-std'].module.src">
+	<input id="src" name="src" placeholder="http://" class="input-large" required="" type="text" ng-model="type['puppet-std'][env].module.src">
 	<p class="help-block">Module source url</p>
     </div>
   </div>
@@ -20,7 +20,7 @@
   <div class="control-group">
     <label class="control-label" for="src">Arguments</label>
     <div class="controls">
-	<input id="src" name="src" placeholder="" class="input-large" type="text" ng-model="type['puppet-std'].args">
+	<input id="src" name="src" placeholder="" class="input-large" type="text" ng-model="type['puppet-std'][env].args">
 	<p class="help-block">Puppet run arguments</p>
     </div>
   </div>
@@ -28,7 +28,7 @@
   <div class="control-group">
     <label class="control-label" for="textarea">Classes</label>
     <div class="controls">                     
-	<textarea id="textarea" name="textarea" ng-model="type.classes">{}</textarea>
+	<textarea id="textarea" name="textarea" ng-model="type['puppet-std'][env].classes">{}</textarea>
        <p class="help-block">Puppet classes</p>
     </div>
   </div>

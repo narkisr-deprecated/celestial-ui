@@ -13,23 +13,43 @@ angular.module( 'celestial.typeEdit', [
     data:{ pageTitle: 'Edit type' }
   });
 })
-.controller( 'TypeEditCtrl', function typeEditController($scope, $location, typesService) {
+.controller( 'TypeEditCtrl', function typeEditController($scope, $location, typesService, envsService) {
 
   $scope.typeId = $location.path().replace("/type/edit/","");
+
+  envsService.loadEnvs().then(function(data){
+     $scope.envs = _.keys(data.environments);
+  });
+
+  $scope.envSelect = function() {
+    if($scope.provisioner !== undefined && $scope.type !== undefined){
+       if(_.isEmpty($scope.type[$scope.provisioner][$scope.env])){
+         $scope.type[$scope.provisioner][$scope.env] = {module:{}};
+       }
+       prov = $scope.type[$scope.provisioner][$scope.env];
+       if($scope.provisioner == 'puppet-std' && prov !== undefined ) {
+        if(_.isObject(prov.classes)){
+          prov.classes = JSON.stringify(prov.classes);
+        }
+        if(prov.args !== undefined && _.isArray(prov.args)){
+          prov.args = prov.args.join(" ");
+        }
+      }
+      $scope.type[$scope.provisioner][$scope.env] = prov;
+    }
+  };
 
   $scope.loadType = function(){
     typesService.get($scope.typeId).$promise.then(function(type) {
       $scope.type = type;
-      $scope.type.classes = JSON.stringify(type.classes);
-	if($scope.type['puppet-std'].args !==undefined){
-        $scope.type['puppet-std'].args = type['puppet-std'].args.join(" ");
-      }
-      $scope.currentProvisioner = typesService.provisionerOf($scope.type);
-      $scope.provisionerTemplate = 'types/edit/'+$scope.currentProvisioner+'.tpl.html';
+      $scope.provisioner = typesService.provisionerOf($scope.type);
+	$scope.env = _.keys($scope.type[$scope.provisioner])[0];
+      $scope.provisionerTemplate = 'types/edit/'+$scope.provisioner+'.tpl.html';
     });
   };
 
   $scope.loadType();
+  $scope.$watch( 'env', $scope.envSelect );
 
   $scope.submit = function(){
     typesService.update($scope.typeId,$scope.type);

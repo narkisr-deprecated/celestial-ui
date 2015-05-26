@@ -19,8 +19,6 @@ angular.module( 'celestial.systemAdd', [
 
   var Systems = $resource('/systems/');
 
-  var Environments = $resource('/environments/');
-  
   $scope.machine = {};
   $scope.hypervisor = {};
   $scope.type = '';

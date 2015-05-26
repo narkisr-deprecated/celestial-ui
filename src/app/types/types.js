@@ -29,10 +29,17 @@ angular.module( 'celestial.types', [
 
   var intoPersisted = function(type) {
     var saved = angular.copy(type);
-    if(saved['puppet-std']['args']!==undefined){
-      saved['puppet-std']['args'] = saved['puppet-std']['args'].split(" ");
+    if(typesService.provisionerOf(saved) == 'puppet-std'){
+       _.each(_.keys(saved['puppet-std']),function(env){
+        props = saved['puppet-std'][env];
+        if(props !== undefined){
+          if(props.args !== undefined && _.isString(props.args)){
+            saved['puppet-std'][env].args = props.args.split(" ");
+          }
+          saved['puppet-std'][env].classes = JSON.parse(saved['puppet-std'][env].classes);
+        }
+      });
     }
-    saved['classes'] = JSON.parse(saved.classes);
     return saved;
   };
 
