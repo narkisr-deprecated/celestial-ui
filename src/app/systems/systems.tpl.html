@@ -1,110 +1,108 @@
 <div class="panel panel-default">
-  <div class="panel-heading"> 
+  <div class="panel-heading">
     <h3 class="panel-title"> Systems </h3>
   </div>
-  <div class='panel-body'> 
+  <div class='panel-body'>
 
     <form class="form-search pull-left">
-	<input type="text" ng-model="query" class="input-medium search-query" style="width:400px">
-	<button class="btn" ng-click="search()">Search</button>
-	<a href="" ng-click="launchHelp()" tooltip-placement="right" tooltip="Query syntax help">
-	  <i class="fa-fixed-question fa fa-question" tooltip-placement="right"></i>
-	</a>
+      <input type="text" ng-model="query" class="input-medium search-query" style="width:400px">
+      <button class="btn" ng-click="search()">Search</button>
+      <a href="" ng-click="launchHelp()" tooltip-placement="right" tooltip="Query syntax help">
+        <i class="fa-fixed-question fa fa-question" tooltip-placement="right"></i>
+      </a>
     </form>
 
-    <div class="pull-right"> 
-	<div id="operations" class="btn-group">
-	  <label>Operations</label>
-	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
-	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	    <span class="fa fa-caret-down"></span></a>
-	  <ul class="dropdown-menu">
-	    <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
+    <div class="pull-right">
+      <div id="operations" class="btn-group">
+        <label>Operations</label>
 
-	    <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
-	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-		tooltip="{{Operations[op].tooltip}}">
-		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	    </li>
+        <div class="btn-group" dropdown>
+          <button type="button" class="btn"><i class="fa fa-list-ul"></i></button>
+          <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+            <span class="fa fa-caret-down"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
 
-	    <li class="divider"></li>
+            <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
+              <a href="" ng-click="launchJobs(op)" tooltip-placement="left"
+              tooltip="{{Operations[op].tooltip}}">
+              <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+            </li>
 
-	    <li ng-repeat="op in destructive | filter:'!run-action'">
-	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
-		tooltip="{{Operations[op].tooltip}}">
-		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
-	    </li>
-	  </ul>
-	</div>
+            <li class="divider"></li>
+
+            <li ng-repeat="op in destructive | filter:'!run-action'">
+              <a href="" ng-click="launchJobs(op)" tooltip-placement="left"
+              tooltip="{{Operations[op].tooltip}}">
+              <i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
 
     </div>
 
     <table class="table">
-	<thead>
-	  <tr>
-	    <th>#</th>
-	    <th>Hostname</th>
-	    <th>Type</th>
-	    <th>Hypervisor</th>
-	    <th>Environment</th>
-	    <th>Owner</th>
-	  </tr>
-	</thead>
-	<tbody class="select">
-	  <tr ng-repeat="system in systems" ng-click="setSelected()" >
-	    <td style="background-color:{{isSelected()}};"><a href="#/system/{{system.id}}">{{system.id}}</a></td>
-	    <td style="background-color:{{isSelected()}};">{{system.machine.hostname}}</td>
-	    <td style="background-color:{{isSelected()}};">{{system.type}}</td>
-	    <td style="background-color:{{isSelected()}};">{{system.hypervisor}}</td>
-	    <td style="background-color:{{isSelected()}};">{{system.env}}</td>
-	    <td style="background-color:{{isSelected()}};">{{system.owner}}</td>
-	  </tr>
-	</tbody>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Hostname</th>
+          <th>Type</th>
+          <th>Hypervisor</th>
+          <th>Environment</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody class="select">
+        <tr ng-repeat="system in systems" ng-click="setSelected()" >
+          <td style="background-color:{{isSelected()}};"><a href="#/system/{{system.id}}">{{system.id}}</a></td>
+          <td style="background-color:{{isSelected()}};">{{system.machine.hostname}}</td>
+          <td style="background-color:{{isSelected()}};">{{system.type}}</td>
+          <td style="background-color:{{isSelected()}};">{{system.hypervisor}}</td>
+          <td style="background-color:{{isSelected()}};">{{system.env}}</td>
+          <td style="background-color:{{isSelected()}};">{{system.owner}}</td>
+        </tr>
+      </tbody>
     </table>
 
 
-    <div class='panel-body'> 
+    <div class='panel-body'>
 
-	<div ng-hide="emptyActions" id="actions" tooltip-placement="left" tooltip="Actions" class="btn-group pull-right">
-	  <label>Actions</label>
-	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
-	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	    <span class="fa fa-caret-down"></span></a>
-	  <ul class="dropdown-menu">
-	    <li ng-repeat="action in actions">
-	      <a ng-click="launchAction(action)">{{action.name}}</a>
-	    </li>
-	  </ul>
-	</div>
-	 
-      <div ng-hide="!emptyActions" id="actions" class="btn-group pull-right">
-	  <label>Actions</label>
-	  <a class="btn" href="" disabled><i class="fa fa-list-ul"></i></a>
-	  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-	    <span class="fa fa-caret-down"></span></a>
-	  <ul class="dropdown-menu">
-	    <li >
-	      <a href="">Select systems with actions</a>
-	    </li>
-	  </ul>
-	</div>
+        <div class="pull-right">
+          <div class="btn-group">
+            <label>Actions</label>
 
-	<div class=""> 
-	  <a href="" ng-click="selectAll()" >Select all</a> /
-	  <a href="" ng-click="selectNone()" >Clear</a> 
-	</div>
+            <div class="btn-group" dropdown>
+              <button type="button" class="btn"><i class="fa fa-list-ul"></i></button>
+              <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle>
+                <span class="fa fa-caret-down"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li ng-repeat="action in actions">
+                  <a ng-click="launchAction(action)">{{action.name}}</a>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-	<p> </p>
-	<select id="perPage" class='input-small pull-left' ng-model="perPage">
-	  <option>10</option>
-	  <option>25</option>
-	  <option>50</option>
-	</select>
+        </div>
+
+        <div class="">
+          <a href="" ng-click="selectAll()" >Select all</a> /
+          <a href="" ng-click="selectNone()" >Clear</a>
+        </div>
+
+        <p> </p>
+        <select id="perPage" class='input-small pull-left' ng-model="perPage">
+          <option>10</option>
+          <option>25</option>
+          <option>50</option>
+        </select>
+      </div>
+
+      <p class="text-center">
+        <pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+      </p>
     </div>
-
-    <p class="text-center"> 
-	<pagination boundary-links="true" total-items="count" page="currentPage" items-per-page="perPage" class="pagination-small" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-    </p>
   </div>
-</div>
-

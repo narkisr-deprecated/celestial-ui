@@ -1,5 +1,5 @@
 angular.module( 'celestial.types', [
-  'ui.state', 'ui.bootstrap','celestial.typeAdd','celestial.typeEdit'
+  'ui.router', 'ui.bootstrap','celestial.typeAdd','celestial.typeEdit'
 ])
 
 .config(function config( $stateProvider ) {
@@ -36,7 +36,10 @@ angular.module( 'celestial.types', [
           if(props.args !== undefined && _.isString(props.args)){
             saved['puppet-std'][env].args = props.args.split(" ");
           }
-          saved['puppet-std'][env].classes = JSON.parse(saved['puppet-std'][env].classes);
+
+          if(saved['puppet-std'][env].classes) {
+            saved['puppet-std'][env].classes = JSON.parse(saved['puppet-std'][env].classes);
+          }
         }
       });
     }
@@ -61,7 +64,7 @@ angular.module( 'celestial.types', [
         $location.path('/types');
       },loggingService.error);
   };
-  
+
   typesService.provisionerOf = function(type) {
     return _.filter(['puppet-std','chef','puppet'], function(a){return type[a]!=null; })[0];
   };
@@ -70,7 +73,7 @@ angular.module( 'celestial.types', [
     return Types.get({}).$promise.then(function(data){
         return _.map(data.types,function(type){
            type.provisioner = typesService.provisionerOf(type);
-           return type; 
+           return type;
         });
     });
   };
@@ -81,7 +84,7 @@ angular.module( 'celestial.types', [
         growl.addInfoMessage(resp.message);
         $location.path( '/types');
       },loggingService.error);
-  }; 
+  };
 
   return typesService;
 })
@@ -107,7 +110,7 @@ angular.module( 'celestial.types', [
         $scope.types = $scope.data.types.slice(from,to);
     }
   };
-  
+
   $scope.$watch( 'currentPage', $scope.setPage );
   $scope.$watch( 'data.types', $scope.setPage );
 });

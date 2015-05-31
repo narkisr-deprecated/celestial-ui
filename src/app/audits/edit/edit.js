@@ -1,5 +1,5 @@
 angular.module( 'celestial.auditEdit', [
-  'ui.state',  'ngResource'
+  'ui.router',  'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'auditEdit', {

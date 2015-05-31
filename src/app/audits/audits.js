@@ -1,5 +1,5 @@
 angular.module( 'celestial.audits', [
-  'ui.state', 'ui.bootstrap' ,'celestial.auditAdd', 
+  'ui.router', 'ui.bootstrap' ,'celestial.auditAdd', 
   'celestial.auditEdit', 'celestial.auditLaunch'
 ])
 

@@ -1,5 +1,5 @@
 angular.module( 'celestial.system', [
-  'ui.state', 'ui.bootstrap', 'ngResource'
+  'ui.router', 'ui.bootstrap', 'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'system', {

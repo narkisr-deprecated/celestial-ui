@@ -1,5 +1,5 @@
 angular.module( 'celestial.auditLaunch', [
-  'ui.state',  'ngResource'
+  'ui.router',  'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'auditLaunch', {

@@ -1,4 +1,4 @@
-angular.module('celestial.confirm', ['ui.bootstrap.modal','ui.state'])
+angular.module('celestial.confirm', ['ui.bootstrap.modal','ui.router'])
 
 .controller('ConfirmCtrl', function ConfirmController($scope,$modalInstance, $cookieStore, job, target) {
 

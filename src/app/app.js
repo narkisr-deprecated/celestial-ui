@@ -3,7 +3,7 @@ angular.module( 'celestial', [
   'celestial.systems', 'celestial.actions', 'celestial.audits',
   'celestial.types','celestial.jobs','celestial.admin',
   'celestial.environments',
-  'ui.state', 'ui.route', 'angular-growl' , 'ngAnimate'
+  'ui.router', 'angular-growl' , 'ngAnimate'
 ])
 
 .config(function myAppConfig ( $stateProvider, $urlRouterProvider,growlProvider ) {
@@ -19,17 +19,17 @@ angular.module( 'celestial', [
       growl.addErrorMessage(errors.data.message);
       console.log(errors);
    };
- 
+
    loggingService.info = function(resp){
       growl.addInfoMessage(resp.message);
-   };  
+   };
 
    return loggingService;
 })
 
 .directive('eatClick', function() {
     return function(scope, element, attrs) {
-        $(element).click(function(event) {
+        element.bind('click', function(event) {
             event.preventDefault();
         });
     };
@@ -43,7 +43,7 @@ angular.module( 'celestial', [
     }
   });
 
-   
+
    $scope.logout = function(){
      loginService.logout();
    };
@@ -52,7 +52,7 @@ angular.module( 'celestial', [
     return loginService.isAdmin();
    };
 
-   // looks like there is a race condition between ng-show and promise return 
+   // looks like there is a race condition between ng-show and promise return
    // this somehow bypasses that
    $scope.isAdmin = true;
 

@@ -1,5 +1,5 @@
 angular.module( 'celestial.actionAdd', [
-  'ui.state',  'ngResource'
+  'ui.router',  'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'actionAdd', {
