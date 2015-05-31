@@ -1,5 +1,5 @@
 angular.module( 'celestial.jobs', [
-  'ui.state', 'ui.bootstrap'
+  'ui.router', 'ui.bootstrap'
 ])
 
 .config(function config( $stateProvider ) {

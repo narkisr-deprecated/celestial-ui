@@ -1,7 +1,7 @@
 <div>
   <div>
-    <form class="form-horizontal" name="typeForm" ng-submit="submit()">
-	<fieldset>  
+    <form class="form-horizontal" name="typeForm" ng-submit="submit()" novalidate>
+	<fieldset>
 	  <legend>Main</legend>
 	  <div class="control-group">
 	    <label class="control-label" for="type">Type</label>
@@ -12,27 +12,27 @@
 
 	  <div class="control-group">
 	    <label class="control-label" for="textarea">Description</label>
-	    <div class="controls">                     
-		<textarea id="textarea" name="textarea" ng-model="type[provisioner].description"></textarea>
+	    <div class="controls">
+		<textarea id="textarea" name="textarea" ng-model="type[provisioner][env].description"></textarea>
 	    </div>
 	  </div>
 
-	  <div class="control-group">  
-	    <label class="control-label" for="provisioner">Provisioner type</label>  
-	    <div class="controls">  
-		<select id="provisioner" ng-model="provisioner">  
-		  <option>puppet-std</option>  
-		</select>  
-	    </div>  
+	  <div class="control-group">
+	    <label class="control-label" for="provisioner">Provisioner type</label>
+	    <div class="controls">
+		<select id="provisioner" ng-model="provisioner">
+		  <option>puppet-std</option>
+		</select>
+	    </div>
 	  </div>
 
-	  <div class="control-group">  
-	    <label class="control-label" for="env">Environment</label>  
-	    <div class="controls">  
+	  <div class="control-group">
+	    <label class="control-label" for="env">Environment</label>
+	    <div class="controls">
 		<select id="env"  name="env" ng-model="env" ng-options="env for env in envs"> </select>
-	    </div>  
+	    </div>
 	  </div>
-	</fieldset>  
+	</fieldset>
 
 	<div ng-include src="provisionerTemplate"></div>
 
@@ -42,4 +42,4 @@
 	</div>
     </form>
   </div>
-</div>	
+</div>

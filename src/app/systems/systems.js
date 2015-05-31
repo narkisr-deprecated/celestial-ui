@@ -1,5 +1,5 @@
 angular.module( 'celestial.systems', [
-  'ui.state', 'ui.bootstrap', 'ngResource',
+  'ui.router', 'ui.bootstrap', 'ngResource',
   'celestial.system', 'celestial.systemAdd',
   'celestial.actions', 'celestial.confirm',
   'celestial.systemClone', 'celestial.systems.query',
@@ -39,7 +39,7 @@ angular.module( 'celestial.systems', [
       controller: 'ConfirmCtrl',
 	resolve: {job: function(){return job;}, target: function(){return target;}}
     });
-   
+
     modalInstance.result.then(function () {
        launchFn();
     }, function () {
@@ -56,9 +56,9 @@ angular.module( 'celestial.systems', [
 
   systemsService.launchJob = function(id, target, job) {
     if($cookieStore.get('skipSystemConfirm')){
-      systemsService.runJob(job, id);  
+      systemsService.runJob(job, id);
     } else {
-	systemsService.safeLaunch(target.machine.hostname ,job ,function(){systemsService.runJob(job, id);}); 
+	systemsService.safeLaunch(target.machine.hostname ,job ,function(){systemsService.runJob(job, id);});
     }
   };
 
@@ -78,7 +78,7 @@ angular.module( 'celestial.systems', [
         _.each(ids, function(id) {
           systemsService.runJob(job, id);
         });
-      }); 
+      });
     }
   };
 
@@ -89,18 +89,18 @@ angular.module( 'celestial.systems', [
 
 
   systemsService.Operations = {
-    create:{icon:'fa-check-square-o', tooltip:'Create a running machine' ,destructive:false}, 
-    provision:{icon:'fa-gears', tooltip:'Run provisioining'}, 
+    create:{icon:'fa-check-square-o', tooltip:'Create a running machine' ,destructive:false},
+    provision:{icon:'fa-gears', tooltip:'Run provisioining'},
     stage:{icon:'fa-refresh', tooltip:'Create and Provision'},
     stop:{icon:'fa-stop', tooltip:'Stop the backing machine'},
     clone:{icon:'fa-copy', tooltip:'Clone an existing machine'},
     start:{icon:'fa-play', tooltip:'Starting the backing machine'},
-    destroy:{icon:'fa-trash-o', tooltip:'Destroy machine'}, 
+    destroy:{icon:'fa-trash-o', tooltip:'Destroy machine'},
     reload:{icon:'fa-warning', tooltip:'Destroy and re-create machine'},
     clear:{icon:'fa-eraser', tooltip:'Clear system model'}
   };
   return systemsService;
-}).controller( 'SystemsCtrl', 
+}).controller( 'SystemsCtrl',
   function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
@@ -109,7 +109,7 @@ angular.module( 'celestial.systems', [
 
   $scope.Operations = systemsService.Operations;
   usersService.loadOperations($scope);
-  
+
   $scope.perPage = 10;
   $scope.currentPage= $location.path().replace('/systems/','').split('\/')[1];
   $scope.query = atob(decodeURIComponent($location.path().replace('/systems/','').split('\/')[0]));
@@ -151,20 +151,20 @@ angular.module( 'celestial.systems', [
     }
   };
 
-  $scope.launchJob = function(id,job) { 
+  $scope.launchJob = function(id,job) {
     var target = _.find($scope.systems,function(s){return s.id==id;});
     systemsService.launchJob(id, target, job);
   };
 
-  $scope.launchJobs = function(job) { 
+  $scope.launchJobs = function(job) {
     systemsService.launchJobs(_.values($scope.selected), job);
   };
 
-  $scope.launchHelp= function(id,job) { 
+  $scope.launchHelp= function(id,job) {
     systemsQueryService.queryHelp();
   };
 
-  $scope.search = function() { 
+  $scope.search = function() {
      var parsedQuery = systemsQueryService.parseQuery($scope.query);
      $location.path('/systems/' + encodeURIComponent(btoa($scope.query)) + '/1');
   };
@@ -175,16 +175,22 @@ angular.module( 'celestial.systems', [
          actionsService.launchAction(id, action);
       });
     } else {
-	runService.run(_.keys($scope.selected), action);            
+	runService.run(_.keys($scope.selected), action);
     }
   };
 
   $scope.$watch( 'currentPage', $scope.setPage );
   $scope.$watch( 'perPage', $scope.setPage );
-  
+
   $scope.selected = {};
-  $scope.actions = [];
-  $scope.emptyActions= true;
+
+  setEmptyActions();
+
+  function setEmptyActions() {
+    $scope.actions = [{
+      name: 'Select systems with actions'
+    }];
+  }
 
   $scope.setSelected = function() {
     if($scope.selected[this.system.id]) {
@@ -196,16 +202,13 @@ angular.module( 'celestial.systems', [
    if(_.keys(types).length == 1){
      actionsService.grabActions(_.first(_.values($scope.selected)).type).then(function(actions){
       if(_.isEmpty(actions)){
-        $scope.emptyActions = true;
-        $scope.actions = [];
+        setEmptyActions();
       } else {
-        $scope.emptyActions = false;
         $scope.actions = actions;
       }
     });
    } else {
-      $scope.emptyActions= true;
-      $scope.actions = [];
+     setEmptyActions();
    }
   };
 
@@ -213,18 +216,17 @@ angular.module( 'celestial.systems', [
   $scope.isSelected = function() {
      return $scope.selected[this.system.id] ? 'lightsteelblue':1;
   };
-    
+
   $scope.selectAll = function() {
     _.each($scope.systems, function(s) {
        $scope.selected[s.id] = s;
-    });   
+    });
   };
 
   $scope.selectNone= function() {
     _.each($scope.selected, function(s) {
 	delete $scope.selected[s.id];
-    });   
-  }; 
- 
-});
+    });
+  };
 
+});

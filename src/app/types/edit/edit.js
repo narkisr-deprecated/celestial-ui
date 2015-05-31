@@ -1,5 +1,5 @@
 angular.module( 'celestial.typeEdit', [
-  'ui.state',  'ngResource'
+  'ui.router',  'ngResource'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'typeEdit', {
@@ -58,5 +58,5 @@ angular.module( 'celestial.typeEdit', [
   $scope.remove = function() {
     typesService.remove($scope.typeId);
   };
-  
+
 });

@@ -1,4 +1,4 @@
-angular.module('celestial.login', ['ui.state', 'ui.bootstrap', 'ngResource', 'ngCookies'])
+angular.module('celestial.login', ['ui.router', 'ui.bootstrap', 'ngResource', 'ngCookies'])
 .config(function ($stateProvider) {
   $stateProvider.state( 'login', {
     url: '/login',

@@ -22,7 +22,7 @@ module.exports = {
   app_files: {
     js: [ 'src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js' ],
     jsunit: [ 'src/**/*.spec.js' ],
-    
+
     coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
     coffeeunit: [ 'src/**/*.spec.coffee' ],
 
@@ -62,23 +62,23 @@ module.exports = {
    */
   vendor_files: {
     js: [
+      'vendor/jquery/jquery.js',
       'vendor/angular/angular.js',
       'vendor/angular-animate/angular-animate.js',
-      'vendor/underscore/underscore-min.js',
+      'vendor/lodash/lodash.min.js',
       'vendor/underscore.string/dist/underscore.string.min.js',
       'vendor/angular-resource/angular-resource.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js', 
+      'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-growl/build/angular-growl.js',
       'vendor/angular-cookies/angular-cookies.js' ,
-      'vendor/jquery/jquery.js', 
-      'vendor/momentjs/min/moment.min.js', 
+      'vendor/momentjs/min/moment.min.js',
       'static-vendor/js/peg-0.8.0.min.js'
 
     ],
     css: [
-       
+
     ],
     assets: [
     ]
