@@ -28,9 +28,6 @@ angular.module( 'celestial.typeEdit', [
        }
        prov = $scope.type[$scope.provisioner][$scope.env];
        if($scope.provisioner == 'puppet-std' && prov !== undefined ) {
-        if(_.isObject(prov.classes)){
-          prov.classes = JSON.stringify(prov.classes);
-        }
         if(prov.args !== undefined && _.isArray(prov.args)){
           prov.args = prov.args.join(" ");
         }
@@ -45,6 +42,9 @@ angular.module( 'celestial.typeEdit', [
       $scope.provisioner = typesService.provisionerOf($scope.type);
 	$scope.env = _.keys($scope.type[$scope.provisioner])[0];
       $scope.provisionerTemplate = 'types/edit/'+$scope.provisioner+'.tpl.html';
+      _.each(_.keys($scope.type['puppet-std']),function(env){
+         $scope.type['puppet-std'][env].classes = JSON.stringify($scope.type['puppet-std'][env].classes);
+      });
     });
   };
 
