@@ -13,17 +13,34 @@ angular.module( 'celestial.actionAdd', [
     data:{ pageTitle: 'New action' }
   });
 })
-.controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService, $location) {
+.controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService, $location, envsService) {
 
-  $scope.action = {type:'capistrano', timeout:360};
+  $scope.common = {timeout:360};
+  $scope.remoter = {};
+  $scope.type = 'capistrano';
+
+  envsService.loadEnvs().then(function(data){
+     $scope.envs = _.keys(data.environments);
+     $scope.env = _.keys(data.environments)[0];
+     _.each($scope.envs, function(e) {
+        $scope.remoter[e] = {};
+    });
+  });
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
-     $scope.action['operates-on'] = $location.path().replace('/action/add/','');
+     $scope.common['operates-on'] = $location.path().replace('/action/add/','');
   });
 
   $scope.submit = function(){
-    action = angular.copy($scope.action);
+    var remoter =  angular.copy($scope.remoter);
+    _.each($scope.envs, function(e) {
+	if(_.isEmpty(remoter[e])) {
+        delete remoter[e];
+      }
+    });
+    var action = angular.copy($scope.common);
+    action[$scope.type] = remoter;
     action.timeout = action.timeout * 1000;
     actionsService.saveAction(action); 
   };

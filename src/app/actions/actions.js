@@ -65,16 +65,16 @@ angular.module('celestial.actions', [
   };
 
   var joinArgs = function(action) {
-    var newAction = _.clone(action);
-    newAction[newAction.type] = {args:newAction.args.split(' ')};
-    delete newAction['args'];
-    delete newAction['type'];
+     var newAction = _.clone(action);
+     var type = remoterType(newAction).type;
+     _.each(_.keys(newAction[type]), function(e) {
+       newAction[type][e]['args'] = newAction[type][e]['args'].split(' ');
+    });
     return newAction;
   };
 
   actionsService.saveAction = function(action){
-     var newAction = joinArgs(action);
-     Actions.save(newAction, function(resp) {
+     Actions.save(joinArgs(action), function(resp) {
          $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.message);
 	},loggingService.error);
@@ -101,7 +101,9 @@ angular.module('celestial.actions', [
   actionsService.getAction = function(id){
     return Actions.get({id:id}).$promise.then(function(action) {
       action = remoterType(action);
-	action.args =  action[action.type].args.join(' ');
+	_.keys(action[action.type]).each(function(e) {
+         action.args =  action[action.type][e].args.join(' ');
+      });
       return action;
     });
   };

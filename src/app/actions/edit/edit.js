@@ -13,12 +13,17 @@ angular.module( 'celestial.actionEdit', [
     data:{ pageTitle: 'Edit action' }
   });
 })
-.controller( 'actionEditCtrl', function actionEditController($scope, $location, actionsService, typesService) {
+.controller( 'actionEditCtrl', function actionEditController($scope, $location, actionsService, typesService, envsService) {
 
   $scope.actionId = $location.path().replace("/action/edit/","");
 
   typesService.getAll().then(function(data) {
      $scope.types = _.pluck(data,'type');
+  });
+
+  envsService.loadEnvs().then(function(data){
+     $scope.envs = _.keys(data.environments);
+     $scope.env = _.keys(data.environments)[0];
   });
 
 

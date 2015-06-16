@@ -7,7 +7,7 @@
 	  <div class="control-group">
 	    <label class="control-label" for="name">Name</label>
 	    <div class="controls">
-		<input id="name" name="name" class="input-large" required="" type="text" ng-model="action.name">
+		<input id="name" name="name" class="input-large" required="" type="text" ng-model="common.name">
 	    </div>
 	  </div>
 
@@ -21,14 +21,21 @@
 	  <div class="control-group">  
 	    <label class="control-label" for="operatesOn">Target type</label>  
 	    <div class="controls">  
-		<select id="operatesOn" ng-model="action['operates-on']" ng-options="type for type in types"> </select>
+		<select id="operatesOn" ng-model="common['operates-on']" ng-options="type for type in types"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="env">Environment</label>  
+	    <div class="controls">  
+		<select id="env"  name="env" ng-model="env" ng-options="env for env in envs"> </select>
 	    </div>  
 	  </div>
 
 	  <div class="control-group">  
 	    <label class="control-label" for="remoter">Remoter type</label>  
 	    <div class="controls">  
-		<select id="remoter"  ng-model="action.type">  
+		<select id="remoter"  ng-model="type">  
 		  <option>capistrano</option>  
 		  <option>ruby</option>  
 		</select>  
@@ -38,21 +45,23 @@
 	  <div class="control-group">
 	    <label class="control-label" for="args">Arguments</label>
 	    <div class="controls">
-		<textarea id="args" name="args" ng-model="action.args" required="" ></textarea>
+		<textarea id="args" name="args" 
+		  ng-model="remoter[env]['args']" required="" ></textarea>
 	    </div>
 	  </div>
 
 	  <div class="control-group">
 	    <label class="control-label" for="src">Source url</label>
 	    <div class="controls">
-		<input id="src" name="src" class="input-large" required="" type="text" ng-model="action.src">
+		<input id="src" name="src" class="input-large" required="" type="text" 
+		   ng-model="remoter[env]['src']">
 	    </div>
 	  </div>
 
 	  <div class="control-group">
 	    <label class="control-label" for="src">Timeout (sec)</label>
 	    <div class="controls">
-		<input id="timeout" required=""  type="number" min="1" name="timeout" class="input-large" type="text" ng-model="action.timeout">
+		<input id="timeout" required=""  type="number" min="1" name="timeout" class="input-large" type="text" ng-model="common.timeout">
 	    </div>
 	  </div>
 	</fieldset>  
