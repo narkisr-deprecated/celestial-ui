@@ -44,7 +44,7 @@ angular.module( 'celestial.actionRun', [
    $scope.loadAction = function(){
      actionsService.getAction($scope.actionId).then(function(action) {
        $scope.action = action;
-       _.each(action.provided, function(a) {
+       _.each($scope.action.provided, function(a) {
           $scope.userArgs[a] = ''; 
        });
      });
