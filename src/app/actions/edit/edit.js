@@ -23,7 +23,6 @@ angular.module( 'celestial.actionEdit', [
 
   envsService.loadEnvs().then(function(data){
      $scope.envs = _.keys(data.environments);
-     $scope.env = _.keys(data.environments)[0];
   });
 
 
@@ -31,6 +30,8 @@ angular.module( 'celestial.actionEdit', [
     actionsService.getAction($scope.actionId).then(function(action) {
 	action.timeout = action.timeout / 1000;
 	$scope.action = action;
+	$scope.envs = _.keys(action[action.type]);
+	$scope.env = $scope.envs[0];
     });
   };
 
