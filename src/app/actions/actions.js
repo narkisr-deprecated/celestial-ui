@@ -40,6 +40,12 @@ angular.module('celestial.actions', [
 	});
   };
  
+  var flattenProvided = function(action){
+      action.provided = _.chain(action[action.type])
+          .map(function(d,e){ return d.provided; }).flatten().uniq().value();
+      return action; 
+  };
+
   actionsService.grabActions = function(type) {
 	return Actions.byType({type:type}).$promise.then(function(actions) {
         var result = _.chain(actions).map(function(action, id) {
@@ -52,6 +58,8 @@ angular.module('celestial.actions', [
         }).filter(function(action) {
           return action != null;
         }).value();
+        
+       result = _.map(result,function(action,id){ return flattenProvided(action);});
        return !_.isEmpty(result) ? result : null;
       });
   };
@@ -104,7 +112,7 @@ angular.module('celestial.actions', [
 	_.each(_.keys(action[action.type]),function(e) {
         action[action.type][e].args =  action[action.type][e].args.join(' ');
       });
-      return action;
+	return flattenProvided(action);
     });
   };
 
