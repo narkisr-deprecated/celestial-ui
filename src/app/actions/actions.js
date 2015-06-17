@@ -101,8 +101,8 @@ angular.module('celestial.actions', [
   actionsService.getAction = function(id){
     return Actions.get({id:id}).$promise.then(function(action) {
       action = remoterType(action);
-	_.keys(action[action.type]).each(function(e) {
-         action.args =  action[action.type][e].args.join(' ');
+	_.each(_.keys(action[action.type]),function(e) {
+        action[action.type][e].args =  action[action.type][e].args.join(' ');
       });
       return action;
     });

@@ -33,11 +33,11 @@ angular.module( 'celestial.actionAdd', [
   });
 
   $scope.submit = function(){
-    var remoter =  angular.copy($scope.remoter);
-    _.each($scope.envs, function(e) {
-	if(_.isEmpty(remoter[e])) {
-        delete remoter[e];
-      }
+     var remoter =  angular.copy($scope.remoter);
+     _.each($scope.envs, function(e) {
+       if(_.isEmpty(remoter[e])) {
+         delete remoter[e];
+       }
     });
     var action = angular.copy($scope.common);
     action[$scope.type] = remoter;

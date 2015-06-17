@@ -17,10 +17,6 @@ angular.module( 'celestial.actionEdit', [
 
   $scope.actionId = $location.path().replace("/action/edit/","");
 
-  typesService.getAll().then(function(data) {
-     $scope.types = _.pluck(data,'type');
-  });
-
   envsService.loadEnvs().then(function(data){
      $scope.envs = _.keys(data.environments);
   });
@@ -28,14 +24,24 @@ angular.module( 'celestial.actionEdit', [
 
   $scope.loadAction = function(){
     actionsService.getAction($scope.actionId).then(function(action) {
+      $scope.type = action.type;
+      $scope.action = action;
 	action.timeout = action.timeout / 1000;
-	$scope.action = action;
-	$scope.envs = _.keys(action[action.type]);
-	$scope.env = $scope.envs[0];
+	$scope.env = _.keys(action[action.type])[0];
     });
   };
 
+  $scope.envChanged = function() {
+   if($scope.action !== undefined){
+     if($scope.action[$scope.type][$scope.env] === undefined){
+      $scope.action[$scope.type][$scope.env] = {};
+     }
+   }
+  };
+
   $scope.loadAction();
+
+  $scope.$watch('env', $scope.envChanged);
 
   $scope.submit = function(){
     action = angular.copy($scope.action);
