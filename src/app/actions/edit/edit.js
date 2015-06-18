@@ -45,7 +45,6 @@ angular.module( 'celestial.actionEdit', [
 
   $scope.submit = function(){
     action = angular.copy($scope.action);
-    action.timeout = action.timeout * 1000;
     actionsService.update($scope.actionId,action);
   };
 

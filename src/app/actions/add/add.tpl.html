@@ -35,6 +35,14 @@
 	    </div>  
 	  </div>
 
+	  <div class="control-group">
+	    <label class="control-label" for="src">Source url</label>
+	    <div class="controls">
+		<input id="src" name="src" class="input-large" required="" type="text" 
+		   ng-model="common.src">
+	    </div>
+	  </div>
+
 	  <div class="control-group">  
 	    <label class="control-label" for="env">Environment</label>  
 	    <div class="controls">  
@@ -50,18 +58,11 @@
 	    </div>
 	  </div>
 
-	  <div class="control-group">
-	    <label class="control-label" for="src">Source url</label>
-	    <div class="controls">
-		<input id="src" name="src" class="input-large" required="" type="text" 
-		   ng-model="remoter[env]['src']">
-	    </div>
-	  </div>
 
 	  <div class="control-group">
 	    <label class="control-label" for="src">Timeout (sec)</label>
 	    <div class="controls">
-		<input id="timeout" required=""  type="number" min="1" name="timeout" class="input-large" type="text" ng-model="common.timeout">
+		<input id="timeout" required=""  type="number" min="1" name="timeout" class="input-large" type="text" ng-model="remoter[env]['timeout']">
 	    </div>
 	  </div>
 	</fieldset>  

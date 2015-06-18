@@ -15,7 +15,7 @@ angular.module( 'celestial.actionAdd', [
 })
 .controller('ActionAddCtrl', function actionAddController($scope, actionsService, typesService, $location, envsService) {
 
-  $scope.common = {timeout:360};
+  $scope.common = {};
   $scope.remoter = {};
   $scope.type = 'capistrano';
 
@@ -41,7 +41,6 @@ angular.module( 'celestial.actionAdd', [
     });
     var action = angular.copy($scope.common);
     action[$scope.type] = remoter;
-    action.timeout = action.timeout * 1000;
     actionsService.saveAction(action); 
   };
   

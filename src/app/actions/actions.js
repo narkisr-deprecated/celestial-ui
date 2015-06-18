@@ -39,7 +39,21 @@ angular.module('celestial.actions', [
          return !_.isEmpty(result) ? result:null;
 	});
   };
- 
+   var timeoutMilli = function(action){
+      action = remoterType(action);
+	_.each(_.keys(action[action.type]), function(e){
+         action[action.type][e].timeout *= 1000;
+      });
+     return action; 
+  };
+
+   var timeoutSeconds = function(action){
+      action = remoterType(action);
+	_.each(_.keys(action[action.type]), function(e){
+         action[action.type][e].timeout /= 1000;
+      });
+     return action; 
+  };
   var flattenProvided = function(action){
       action.provided = _.chain(action[action.type])
           .map(function(d,e){ return d.provided; }).flatten().uniq().value();
@@ -59,7 +73,7 @@ angular.module('celestial.actions', [
           return action != null;
         }).value();
         
-       result = _.map(result,function(action,id){ return flattenProvided(action);});
+       result = _.map(result,function(action,id){ return timeoutSeconds(flattenProvided(action));});
        return !_.isEmpty(result) ? result : null;
       });
   };
@@ -82,14 +96,14 @@ angular.module('celestial.actions', [
   };
 
   actionsService.saveAction = function(action){
-     Actions.save(joinArgs(action), function(resp) {
+     Actions.save(timeoutMilli(joinArgs(action)), function(resp) {
          $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.message);
 	},loggingService.error);
   };
 
   actionsService.update = function(id, action){
-     var updatedAction = joinArgs(action);
+     var updatedAction = timeoutMilli(joinArgs(action));
      Actions.update({id:id},updatedAction, function(resp) {
         $location.path('/actions/'+action['operates-on']);
          growl.addInfoMessage(resp.message);
@@ -112,7 +126,7 @@ angular.module('celestial.actions', [
 	_.each(_.keys(action[action.type]),function(e) {
         action[action.type][e].args =  action[action.type][e].args.join(' ');
       });
-	return flattenProvided(action);
+      return timeoutSeconds(flattenProvided(action));
     });
   };
 
