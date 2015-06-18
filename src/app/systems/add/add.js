@@ -114,9 +114,11 @@ angular.module( 'celestial.systemAdd', [
 	system.openstack.volumes = $scope.volumes;
       splitProps(['security-groups'], system.openstack);
       splitProps(['networks'], system.openstack);
-	system.openstack.hints = _.map(system.openstack.hints.split(' '), function(hint){
-         return hint.split('=');
-	});
+      if(system.openstack.hints !== undefined){
+        system.openstack.hints = _.map(system.openstack.hints.split(' '), function(hint){
+           return hint.split('=');
+        });
+      }
       break;
      case "aws": 
 	system.aws.volumes = $scope.volumes;
@@ -148,10 +150,13 @@ angular.module( 'celestial.systemAdd', [
       $scope.hypervisors = _.keys($scope.rawEnvs[$scope.env]); 
       $scope.currentHypervisor = $scope.hypervisors[0];
     }
-     if($scope.currentHypervisor=='openstack'){
-       $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
-       $scope.hypervisor['openstack']['flavor'] = $scope.flavors[0];
-     }
+    if($scope.currentHypervisor=='openstack'){
+      $scope.flavors=_.keys($scope.rawEnvs[$scope.env]['openstack']['flavors']);
+      if($scope.hypervisor.openstack === undefined){
+        $scope.hypervisor.openstack = {openstack:{flavor:''}}; 
+      }
+      $scope.hypervisor['openstack']['flavor'] = $scope.flavors[0];
+    }
   };
 
   $scope.$watch('env', $scope.envChanged);
