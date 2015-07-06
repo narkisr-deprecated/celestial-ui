@@ -1,9 +1,9 @@
 angular.module( 'celestial.systems', [
   'ui.state', 'ui.bootstrap', 'ngResource',
   'celestial.system', 'celestial.systemAdd',
-  'celestial.actions', 'celestial.confirm',
-  'celestial.systemClone', 'celestial.systems.query',
-   'angular-growl', 'ngAnimate'
+  'celestial.systemLaunch', 'celestial.actions',
+  'celestial.confirm', 'celestial.systemClone',
+  'celestial.systems.query', 'angular-growl', 'ngAnimate'
 ])
 .config(function config($stateProvider) {
   $stateProvider.state( 'systems', {

@@ -21,6 +21,9 @@
 	  <ul class="dropdown-menu">
 	    <li><a href="#/system/add/" tooltip-placement="left" tooltip="Create a running machine"><i class="fa-fixed-width fa fa-plus-square-o" ></i> Add</a></li>
 
+	    <li><a href="#/system/launch/" tooltip-placement="left" tooltip="Launch from template"><i class="fa-fixed-width fa fa-upload" ></i> Launch</li>
+
+
 	    <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
 	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
 		tooltip="{{Operations[op].tooltip}}">
