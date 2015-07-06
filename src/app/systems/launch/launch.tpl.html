@@ -1,0 +1,50 @@
+<div>
+  <div>
+    <form class="form-horizontal" name="systemForm" ng-submit="submit()">
+	<fieldset>  
+	  <legend>Template</legend>
+
+	  <div class="control-group">
+	    <label class="control-label" for="hostname">Hostname</label>
+	    <div class="controls">
+		<input id="hostname" name="hostname" type="text" placeholder="" class="input-large" required="" ng-model="provided.machine.hostname">
+	    </div>
+	  </div>
+
+
+	  <div ng-hide="!isSuper" class="control-group">  
+	    <label class="control-label" for="owner">Owner</label>  
+	    <div class="controls">  
+		<select id="owner"  name="owner" ng-model="owner" ng-options="user for user in users"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="desc">Description</label>  
+	    <div class="controls">  
+		<textarea id="textarea" ng-model="provided.description" name="textarea" ng-model="description"></textarea>
+	    </div>  
+	  </div>
+
+
+	  <div class="control-group">  
+	    <label class="control-label" for="env">Environment</label>  
+	    <div class="controls">  
+		<select id="env"  name="env" ng-model="provided.env" ng-options="env for env in envs"> </select>
+	    </div>  
+	  </div>
+
+	  <div class="control-group">  
+	    <label class="control-label" for="template">Template</label>  
+	    <div class="controls">  
+		<select id="template"  name="template" ng-model="template" ng-options="template for template in templates"> </select>
+	    </div>  
+	  </div>
+	</fieldset>
+
+	<div class="form-actions">
+	  <button type="submit" class="btn btn-primary">Save system</button>
+	</div>
+    </form>
+  </div>
+</div>	
