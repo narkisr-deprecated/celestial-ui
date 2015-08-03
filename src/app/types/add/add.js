@@ -44,6 +44,9 @@ angular.module( 'celestial.typeAdd', [
   $scope.$watch( 'env', $scope.envSelect );
 
   $scope.submit = function(){
+    if(!$scope.isHttps() && $scope.type[$scope.currentProvisioner][$scope.env].module.options.unsecure){
+	delete $scope.type[$scope.currentProvisioner][$scope.env].module.options['unsecure'];
+    }
     typesService.save($scope.typeId,$scope.type); 
   };
   

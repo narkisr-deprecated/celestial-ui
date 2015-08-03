@@ -59,11 +59,15 @@ angular.module( 'celestial.typeEdit', [
   $scope.$watch( 'env', $scope.envSelect );
 
   $scope.submit = function(){
+    if(!$scope.isHttps() && $scope.type[$scope.provisioner][$scope.env].module.options['unsecure']){
+	delete $scope.type[$scope.provisioner][$scope.env].module.options['unsecure'];
+    }
+
     typesService.update($scope.typeId,$scope.type);
   };
 
   $scope.remove = function() {
     typesService.remove($scope.typeId);
   };
-  
+
 });
