@@ -17,6 +17,16 @@
     </div>
   </div>
 
+  <div ng-hide="!isHttps()" class="control-group">
+    <label class="control-label" for="clear">Unsecure</label>
+    <div class="controls">
+	<label class="checkbox inline" for="clear">
+	  <input type="checkbox" name="clear" id="clear" ng-model="type['puppet-std'][env].module.options['unsecure']" value="false">
+	</label>
+	<p class="help-block">Trust self signed certificate</p>
+    </div>
+  </div>
+
   <div class="control-group">
     <label class="control-label" for="src">Arguments</label>
     <div class="controls">

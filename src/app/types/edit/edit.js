@@ -24,13 +24,16 @@ angular.module( 'celestial.typeEdit', [
   $scope.envSelect = function() {
     if($scope.provisioner !== undefined && $scope.type !== undefined){
        if(_.isEmpty($scope.type[$scope.provisioner][$scope.env])){
-         $scope.type[$scope.provisioner][$scope.env] = {module:{}};
+         $scope.type[$scope.provisioner][$scope.env] = {module:{options:{}}};
        }
        prov = $scope.type[$scope.provisioner][$scope.env];
        if($scope.provisioner == 'puppet-std' && prov !== undefined ) {
         if(prov.args !== undefined && _.isArray(prov.args)){
           prov.args = prov.args.join(" ");
         }
+      }
+      if(prov.module.options === undefined){
+        prov.module.options = {};
       }
       $scope.type[$scope.provisioner][$scope.env] = prov;
     }
@@ -46,6 +49,10 @@ angular.module( 'celestial.typeEdit', [
          $scope.type['puppet-std'][env].classes = JSON.stringify($scope.type['puppet-std'][env].classes);
       });
     });
+  };
+
+  $scope.isHttps = function(){
+    return $scope.type[$scope.provisioner][$scope.env].module.src.startsWith('https');
   };
 
   $scope.loadType();

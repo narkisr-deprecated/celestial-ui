@@ -17,10 +17,21 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" for="src">Arguments</label>
+  <div ng-hide="!isHttps()" class="control-group">
+    <label class="control-label" for="clear">Unsecure</label>
     <div class="controls">
-	<input id="src" name="src" placeholder="" class="input-large" type="text" ng-model="type['puppet-std'][env].args">
+	<label class="checkbox inline" for="clear">
+	  <input type="checkbox" name="clear" id="clear" ng-model="type['puppet-std'][env].module.options['unsecure']" value="false">
+	</label>
+	<p class="help-block">Trust self signed certificate</p>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <label class="control-label" for="args">Arguments</label>
+    <div class="controls">
+	<input id="args" name="args" placeholder="" class="input-large" type="text" ng-model="type['puppet-std'][env].args">
 	<p class="help-block">Puppet run arguments</p>
     </div>
   </div>
@@ -29,7 +40,7 @@
     <label class="control-label" for="textarea">Classes</label>
     <div class="controls">                     
 	<textarea id="textarea" name="textarea" ng-model="type['puppet-std'][env].classes">{}</textarea>
-       <p class="help-block">Puppet classes</p>
+	<p class="help-block">Puppet classes</p>
     </div>
   </div>
 

@@ -23,7 +23,7 @@ angular.module( 'celestial.typeAdd', [
   envsService.loadEnvs().then(function(data){
      $scope.envs = _.keys(data.environments);
      $scope.env = _.keys(data.environments)[0];
-     $scope.type = {'puppet-std':{}};
+     $scope.type = {'puppet-std':{module:{options:{}}}};
   });
 
   $scope.typeSelect = function() {
@@ -32,8 +32,13 @@ angular.module( 'celestial.typeAdd', [
 
   $scope.envSelect = function() {
     $scope.type['puppet-std'] = {};
-    $scope.type['puppet-std'][$scope.env] = {module:{}};
+    $scope.type['puppet-std'][$scope.env] = {module:{options:{}}};
   };
+
+  $scope.isHttps = function(){
+    return $scope.type[$scope.currentProvisioner][$scope.env].module.src.startsWith('https');
+  };
+
 
   $scope.$watch( 'currentProvisioner', $scope.typeSelect );
   $scope.$watch( 'env', $scope.envSelect );
