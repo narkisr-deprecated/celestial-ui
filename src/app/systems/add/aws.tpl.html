@@ -262,21 +262,20 @@
 
 <legend>VPC</legend>
 <div class="control-group">
+  <label class="control-label" for="vpc-id">VPC id</label>
+  <div class="controls">
+    <input id="vpc-id" name="vpc-id" type="text" class="input-large" ng-model="vpc['vpc-id']">
+  </div>
+</div>
+
+
+<div class="control-group">
   <label class="control-label" for="subnet-id">Subnet id</label>
   <div class="controls">
     <input id="subnet-id" name="subnet-id" type="text" class="input-large" ng-model="vpc['subnet-id']">
     <p class="help-block">VPC subnet id</p>
   </div>
 </div>
-
-<div class="control-group">
-  <label class="control-label" for="security-group-ids">Security group ids</label>
-  <div class="controls">
-    <input id="security-group-ids" name="security-group-ids" placeholder="default" class="input-large" type="text" ng-model="hypervisor.aws['security-group-ids']">
-    <p class="help-block">VPC security group ids</p>
-  </div>
-</div>
-
 
 <div class="control-group">
   <label class="control-label" for="assign-public">Assign public</label>
