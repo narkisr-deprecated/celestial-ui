@@ -55,6 +55,7 @@ angular.module( 'celestial.systemAdd', [
          }
         };
         $scope.machine={};
+        $scope.vpc={};
         $scope.volumes=[];
         $scope.blocks=[];
         $scope.volume={clear:false,'volume-type':'standard'};
@@ -123,6 +124,9 @@ angular.module( 'celestial.systemAdd', [
      case "aws": 
 	system.aws.volumes = $scope.volumes;
       system.aws['block-devices']= $scope.blocks;
+	if(!_.isEmpty($scope.vpc)){
+        system.aws.vpc = $scope.vpc;
+      }
       splitProps(['security-groups'], system.aws);
       break;
      case "docker":
