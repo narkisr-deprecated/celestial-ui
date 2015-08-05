@@ -67,7 +67,31 @@
 	  <td>EBS optimized</td>
 	  <td>{{system.aws['ebs-optimized']}}</td>
 	</tr>
+  </tbody>
+</table>
 
+
+<h2>VPC:</h2>
+<table class="table table-bordered" >
+  <thead>
+    <tr>
+	<th>Property</th>
+	<th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>		
+	<td>VPC id</td>
+	<td>{{system.aws.vpc['vpc-id']}}</td>
+    </tr>
+    <tr>		
+	<td>Subnet id</td>
+	<td>{{system.aws.vpc['subnet-id']}}</td>
+    </tr>
+    <tr>		
+	<td>Assign public IP</td>
+	<td>{{system.aws.vpc['assign-public']}}</td>
+    </tr>
   </tbody>
 </table>
 
