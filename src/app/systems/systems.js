@@ -101,7 +101,7 @@ angular.module( 'celestial.systems', [
   };
   return systemsService;
 }).controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService, provisionService) {
+  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService, provisionService, growl) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
      query:{method : "GET", url:'/systems/query'}
@@ -180,7 +180,11 @@ angular.module( 'celestial.systems', [
   };
 
   $scope.launchProvision = function() {
-	provisionService.run(_.keys($scope.selected));            
+      if(_.isEmpty($scope.selected)){
+         growl.addErrorMessage('please select systems to provision');
+      } else {
+        provisionService.run(_.keys($scope.selected));            
+      }
   };
 
   $scope.$watch( 'currentPage', $scope.setPage );
