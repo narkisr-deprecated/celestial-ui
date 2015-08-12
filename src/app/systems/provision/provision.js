@@ -35,12 +35,15 @@ angular.module( 'celestial.systemProvision', [
   $scope.noop = false;
 
   $scope.submit = function(){
-    var args = [];
+    var opts = {};
     if($scope.noop === true){
-      args = ['--noop']; 
+      opts['args'] = ['--noop']; 
+    }
+    if($scope.classes !== undefined && !_.isEmpty(JSON.parse($scope.classes))){
+	opts['classes'] = JSON.parse($scope.classes);
     }
     _.each(provisionService.targets, function(id){
-	$http.post('/jobs/provision/'+id, {'run-opts':{classes:$scope.classes, 'args':args}})
+	$http.post('/jobs/provision/'+id, {'run-opts':opts})
         .success(function(data) {
           growl.addInfoMessage(data.message);
         }).error(loggingService.error);
