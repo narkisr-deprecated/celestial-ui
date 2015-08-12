@@ -24,7 +24,10 @@
 	    <li><a href="#/system/launch/" tooltip-placement="left" tooltip="Launch from template"><i class="fa-fixed-width fa fa-upload" ></i> Launch</li>
 
 
-	    <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone'">
+	    <li><a href="" ng-click="launchProvision()" tooltip-placement="left" tooltip="Provision system"><i class="fa-fixed-width fa fa-gears" ></i> Provision</li>
+
+
+	    <li ng-repeat="op in constructive | filter:'!run-action' | filter:'!clone' | filter:'!provision'">
 	    <a href="" ng-click="launchJobs(op)" tooltip-placement="left" 
 		tooltip="{{Operations[op].tooltip}}">
 		<i class="fa-fixed-width fa {{Operations[op].icon}}"> </i> {{op}}</a>

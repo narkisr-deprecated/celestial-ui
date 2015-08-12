@@ -1,8 +1,8 @@
 angular.module( 'celestial.systems', [
   'ui.state', 'ui.bootstrap', 'ngResource',
   'celestial.system', 'celestial.systemAdd',
-  'celestial.systemLaunch', 'celestial.actions',
-  'celestial.confirm', 'celestial.systemClone',
+  'celestial.systemLaunch', 'celestial.systemProvision',
+ 'celestial.actions', 'celestial.confirm', 'celestial.systemClone',
   'celestial.systems.query', 'angular-growl', 'ngAnimate'
 ])
 .config(function config($stateProvider) {
@@ -101,7 +101,7 @@ angular.module( 'celestial.systems', [
   };
   return systemsService;
 }).controller( 'SystemsCtrl', 
-  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService) {
+  function SystemsController($scope, $resource, actionsService, runService, $location, systemsService, systemsQueryService, usersService, provisionService) {
 
   var Systems = $resource('/systems/', {page:'@page',offset:'@offset'},{
      query:{method : "GET", url:'/systems/query'}
@@ -177,6 +177,10 @@ angular.module( 'celestial.systems', [
     } else {
 	runService.run(_.keys($scope.selected), action);            
     }
+  };
+
+  $scope.launchProvision = function() {
+	provisionService.run(_.keys($scope.selected));            
   };
 
   $scope.$watch( 'currentPage', $scope.setPage );
