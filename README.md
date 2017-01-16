@@ -1,5 +1,7 @@
 # Intro 
 
+(Deprecated see (dashboard)[https://github.com/celestial-ops/elm-ui])
+
 Celestial webui, implemented using:
 
 * [Angularjs](http://angularjs.org/)
