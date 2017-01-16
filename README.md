@@ -2,29 +2,6 @@
 
 (Deprecated see (dashboard)[https://github.com/celestial-ops/elm-ui])
 
-Celestial webui, implemented using:
-
-* [Angularjs](http://angularjs.org/)
-* [Bootstrap](http://getbootstrap.com/2.3.2/)
-
-[![Build Status](https://travis-ci.org/celestial-ops/celestial-ui.png)](https://travis-ci.org/celestial-ops/celestial-ui)
-
-# Build
-
-```bash
-
-$ node -v                                                                    
-v0.10.18
-
-# Ubuntu version does not work (verified on 13.10 nodejs 10.15)
-$ sudo add-apt-repository ppa:chris-lea/node.js
-$ sudo npm -g install grunt-cli karma bower
-$ npm install
-$ bower install
-$ grunt watch
-```
-
-
 # Copyright and license
 
 Copyright [2013] [Ronen Narkis]
